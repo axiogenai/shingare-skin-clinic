@@ -64,12 +64,12 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#F8F6F3] font-source">
+    <main className="min-h-screen bg-[#f6f3eb] font-source">
       {/* 1. Page Header */}
       <div className="pt-[72px] bg-[#FAF8F5] border-b border-[#EAE5DE]">
         <div className="max-w-[1060px] mx-auto px-5 sm:px-8 pt-8 pb-10 text-center">
-          <div className="inline-flex items-center gap-1.5 bg-[#E6F3F1] border border-[#C5E5DF] text-[#108283] rounded-full px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#108283]" />
+          <div className="inline-flex items-center gap-1.5 bg-[#e9ece2] border border-[#c6d3c5] text-[#355a48] rounded-full px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#355a48]" />
             <span>PETH VADGAON, KOLHAPUR • EST. EXCELLENCE</span>
           </div>
 
@@ -92,7 +92,7 @@ export default function ContactPage() {
             <div className="bg-white rounded-2xl border border-[#EAE5DE] p-5 sm:p-6 shadow-xs space-y-4">
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#E6F3F1] text-[#108283] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#e9ece2] text-[#355a48] flex items-center justify-center shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
@@ -119,7 +119,7 @@ export default function ContactPage() {
                 <div
                   className="absolute inset-0 opacity-40 pointer-events-none"
                   style={{
-                    backgroundImage: "radial-gradient(#108283 1.2px, transparent 1.2px)",
+                    backgroundImage: "radial-gradient(#355a48 1.2px, transparent 1.2px)",
                     backgroundSize: "16px 16px",
                   }}
                 />
@@ -127,19 +127,19 @@ export default function ContactPage() {
                 <div className="relative z-10 flex flex-col justify-between min-h-[160px]">
                   {/* Top Bar */}
                   <div className="flex items-center justify-between text-[10px]">
-                    <span className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-xs border border-[#C5E5DF] text-gray-700 px-2.5 py-1 rounded-full font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#108283]" />
+                    <span className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-xs border border-[#c6d3c5] text-gray-700 px-2.5 py-1 rounded-full font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#355a48]" />
                       Peth Vadgaon Junction
                     </span>
 
-                    <span className="bg-white/90 backdrop-blur-xs border border-[#C5E5DF] text-gray-700 px-2.5 py-1 rounded-full font-semibold">
+                    <span className="bg-white/90 backdrop-blur-xs border border-[#c6d3c5] text-gray-700 px-2.5 py-1 rounded-full font-semibold">
                       100M FROM BUS STAND
                     </span>
                   </div>
 
                   {/* Center Pin Marker */}
                   <div className="text-center my-4">
-                    <div className="w-10 h-10 rounded-full bg-[#108283] text-white flex items-center justify-center mx-auto shadow-md">
+                    <div className="w-10 h-10 rounded-full bg-[#355a48] text-white flex items-center justify-center mx-auto shadow-md">
                       <MapPin className="w-5 h-5" />
                     </div>
                     <span className="inline-block mt-1 bg-white text-gray-900 text-[11px] font-bold px-3 py-0.5 rounded-full shadow-xs border border-gray-200">
@@ -153,7 +153,7 @@ export default function ContactPage() {
                       href="https://www.google.com/maps/search/?api=1&query=Shingare+Skin+and+Cosmetics+Clinic+Peth+Vadgaon+Kolhapur"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#108283] hover:underline cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#355a48] hover:underline cursor-pointer"
                     >
                       <Compass className="w-3.5 h-3.5" />
                       <span>Open in Google Maps</span>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                       href="https://www.google.com/maps/dir/?api=1&destination=Peth+Vadgaon+Kolhapur+Maharashtra"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 bg-[#108283] hover:bg-[#0c6b6c] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-xs transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 bg-[#355a48] hover:bg-[#294a3a] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-xs transition-colors cursor-pointer"
                     >
                       <Navigation className="w-3.5 h-3.5" />
                       <span>Get Directions</span>
@@ -177,7 +177,7 @@ export default function ContactPage() {
             <div className="bg-white rounded-2xl border border-[#EAE5DE] p-5 sm:p-6 shadow-xs space-y-4">
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#E6F3F1] text-[#108283] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#e9ece2] text-[#355a48] flex items-center justify-center shrink-0">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
@@ -215,7 +215,7 @@ export default function ContactPage() {
                         <span className="border border-[#E2DBD3] bg-[#FAF8F5] text-gray-700 px-3 py-1 rounded-md text-[11px]">
                           Morning: {item.morning}
                         </span>
-                        <span className="border border-[#CBE5DF] bg-[#F0F8F6] text-[#108283] px-3 py-1 rounded-md text-[11px] font-medium">
+                        <span className="border border-[#CBE5DF] bg-[#F0F8F6] text-[#355a48] px-3 py-1 rounded-md text-[11px] font-medium">
                           Evening: {item.evening}
                         </span>
                       </div>
@@ -289,7 +289,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Rahul Patil"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#108283]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#355a48]"
                     />
                   </div>
 
@@ -307,7 +307,7 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="98765 43210"
-                        className="w-full px-3.5 py-2.5 rounded-r-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#108283]"
+                        className="w-full px-3.5 py-2.5 rounded-r-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#355a48]"
                       />
                     </div>
                   </div>
@@ -319,7 +319,7 @@ export default function ContactPage() {
                     <select
                       value={formData.department}
                       onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 focus:outline-none focus:border-[#108283]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 focus:outline-none focus:border-[#355a48]"
                     >
                       <option>General Dermatology (Skin &amp; Allergy)</option>
                       <option>Laser &amp; Cosmetic Treatments</option>
@@ -338,13 +338,13 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Briefly describe your symptoms or appointment query..."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#108283] resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2DBD3] bg-[#FAF8F5] text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#355a48] resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-[#108283] hover:bg-[#0c6b6c] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
+                    className="w-full bg-[#355a48] hover:bg-[#294a3a] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>Send Inquiry</span>
@@ -361,9 +361,9 @@ export default function ContactPage() {
 
                 <Link
                   href="/book-now"
-                  className="inline-flex items-center gap-1.5 border border-[#E2DBD3] hover:bg-[#FAF8F5] text-[#108283] text-xs font-bold px-3 py-2 rounded-xl transition-colors shrink-0 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 border border-[#E2DBD3] hover:bg-[#FAF8F5] text-[#355a48] text-xs font-bold px-3 py-2 rounded-xl transition-colors shrink-0 cursor-pointer"
                 >
-                  <Calendar className="w-3.5 h-3.5 text-[#108283]" />
+                  <Calendar className="w-3.5 h-3.5 text-[#355a48]" />
                   <span>Book Token</span>
                 </Link>
               </div>
@@ -375,7 +375,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <a
             href="tel:+917249727104"
-            className="bg-white rounded-2xl border border-[#EAE5DE] p-5 flex items-center justify-between shadow-xs hover:border-[#108283]/40 transition-colors cursor-pointer"
+            className="bg-white rounded-2xl border border-[#EAE5DE] p-5 flex items-center justify-between shadow-xs hover:border-[#355a48]/40 transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3.5">
               <div className="w-11 h-11 rounded-xl bg-[#FBF2EA] text-[#C47D1C] flex items-center justify-center shrink-0">

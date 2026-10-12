@@ -169,7 +169,7 @@ function BookNowContent() {
       {/* 2. Intro Section */}
       <section className="w-full py-16 px-5 sm:px-6 md:px-8">
         <div className="max-w-[850px] mx-auto text-center">
-          <div className="inline-block bg-[#FAEDDA] text-[#108283] text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+          <div className="inline-block bg-[#e9ece2] text-[#355a48] text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
             INSTANT DIGITAL TOKEN GENERATION
           </div>
           <h2 className="font-playfair text-3xl sm:text-4xl text-gray-950 font-normal mb-4">
@@ -180,21 +180,21 @@ function BookNowContent() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-gray-800">
-            <span className="flex items-center gap-1.5 bg-[#FAF0DD] px-3.5 py-1.5 rounded-full border border-[#F0DAAA]/60">
-              <CheckCircle2 className="w-4 h-4 text-[#108283]" /> Real-Time OPD Sync
+            <span className="flex items-center gap-1.5 bg-[#e9ece2] px-3.5 py-1.5 rounded-full border border-[#F0DAAA]/60">
+              <CheckCircle2 className="w-4 h-4 text-[#355a48]" /> Real-Time OPD Sync
             </span>
-            <span className="flex items-center gap-1.5 bg-[#FAF0DD] px-3.5 py-1.5 rounded-full border border-[#F0DAAA]/60">
-              <CheckCircle2 className="w-4 h-4 text-[#108283]" /> Live Queue Tracking
+            <span className="flex items-center gap-1.5 bg-[#e9ece2] px-3.5 py-1.5 rounded-full border border-[#F0DAAA]/60">
+              <CheckCircle2 className="w-4 h-4 text-[#355a48]" /> Live Queue Tracking
             </span>
-            <span className="flex items-center gap-1.5 bg-[#FAF0DD] px-3.5 py-1.5 rounded-full border border-[#F0DAAA]/60">
-              <CheckCircle2 className="w-4 h-4 text-[#108283]" /> MD Doctor Care
+            <span className="flex items-center gap-1.5 bg-[#e9ece2] px-3.5 py-1.5 rounded-full border border-[#F0DAAA]/60">
+              <CheckCircle2 className="w-4 h-4 text-[#355a48]" /> MD Doctor Care
             </span>
           </div>
         </div>
       </section>
 
       {/* 3. Treatment Category Cards Grid */}
-      <section className="w-full pb-20 px-5 sm:px-6 md:px-8 bg-[#F4F7F8] py-16">
+      <section className="w-full pb-20 px-5 sm:px-6 md:px-8 bg-[#f6f3eb] py-16">
         <div className="max-w-[1140px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {treatmentOptions.map((category) => {
@@ -207,18 +207,18 @@ function BookNowContent() {
                 >
                   <div>
                     {/* Icon */}
-                    <div className="w-12 h-12 mb-5 rounded-2xl flex items-center justify-center bg-[#108283]/10 text-[#108283] group-hover:bg-[#108283] group-hover:text-white transition-all duration-200">
+                    <div className="w-12 h-12 mb-5 rounded-2xl flex items-center justify-center bg-[#355a48]/10 text-[#355a48] group-hover:bg-[#355a48] group-hover:text-white transition-all duration-200">
                       <Icon className="w-6 h-6" />
                     </div>
 
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#FAF0DD] text-[#108283] mb-3 inline-block">
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#e9ece2] text-[#355a48] mb-3 inline-block">
                       {category.category}
                     </span>
 
                     <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-1 text-gray-950">
                       {category.title}
                     </h3>
-                    <p className="text-xs font-semibold text-[#108283] uppercase tracking-wider mb-3">
+                    <p className="text-xs font-semibold text-[#355a48] uppercase tracking-wider mb-3">
                       {category.subtitle}
                     </p>
 
@@ -226,13 +226,13 @@ function BookNowContent() {
                       {category.description}
                     </p>
 
-                    <div className="bg-[#FAF0DD]/50 border border-[#F0DAAA]/60 text-gray-800 text-xs px-3.5 py-2 rounded-xl mb-6 flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#108283] shrink-0" />
+                    <div className="bg-[#e9ece2]/50 border border-[#F0DAAA]/60 text-gray-800 text-xs px-3.5 py-2 rounded-xl mb-6 flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#355a48] shrink-0" />
                       <span className="font-medium">{category.doctorNote}</span>
                     </div>
                   </div>
 
-                  <div className="w-full py-3 rounded-full bg-[#108283] text-white text-xs font-semibold text-center transition-all flex items-center justify-center gap-2 shadow-xs group-hover:bg-[#0c6b6c]">
+                  <div className="w-full py-3 rounded-full bg-[#355a48] text-white text-xs font-semibold text-center transition-all flex items-center justify-center gap-2 shadow-xs group-hover:bg-[#294a3a]">
                     <CalendarCheck className="w-4 h-4" />
                     <span>Book This Treatment Token</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -246,9 +246,9 @@ function BookNowContent() {
 
       {/* 4. Live Queue Quick-Check Banner */}
       <section className="w-full py-12 px-5 sm:px-6 md:px-8 bg-white">
-        <div className="max-w-[1000px] mx-auto bg-[#F4F7F8] rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div className="max-w-[1000px] mx-auto bg-[#f6f3eb] rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div>
-            <span className="text-xs uppercase tracking-widest font-bold block text-[#108283]">
+            <span className="text-xs uppercase tracking-widest font-bold block text-[#355a48]">
               Already Have A Token?
             </span>
             <h3 className="font-playfair text-2xl font-bold text-gray-950 mt-1">
@@ -260,7 +260,7 @@ function BookNowContent() {
           </div>
           <Link
             href="/live-queue"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#108283] hover:bg-[#0c6b6c] text-white text-xs uppercase tracking-widest font-semibold transition-all shadow-sm active:scale-95 shrink-0"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#355a48] hover:bg-[#294a3a] text-white text-xs uppercase tracking-widest font-semibold transition-all shadow-sm active:scale-95 shrink-0"
           >
             <Clock className="w-4 h-4" />
             <span>Launch Token Radar</span>
@@ -270,7 +270,7 @@ function BookNowContent() {
       </section>
 
       {/* 5. Helpline & OPD Schedule */}
-      <section className="w-full py-16 px-5 sm:px-6 md:px-8 bg-[#FAF0DD]/50 border-t border-[#F0DAAA]/60">
+      <section className="w-full py-16 px-5 sm:px-6 md:px-8 bg-[#e9ece2]/50 border-t border-[#F0DAAA]/60">
         <div className="max-w-[1000px] mx-auto text-center">
           <h2 className="font-playfair text-2xl sm:text-3xl font-bold text-gray-950 mb-3">
             Need Assistance Or Direct Phone Booking?
@@ -281,7 +281,7 @@ function BookNowContent() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[700px] mx-auto">
             <div className="bg-white rounded-2xl border border-gray-200 p-6 text-center flex flex-col items-center justify-center shadow-2xs">
-              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-50 text-[#108283] mb-3">
+              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-50 text-[#355a48] mb-3">
                 <Phone className="w-5 h-5" />
               </div>
               <p className="text-xs uppercase tracking-wider font-bold text-gray-500 mb-1">
@@ -289,14 +289,14 @@ function BookNowContent() {
               </p>
               <a
                 href="tel:+917249727104"
-                className="text-lg font-bold text-[#108283] hover:underline"
+                className="text-lg font-bold text-[#355a48] hover:underline"
               >
                 +91 72497 27104
               </a>
             </div>
 
             <div className="bg-white rounded-2xl border border-gray-200 p-6 text-center flex flex-col items-center justify-center shadow-2xs">
-              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#108283]/8 text-[#108283] mb-3">
+              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#355a48]/8 text-[#355a48] mb-3">
                 <MessageCircle className="w-5 h-5" />
               </div>
               <p className="text-xs uppercase tracking-wider font-bold text-gray-500 mb-1">
@@ -306,7 +306,7 @@ function BookNowContent() {
                 href="https://wa.me/917249727104?text=Hello%20Shingare%20Skin%20Clinic,%20I%20want%20to%20inquire%20about%20an%20appointment"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg font-bold text-[#108283] hover:underline"
+                className="text-lg font-bold text-[#355a48] hover:underline"
               >
                 Chat on WhatsApp
               </a>
@@ -314,7 +314,7 @@ function BookNowContent() {
           </div>
 
           <div className="mt-8 flex items-center justify-center gap-2 text-xs text-gray-600">
-            <Clock className="w-4 h-4 text-[#108283]" />
+            <Clock className="w-4 h-4 text-[#355a48]" />
             <span>
               OPD Timings: Mon–Sat 10:00 AM – 1:30 PM &amp; 5:00 PM – 9:00 PM | Sunday Closed
             </span>
@@ -345,17 +345,17 @@ function BookNowContent() {
               {bookingSuccess ? (
                 /* SUCCESS STATE */
                 <div className="text-center py-6">
-                  <div className="w-16 h-16 bg-[#108283]/8 border-2 border-[#108283] rounded-full flex items-center justify-center mx-auto text-[#108283] mb-4">
+                  <div className="w-16 h-16 bg-[#355a48]/8 border-2 border-[#355a48] rounded-full flex items-center justify-center mx-auto text-[#355a48] mb-4">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
 
-                  <span className="text-xs uppercase tracking-widest font-bold text-[#108283]">
+                  <span className="text-xs uppercase tracking-widest font-bold text-[#355a48]">
                     Appointment Confirmed
                   </span>
 
                   <div className="my-4">
                     <span className="text-xs text-gray-500 block uppercase font-semibold">Your Assigned Token</span>
-                    <div className="text-5xl font-playfair font-bold text-[#108283] tracking-tight">
+                    <div className="text-5xl font-playfair font-bold text-[#355a48] tracking-tight">
                       #{String(bookingSuccess.tokenNumber).padStart(2, "0")}
                     </div>
                   </div>
@@ -368,14 +368,14 @@ function BookNowContent() {
                     Scheduled for: <strong>{bookingSuccess.date}</strong> • {preferredSlot}
                   </p>
 
-                  <div className="bg-[#F4F7F8] border border-gray-200 rounded-2xl p-4 my-6 text-left text-xs text-gray-700 space-y-1.5">
+                  <div className="bg-[#f6f3eb] border border-gray-200 rounded-2xl p-4 my-6 text-left text-xs text-gray-700 space-y-1.5">
                     <div className="flex justify-between">
                       <span className="text-gray-500">Consulting Doctor:</span>
                       <span className="font-bold text-gray-900">Dr. Pramod Shingare (MD Dermatology, Ayu.)</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-500">Service:</span>
-                      <span className="font-semibold text-[#108283]">{selectedTreatment?.title}</span>
+                      <span className="font-semibold text-[#355a48]">{selectedTreatment?.title}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-500">Clinic:</span>
@@ -391,7 +391,7 @@ function BookNowContent() {
                     <Link
                       href={`/live-queue?token=${bookingSuccess.tokenNumber}`}
                       onClick={() => setIsModalOpen(false)}
-                      className="flex-1 py-3 rounded-full bg-[#108283] text-white text-xs font-semibold text-center hover:bg-[#0c6b6c] transition-all flex items-center justify-center gap-1.5 shadow-xs"
+                      className="flex-1 py-3 rounded-full bg-[#355a48] text-white text-xs font-semibold text-center hover:bg-[#294a3a] transition-all flex items-center justify-center gap-1.5 shadow-xs"
                     >
                       <Clock className="w-4 h-4" />
                       <span>Track In Live Queue</span>
@@ -410,11 +410,11 @@ function BookNowContent() {
                 /* BOOKING FORM */
                 <div>
                   <div className="flex items-center gap-3 mb-5 border-b border-gray-100 pb-4">
-                    <div className="w-10 h-10 rounded-2xl bg-[#108283]/10 text-[#108283] flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-2xl bg-[#355a48]/10 text-[#355a48] flex items-center justify-center">
                       <CalendarCheck className="w-5 h-5" />
                     </div>
                     <div>
-                      <span className="text-[11px] uppercase tracking-wider font-bold text-[#108283]">
+                      <span className="text-[11px] uppercase tracking-wider font-bold text-[#355a48]">
                         {selectedTreatment?.category || "OPD Reservation"}
                       </span>
                       <h3 className="font-playfair text-xl font-bold text-gray-950">
@@ -442,7 +442,7 @@ function BookNowContent() {
                           value={patientName}
                           onChange={(e) => setPatientName(e.target.value)}
                           placeholder="e.g. Ramesh Kulkarni"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                         />
                       </div>
 
@@ -456,7 +456,7 @@ function BookNowContent() {
                           value={patientPhone}
                           onChange={(e) => setPatientPhone(e.target.value)}
                           placeholder="e.g. 9876543210"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                         />
                       </div>
                     </div>
@@ -471,7 +471,7 @@ function BookNowContent() {
                           value={patientAge}
                           onChange={(e) => setPatientAge(e.target.value)}
                           placeholder="e.g. 28"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                         />
                       </div>
 
@@ -482,7 +482,7 @@ function BookNowContent() {
                         <select
                           value={patientGender}
                           onChange={(e) => setPatientGender(e.target.value as any)}
-                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                         >
                           <option value="F">Female</option>
                           <option value="M">Male</option>
@@ -499,7 +499,7 @@ function BookNowContent() {
                           value={patientVillage}
                           onChange={(e) => setPatientVillage(e.target.value)}
                           placeholder="e.g. Vadgaon"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                         />
                       </div>
                     </div>
@@ -514,7 +514,7 @@ function BookNowContent() {
                           value={preferredDate}
                           min={new Date().toISOString().split("T")[0]}
                           onChange={(e) => setPreferredDate(e.target.value)}
-                          className="w-full px-3.5 py-2 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          className="w-full px-3.5 py-2 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                         />
                       </div>
 
@@ -525,7 +525,7 @@ function BookNowContent() {
                         <select
                           value={preferredSlot}
                           onChange={(e) => setPreferredSlot(e.target.value)}
-                          className="w-full px-3 py-2 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          className="w-full px-3 py-2 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                         >
                           <option value="Morning (10:00 AM – 01:30 PM)">Morning (10:00 AM – 1:30 PM)</option>
                           <option value="Evening (05:00 PM – 09:00 PM)">Evening (5:00 PM – 9:00 PM)</option>
@@ -542,7 +542,7 @@ function BookNowContent() {
                         value={chiefComplaint}
                         onChange={(e) => setChiefComplaint(e.target.value)}
                         placeholder="e.g. severe acne, itchiness, hair thinning"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#355a48] focus:outline-none text-xs"
                       />
                     </div>
 
@@ -550,7 +550,7 @@ function BookNowContent() {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3.5 rounded-full bg-[#108283] hover:bg-[#0c6b6c] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-md active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full py-3.5 rounded-full bg-[#355a48] hover:bg-[#294a3a] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-md active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2 cursor-pointer"
                       >
                         <CalendarCheck className="w-4 h-4" />
                         <span>{loading ? "Registering Token..." : "Confirm & Generate Token"}</span>
@@ -572,7 +572,7 @@ export default function BookNowPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <span className="text-sm font-semibold text-[#108283]">Loading Booking Portal...</span>
+          <span className="text-sm font-semibold text-[#355a48]">Loading Booking Portal...</span>
         </div>
       }
     >
