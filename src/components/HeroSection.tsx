@@ -10,13 +10,13 @@ import {
   CheckCircle2,
   MapPin,
   ScanFace,
-  Sparkles,
+  Droplets,
   Stethoscope,
 } from "lucide-react";
 
 const carePoints = [
   { icon: ScanFace, label: "Skin diagnostics" },
-  { icon: Sparkles, label: "Hair & aesthetics" },
+  { icon: Droplets, label: "Hair & aesthetics" },
   { icon: Stethoscope, label: "Doctor-led care" },
 ];
 
@@ -41,10 +41,7 @@ export default function HeroSection() {
           className="relative z-10 max-w-2xl"
         >
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/55 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,.95),0_8px_28px_rgba(56,63,49,.06)] backdrop-blur-xl">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7e423e] opacity-35" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#7e423e]" />
-            </span>
+            <span className="inline-flex h-2 w-2 rounded-full bg-[#108283]" />
             <span className="text-[10px] font-semibold uppercase tracking-[.2em] text-[#555d4d] sm:text-[11px]">
               Skin · Hair · Clinical Aesthetics
             </span>

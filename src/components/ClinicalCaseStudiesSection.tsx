@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   CalendarCheck,
   ArrowRight,
-  Sparkles,
   ShieldAlert,
   Activity,
   Layers,
