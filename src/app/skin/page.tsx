@@ -1,11 +1,19 @@
-﻿import React from "react";
+import React from "react";
+import type { Metadata } from "next";
 import CategoryTreatmentPage from "@/components/CategoryTreatmentPage";
 import { TREATMENTS } from "@/data/treatments";
 
-export const metadata = {
-  title: "Skin Treatments | Shingare Skin & Cosmetics Clinic",
+export const metadata: Metadata = {
+  title: "Skin Treatments in Peth Vadgaon, Kolhapur",
   description:
-    "Evidence-based clinical dermatology for severe acne, eczema, psoriasis, melasma, and mole removal by Dr. Pramod Shingare (MD Dermatology).",
+    "Explore skin-care consultations and treatment options for acne, eczema, psoriasis and pigmentation at Shingare Skin & Cosmetics Clinic in Peth Vadgaon, Kolhapur.",
+  alternates: { canonical: "/skin" },
+  openGraph: {
+    title: "Skin Treatments in Peth Vadgaon, Kolhapur",
+    description:
+      "Learn about skin-care services and request a consultation at Shingare Skin & Cosmetics Clinic.",
+    url: "/skin",
+  },
 };
 
 export default function SkinTreatmentsPage() {
@@ -26,5 +34,3 @@ export default function SkinTreatmentsPage() {
     />
   );
 }
-
-
