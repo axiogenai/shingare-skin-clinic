@@ -9,7 +9,6 @@ import {
   CalendarCheck,
   Clock3,
   Droplets,
-  Sparkles,
   Stethoscope,
   Waves,
   Activity,
@@ -116,8 +115,8 @@ export default function SpecialtyCardsSection() {
           className="mx-auto mb-10 max-w-3xl text-center md:mb-14"
         >
           <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/65 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.19em] text-[#626a59] shadow-[inset_0_1px_0_rgba(255,255,255,.9),0_8px_24px_rgba(41,45,39,.05)] backdrop-blur-xl sm:text-[11px]">
-            <Sparkles size={13} className="text-[#7e423e]" />
-            Care, considered
+            
+            Our services
           </span>
           <h2
             id="specialties-heading"
