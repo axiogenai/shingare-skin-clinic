@@ -1,79 +1,214 @@
 "use client";
 
-import Link from "next/link";
+import React from "react";
 import Image from "next/image";
-import { CalendarCheck, Phone, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import {
+  CalendarCheck,
+  Phone,
+  ShieldCheck,
+} from "lucide-react";
 
-const doctors = [
+interface DoctorProfile {
+  id: string;
+  eyebrow: string;
+  eyebrowColor: string;
+  name: string;
+  qualifications: string;
+  regNo: string;
+  bgImage: string;
+  align: "left" | "right";
+  leadBold: string;
+  leadText: string;
+  bodyText: string;
+  affiliationsText: string;
+  badges: string[];
+  consultCta: string;
+}
+
+const doctors: DoctorProfile[] = [
   {
     id: "dr-pramod",
+    eyebrow: "Lead Clinical Dermatologist & Laser Specialist",
+    eyebrowColor: "#881337", // Warm luxury burgundy
     name: "Dr. Pramod Suresh Shingare",
-    role: "Skin, hair and laser care",
-    qualifications: "MD (Ayu) · D. Dermatology (Ay.) MUHS",
-    registration: "MMC Reg. No. I-87218-A",
-    image: "/docbg.png",
-    lead: "Consultation-led care for skin and scalp concerns, with treatment options explained before proceeding.",
-    href: "/book-now",
+    qualifications: "MD (Ayu) - D.Dermatology (Ay.) MUHS",
+    regNo: "MMC Reg. No. I-87218-A",
+    bgImage: "/docbg.png", // Cream / Ivory silk drapery (ripples on the left, smooth on the right)
+    align: "right", // Text positioned on the RIGHT
+    leadBold:
+      "Dr. Pramod Suresh Shingare is a Consultant Dermatologist and Trichologist with over 12 years of clinical excellence in medical dermatology, hair restoration, and precision dermatosurgery.",
+    leadText:
+      "Having completed advanced postgraduate clinical residency under Maharashtra University of Health Sciences (MUHS), he specializes in managing recalcitrant skin disorders, chronic psoriasis, vitiligo, severe cystic acne, and androgenetic alopecia.",
+    bodyText:
+      "He personally directs all clinical dermoscopy assessments, autologous platelet-derived growth factor treatments (PRP/GFC), and laser resurfacing procedures with an uncompromising emphasis on evidence-based pharmacology, transparent counseling, and patient safety.",
+    affiliationsText:
+      "Maharashtra Medical Council Verified (Reg. No. I-87218-A). Active participant in regional and national clinical dermatological forums.",
+    badges: [
+      "MMC Reg. I-87218-A",
+      "MD Dermatology (Ay.) MUHS",
+      "Clinical Trichology & PRP",
+      "Evidence-Based Care",
+      "Precision Lasers",
+    ],
+    consultCta: "Consult Dr. Pramod Shingare",
   },
   {
     id: "dr-priyanka",
+    eyebrow: "Consultant Dermatologist & Clinical Cosmetologist",
+    eyebrowColor: "#9f1239", // Deep rose / crimson
     name: "Dr. Priyanka Pramod Shingare",
-    role: "Clinical cosmetology and skin care",
     qualifications: "BHMS, FCHD, CCHC, CCMP (MUHS)",
-    registration: "Council Reg. No. 73338",
-    image: "/docbg1.png",
-    lead: "An individual approach to skin-care concerns, clinic-based facials and peel options, guided by assessment.",
-    href: "/book-now",
+    regNo: "Council Reg. No. 73338",
+    bgImage: "/docbg1.png", // Blush rose-gold silk drapery (smooth on the left, ripples on the right)
+    align: "left", // Text kept on the LEFT as requested
+    leadBold:
+      "Dr. Priyanka Pramod Shingare is a Consultant Dermatologist and Aesthetic Cosmetologist specializing in non-invasive skin rejuvenation, medical hydra-facials, and clinical chemical resurfacing.",
+    leadText:
+      "Celebrated for her meticulous, patient-centric approach and thorough skin barrier diagnostics, she heads the advanced clinical cosmetology and medical facial therapy wing.",
+    bodyText:
+      "Her clinical practice encompasses medical-grade hydra dermabrasion, post-inflammatory hyperpigmentation protocols, active acne scar remodeling, and customized therapeutic peels. She champions gentle, barrier-restorative aesthetic science that delivers radiant, sustainable results without compromising skin health.",
+    affiliationsText:
+      "Medical Council Verified (Reg. No. 73338, MUHS). Certified in Clinical Cosmetology, Advanced Chemical Peeling, and Holistic Skin Wellness.",
+    badges: [
+      "Council Reg. No. 73338",
+      "BHMS, FCHD, CCHC, CCMP (MUHS)",
+      "Medical Cosmetology Specialist",
+      "Advanced Medi-Facials & Peels",
+      "Skin Barrier Restoration",
+    ],
+    consultCta: "Consult Dr. Priyanka Shingare",
   },
 ];
 
 export default function DoctorsSilkEditorial() {
   return (
-    <section aria-labelledby="our-clinicians-heading" className="border-t border-[#e1e7e3] bg-white px-5 py-16 font-source sm:px-8 sm:py-20 lg:px-12 lg:py-24">
-      <div className="mx-auto max-w-[1280px]">
-        <div className="mb-10 max-w-3xl">
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[.18em] text-[#287a78]">Meet the clinicians</p>
-          <h2 id="our-clinicians-heading" className="font-['Cormorant_Garamond',Georgia,serif] text-4xl font-medium leading-[1.02] tracking-[-.035em] text-[#202a28] sm:text-5xl">
-            Experienced care, explained with clarity.
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-[#64716b] sm:text-base">
-            Learn about the clinicians and their areas of practice before your visit.
-          </p>
-        </div>
+    <div className="w-full font-source">
+      {doctors.map((doc, index) => (
+        <React.Fragment key={doc.id}>
+          {/* Luxury Editorial Label with Hairline Accents positioned directly on the seamless boundary */}
+          {index > 0 && (
+            <div className="relative w-full z-30 h-0 flex items-center justify-center pointer-events-none select-none">
+              <div className="absolute -translate-y-1/2 w-full max-w-[1360px] px-4 sm:px-8 lg:px-16 flex items-center justify-center gap-3 sm:gap-6 pointer-events-auto">
+                {/* Left Hairline Gradient: Transparent -> Gold -> Burgundy */}
+                <div className="flex-1 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-[#881337]/70" />
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          {doctors.map((doctor) => (
-            <article key={doctor.id} className="grid overflow-hidden border border-[#e1e7e3] bg-[#f7f9f7] sm:grid-cols-[.72fr_1fr]">
-              <div className="relative min-h-[250px] bg-[#e8eeea] sm:min-h-[330px]">
-                <Image
-                  src={doctor.image}
-                  alt=""
-                  fill
-                  sizes="(max-width: 768px) 90vw, 30vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="flex flex-col p-5 sm:p-7">
-                <p className="text-[10px] font-semibold uppercase tracking-[.14em] text-[#287a78]">{doctor.role}</p>
-                <h3 className="mt-3 font-['Cormorant_Garamond',Georgia,serif] text-3xl font-semibold leading-tight text-[#202a28]">{doctor.name}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#56645e]">{doctor.lead}</p>
-                <div className="mt-5 space-y-2 border-t border-[#dfe7e2] pt-4 text-xs leading-5 text-[#53615b]">
-                  <p>{doctor.qualifications}</p>
-                  <p className="inline-flex items-center gap-2"><ShieldCheck size={14} aria-hidden="true" className="shrink-0 text-[#287a78]" /> {doctor.registration}</p>
+                {/* Center Luxury Pill */}
+                <div className="flex items-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-[#E8DCBE] shadow-[0_4px_16px_rgba(212,175,55,0.12)] shrink-0">
+                  <span className="w-2 h-2 rotate-45 bg-[#881337] shrink-0" />
+                  <span className="font-playfair text-[11px] sm:text-xs md:text-sm font-bold tracking-widest text-gray-900 uppercase whitespace-nowrap">
+                    Clinical Dermatology &amp; Aesthetic Cosmetology
+                  </span>
+                  <span className="w-2 h-2 rotate-45 bg-[#9f1239] shrink-0" />
                 </div>
-                <div className="mt-auto flex flex-col gap-2 pt-6">
-                  <Link href={doctor.href} className="inline-flex min-h-11 items-center justify-center gap-2 bg-[#176e6d] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#125958]">
-                    <CalendarCheck size={15} aria-hidden="true" /> Request a consultation
+
+                {/* Right Hairline Gradient: Burgundy -> Gold -> Transparent */}
+                <div className="flex-1 h-[1.5px] bg-gradient-to-l from-transparent via-[#D4AF37]/50 to-[#9f1239]/70" />
+              </div>
+            </div>
+          )}
+
+          {/* Full-width Silk Section (Edge-to-edge as on screen) */}
+          <section className="relative w-full min-h-[620px] lg:min-h-[720px] flex items-center overflow-hidden">
+            {/* 1. Full-screen Edge-to-Edge Silk Background */}
+            <Image
+              src={doc.bgImage}
+              alt={`${doc.name} Silk Background`}
+              fill
+              priority={index === 0}
+              className="object-cover object-center pointer-events-none select-none"
+            />
+
+            {/* 2. Seamless Inter-Section Silk Feather Blends (matches both PNGs at the division) */}
+            {index === 0 && (
+              <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-b from-transparent via-[#FAF0E8]/50 to-[#FAF0E8] pointer-events-none z-[5]" />
+            )}
+            {index > 0 && (
+              <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-[#FAF0E8] via-[#FAF0E8]/50 to-transparent pointer-events-none z-[5]" />
+            )}
+
+            {/* 3. Soft directional gradient scrim for crisp text legibility */}
+            <div
+              className={`absolute inset-0 pointer-events-none ${
+                doc.align === "right"
+                  ? "bg-gradient-to-l from-white/85 via-white/50 sm:via-white/40 to-transparent"
+                  : "bg-gradient-to-r from-white/85 via-white/50 sm:via-white/40 to-transparent"
+              }`}
+            />
+
+            {/* 3. Editorial Typography Content Placed Directly on the Silk */}
+            <div
+              className={`relative z-10 w-full max-w-[1360px] mx-auto px-6 sm:px-12 lg:px-20 py-24 sm:py-28 lg:py-36 flex ${
+                doc.align === "right" ? "justify-end" : "justify-start"
+              }`}
+            >
+              <div className="w-full max-w-2xl lg:max-w-[660px]">
+                {/* Eyebrow in warm burgundy / rose serif */}
+                <p
+                  className="font-playfair text-xl sm:text-2xl lg:text-[26px] font-medium tracking-wide italic mb-2.5 sm:mb-3"
+                  style={{ color: doc.eyebrowColor }}
+                >
+                  {doc.eyebrow}
+                </p>
+
+                {/* Physician Name in bold dark serif */}
+                <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold text-gray-950 tracking-tight leading-[1.14] mb-4">
+                  {doc.name}
+                </h2>
+
+                {/* ── Credential Strip ── compact, architectural, trust-critical */}
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-5 pb-5 border-b border-black/8">
+                  <span className="font-mono text-[11px] sm:text-xs text-gray-700 tracking-wide">
+                    {doc.qualifications}
+                  </span>
+                  <span className="h-3 w-px bg-gray-300 hidden sm:block" />
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
+                    <span className="font-mono text-[11px] sm:text-xs text-[#108283] font-medium tracking-wide">
+                      {doc.regNo}
+                    </span>
+                  </div>
+                </div>
+
+
+                <div className="space-y-4 text-gray-900 text-sm sm:text-base md:text-[17px] leading-relaxed">
+                  <p>
+                    <strong className="font-bold text-gray-950">
+                      {doc.leadBold}
+                    </strong>{" "}
+                    {doc.leadText}
+                  </p>
+                  <p className="text-gray-800 leading-relaxed font-normal">
+                    {doc.bodyText}
+                  </p>
+                  <p className="text-gray-700 text-xs sm:text-sm leading-relaxed pt-1">
+                    {doc.affiliationsText}
+                  </p>
+                </div>
+
+
+                {/* Call-to-Action Buttons */}
+                <div className="pt-8 flex flex-wrap items-center gap-3.5">
+                  <Link
+                    href="/book-now"
+                    className="inline-flex items-center justify-center gap-2.5 bg-gray-950 hover:bg-gray-800 text-white px-7 py-3.5 rounded-full text-xs uppercase tracking-wider font-semibold transition-all shadow-md active:scale-95"
+                  >
+                    <CalendarCheck className="w-4 h-4 text-[#FAEDDA]" />
+                    <span>{doc.consultCta}</span>
                   </Link>
-                  <a href="tel:+917249727104" className="inline-flex min-h-10 items-center justify-center gap-2 border border-[#d3dfda] bg-white px-4 text-sm font-semibold text-[#263632] hover:bg-[#f1f6f4]">
-                    <Phone size={15} aria-hidden="true" /> +91 72497 27104
+                  <a
+                    href="tel:+917249727104"
+                    className="inline-flex items-center justify-center gap-2 bg-white/95 hover:bg-white text-gray-900 border border-gray-200 hover:border-gray-400 px-6 py-3.5 rounded-full text-xs uppercase tracking-wider font-semibold transition-all backdrop-blur-md shadow-2xs"
+                  >
+                    <Phone className="w-4 h-4 text-[#108283]" />
+                    <span>+91 72497 27104</span>
                   </a>
                 </div>
               </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+            </div>
+          </section>
+        </React.Fragment>
+      ))}
+    </div>
   );
 }

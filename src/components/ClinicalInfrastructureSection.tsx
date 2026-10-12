@@ -1,85 +1,147 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
-import { Activity, Droplets, Microscope, ScanLine, ShieldCheck, Zap } from "lucide-react";
+import {
+  Zap,
+  Microscope,
+  Activity,
+  Droplets,
+  Flame,
+  ShieldCheck,
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react";
 
 const platforms = [
   {
-    name: "Laser-based skin treatments",
-    category: "Laser care",
-    description: "Laser options may be discussed for selected pigmentation, tattoo and scar concerns after a clinical assessment.",
-    note: "Suitability and expected recovery vary by individual.",
+    code: "PLATFORM // 01",
+    name: "Dual-Wavelength Q-Switched Nd:YAG Laser",
+    wavelength: "1064nm / 532nm Sub-Nanosecond Energy",
+    indications: ["Dermal Melasma & Freckles", "Acne Scar Resurfacing", "Carbon Laser Glow Peel", "Tattoo Pigment Breakdown"],
+    clinicalImpact:
+      "Selectively fractures deep cutaneous pigment deposits via photoacoustic shockwaves without thermal destruction to adjacent epidermal tissue. Tailored specifically for safe use on Indian Fitzpatrick III–V skin types.",
+    safetyProfile: "Zero epidermal charring • Minimal downtime (12–24h mild erythema)",
     icon: Zap,
   },
   {
-    name: "Skin and scalp examination",
-    category: "Assessment",
-    description: "Clinical examination tools can help your clinician assess skin and scalp concerns as part of a consultation.",
-    note: "Testing and imaging depend on the concern being assessed.",
+    code: "PLATFORM // 02",
+    name: "High-Resolution Polarized Digital Dermatoscope",
+    wavelength: "Cross-Polarized & Non-Polarized Optical Microscopy",
+    indications: ["Follicular Density Mapping", "Early Androgenetic Alopecia", "Atypical Nevi & Lesions", "Erythema & Vascular Mapping"],
+    clinicalImpact:
+      "Provides up to 40× optical magnification with cross-polarized light, eliminating skin surface reflection to reveal deep dermal melanin patterns, hair miniaturization ratios, and microscopic follicular health.",
+    safetyProfile: "Non-invasive • Instant high-resolution optical readout",
     icon: Microscope,
   },
   {
-    name: "Hair and scalp treatment options",
-    category: "Hair health",
-    description: "Discuss available approaches for hair fall and scalp concerns, including whether procedural options are appropriate.",
-    note: "No single treatment is suitable for everyone.",
+    code: "PLATFORM // 03",
+    name: "Closed-System Autologous Centrifuge Platform",
+    wavelength: "Precision RCF Speed & Temperature Stabilization",
+    indications: ["Growth Factor Concentrate (GFC)", "Autologous Platelet PRP", "Follicular Revascularization", "Facial Collagen Induction"],
+    clinicalImpact:
+      "A closed-system sterile centrifugation unit that isolates high concentrations of PDGF, VEGF, and TGF-beta growth factors without chemical additives or contamination risk, accelerating follicular stem cell activation.",
+    safetyProfile: "100% autologous biocompatible • Zero foreign-body reaction risk",
     icon: Activity,
   },
   {
-    name: "Clinic-based facial treatments",
-    category: "Clinical aesthetics",
-    description: "Facial and peel options are selected with attention to your skin type, sensitivity and stated concerns.",
-    note: "Your clinician can explain potential benefits and risks.",
+    code: "PLATFORM // 04",
+    name: "Medical Ultrasonic Vortex Hydro-Extractor",
+    wavelength: "Negative Pressure Vacuum + Micro-Jet Infusion",
+    indications: ["Comedone & Blackhead Extraction", "Corneocyte Decongestion", "Medical Hydra Medi-Facials", "Deep Hyaluronic Acid Delivery"],
+    clinicalImpact:
+      "Simultaneously executes non-irritating vortex suction to dislodge impacted follicular debris while infusing medical-grade antioxidant and barrier-replenishing serums deep into porous strata.",
+    safetyProfile: "Comfortable, non-invasive • Zero downtime post-session",
     icon: Droplets,
   },
   {
-    name: "Skin concerns and lesion review",
-    category: "Skin health",
-    description: "Raise questions about skin growths, uneven tone or changes that need an in-person clinical review.",
-    note: "A clinical review is needed before any procedure.",
-    icon: ScanLine,
+    code: "PLATFORM // 05",
+    name: "High-Frequency Radiofrequency Electrocautery",
+    wavelength: "3.8 MHz Sub-Tissue Monopolar / Bipolar Micro-Current",
+    indications: ["Skin Tags (Acrochordons)", "Dermatosis Papulosa Nigra (DPN)", "Benign Warts & Verrucae", "Milia Clearance"],
+    clinicalImpact:
+      "High-frequency radiofrequency current vaporizes unwanted superficial benign skin growths with microscopic margin precision, providing instantaneous coagulation with minimal scar formation.",
+    safetyProfile: "Local anesthetic application • Rapid re-epithelialization in 4–6 days",
+    icon: Flame,
   },
 ];
 
 export default function ClinicalInfrastructureSection() {
   return (
-    <section aria-labelledby="clinic-care-tools-heading" className="border-t border-[#e1e7e3] bg-white px-5 py-16 font-source sm:px-8 sm:py-20 lg:px-12 lg:py-24">
-      <div className="mx-auto max-w-[1280px]">
-        <div className="mb-10 grid gap-4 lg:grid-cols-[1fr_.7fr] lg:items-end lg:gap-12">
-          <div>
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[.18em] text-[#287a78]">Treatments & assessment</p>
-            <h2 id="clinic-care-tools-heading" className="max-w-3xl font-['Cormorant_Garamond',Georgia,serif] text-4xl font-medium leading-[1.02] tracking-[-.035em] text-[#202a28] sm:text-5xl">
-              The right approach starts with the right assessment.
-            </h2>
+    <section className="py-20 md:py-28 bg-white relative font-source border-t border-stone-200/70">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 md:px-8">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 bg-[#FAF0DD] text-[#108283] text-xs font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider border border-[#E8DCBE]/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#108283]" />
+            Clinical Infrastructure
           </div>
-          <p className="max-w-xl text-sm leading-6 text-[#64716b] sm:text-base sm:leading-7">
-            Explore the types of care available at the clinic. The clinician can explain what is suitable, what to expect, and when another approach may be preferable.
+
+          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-stone-950 font-normal leading-tight mb-4">
+            Hospital-Grade Aesthetic &amp;{" "}
+            <span className="text-[#108283] font-semibold italic">
+              Diagnostic Hardware
+            </span>
+          </h2>
+
+          <p className="text-stone-600 text-base md:text-lg font-normal leading-relaxed">
+            Unlike commercial salons using uncalibrated parlor machines, every procedure at Shingare Clinic is powered by calibrated, physician-grade medical instrumentation.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {platforms.map(({ name, category, description, note, icon: Icon }) => (
-            <article key={name} className="flex min-w-0 flex-col border border-[#e1e7e3] bg-[#f7f9f7] p-5 sm:p-6">
-              <div className="mb-5 flex items-center justify-between gap-3">
-                <span className="text-[10px] font-semibold uppercase tracking-[.15em] text-[#6d7c76]">{category}</span>
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#287a78]">
-                  <Icon size={19} strokeWidth={1.6} aria-hidden="true" />
-                </span>
+        {/* Platforms List / Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {platforms.map((plat) => {
+            const Icon = plat.icon;
+            return (
+              <div
+                key={plat.code}
+                className="group relative bg-[#F7F6F4] border border-stone-200/90 rounded-2xl p-6 sm:p-7 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-[#108283]/60 hover:bg-white hover:shadow-[0_8px_24px_rgba(16,130,131,0.06)] transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  {/* Top Bar */}
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-stone-200/60">
+                    <span className="font-mono text-[11px] font-bold text-stone-500 tracking-wider">
+                      {plat.code}
+                    </span>
+                    <div className="w-8 h-8 rounded-lg bg-stone-100 text-[#108283] flex items-center justify-center transition-colors duration-200 border border-stone-200/60">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <h3 className="font-playfair text-lg sm:text-xl font-bold text-stone-950 mb-1 leading-snug group-hover:text-[#108283] transition-colors">
+                    {plat.name}
+                  </h3>
+
+                  <div className="font-mono text-[11px] text-[#108283] font-medium mb-3">
+                    {plat.wavelength}
+                  </div>
+
+                  <p className="text-xs text-stone-600 leading-relaxed mb-4">
+                    {plat.clinicalImpact}
+                  </p>
+
+                  {/* Indications Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {plat.indications.map((ind, i) => (
+                      <span
+                        key={i}
+                        className="text-[10.5px] font-medium text-stone-700 bg-white/90 px-2.5 py-0.5 rounded-md border border-stone-200/70"
+                      >
+                        {ind}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Safety Profile */}
+                <div className="pt-3 border-t border-stone-200/60 flex items-center gap-2 text-[11px] text-stone-600">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
+                  <span className="leading-tight font-medium">{plat.safetyProfile}</span>
+                </div>
               </div>
-              <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-2xl font-semibold leading-tight text-[#25322f]">{name}</h3>
-              <p className="mt-3 text-sm leading-6 text-[#62706a]">{description}</p>
-              <p className="mt-5 border-t border-[#e0e7e2] pt-4 text-xs leading-5 text-[#748079]">{note}</p>
-            </article>
-          ))}
-        </div>
-        <div className="mt-8 border-l-2 border-[#8bb6ae] bg-[#f5f8f6] px-5 py-4 sm:px-6">
-          <p className="flex items-start gap-3 text-sm leading-6 text-[#4f5e58]">
-            <ShieldCheck size={18} className="mt-0.5 shrink-0 text-[#287a78]" aria-hidden="true" />
-            Equipment and treatment availability can change. Please confirm details, candidacy, risks and aftercare with the clinic before booking a procedure.
-          </p>
-          <Link href="/book-now" className="mt-3 inline-flex items-center text-sm font-semibold text-[#176e6d] underline underline-offset-4 hover:text-[#125958]">
-            Discuss a treatment <span aria-hidden="true" className="ml-2">→</span>
-          </Link>
+            );
+          })}
         </div>
       </div>
     </section>

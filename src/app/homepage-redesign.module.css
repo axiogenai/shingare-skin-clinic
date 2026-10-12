@@ -1,15 +1,18 @@
-/* Homepage-only design tokens; operational routes keep their own styles. */
+/* Homepage-only visual system. Other routes, including /verify and /live-queue, do not import this module. */
 .homepage {
-  --home-paper: #f7f7f3;
-  --home-paper-alt: #ffffff;
-  --home-ink: #202a28;
-  --home-muted: #64716b;
-  --home-teal: #176e6d;
-  --home-line: #e1e7e3;
+  --home-paper: #f4f0e8;
+  --home-paper-alt: #eeeee6;
+  --home-ink: #292d27;
+  --home-muted: #696c61;
+  --home-sage: #6d7a63;
+  --home-wine: #7e423e;
+  --home-line: rgba(58, 65, 52, 0.14);
   position: relative;
   isolation: isolate;
   color: var(--home-ink);
-  background: var(--home-paper);
+  background:
+    radial-gradient(ellipse at 4% 18%, rgba(206, 216, 198, 0.2), transparent 30rem),
+    var(--home-paper);
   overflow: clip;
 }
 
@@ -17,14 +20,127 @@
   scroll-margin-top: 5rem;
 }
 
-.homepage :global(h1),
-.homepage :global(h2),
-.homepage :global(h3) {
-  text-wrap: balance;
+.homepage :global(.homepage-intro section:not(#hero)) {
+  background: transparent !important;
 }
 
-.homepage :global(p) {
+.homepage :global(.homepage-intro section) {
+  color: var(--home-ink);
+}
+
+.homepage :global(.homepage-intro h2),
+.homepage :global(section > div h2),
+.homepage :global(section h3) {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  letter-spacing: -0.035em;
+}
+
+.homepage :global(section > div > h2),
+.homepage :global(section > div > div > h2) {
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+.homepage :global(.homepage-intro .animate-marquee) {
+  will-change: transform;
+}
+
+.homepage :global(.homepage-intro .animate-marquee > div > div) {
+  border-radius: 14px;
+  border-color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92), 0 8px 24px rgba(43, 49, 39, 0.045);
+  backdrop-filter: blur(18px);
+}
+
+.homepage :global(.homepage-intro .animate-marquee > div > div > span:last-child) {
+  color: #42473d;
+}
+
+.homepage :global(.homepage-intro section:not(#hero) h2 span),
+.homepage :global(.homepage-intro section:not(#hero) h2 em) {
+  color: var(--home-wine);
+}
+
+.homepage > :global(section) {
+  position: relative;
+  padding-top: clamp(4.5rem, 8vw, 8rem) !important;
+  padding-bottom: clamp(4.5rem, 8vw, 8rem) !important;
+  background-color: var(--home-paper) !important;
+  border-top: 1px solid rgba(69, 75, 60, 0.06);
+}
+
+.homepage > :global(section:nth-of-type(even)) {
+  background-color: var(--home-paper-alt) !important;
+}
+
+.homepage > :global(section) h2 {
+  color: var(--home-ink);
+}
+
+.homepage > :global(section) p {
   text-wrap: pretty;
+}
+
+.homepage > :global(section) [class*="rounded-3xl"][class*="border"],
+.homepage > :global(section) [class*="rounded-2xl"][class*="border"],
+.homepage > :global(section) [class*="rounded-xl"][class*="border"] {
+  border-color: rgba(255, 255, 255, 0.82);
+  background-color: rgba(255, 255, 255, 0.54);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 14px 42px rgba(48, 53, 43, 0.055);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: border-color 240ms ease, box-shadow 240ms ease, transform 240ms ease, background-color 240ms ease;
+}
+
+.homepage > :global(section) [class*="rounded-3xl"][class*="border"]:hover,
+.homepage > :global(section) [class*="rounded-2xl"][class*="border"]:hover {
+  transform: translateY(-3px);
+  border-color: rgba(126, 66, 62, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 20px 48px rgba(48, 53, 43, 0.085);
+}
+
+.homepage > :global(section) a:focus-visible,
+.homepage > :global(section) button:focus-visible {
+  outline: 2px solid var(--home-wine);
+  outline-offset: 4px;
+}
+
+.homepage :global(#services) {
+  background:
+    radial-gradient(ellipse at 90% 10%, rgba(206, 216, 198, 0.24), transparent 32rem),
+    transparent !important;
+}
+
+.homepage :global(#services) [class*="grid"] > * {
+  min-width: 0;
+}
+
+.homepage :global(#booking),
+.homepage :global(section[id*="appointment"]) {
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(205, 215, 195, 0.32), transparent 32rem),
+    #ecece3 !important;
+}
+
+.homepage :global(input),
+.homepage :global(select),
+.homepage :global(textarea) {
+  border-radius: 12px !important;
+  border-color: rgba(82, 91, 72, 0.2) !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+}
+
+.homepage :global(input:focus),
+.homepage :global(select:focus),
+.homepage :global(textarea:focus) {
+  border-color: var(--home-sage) !important;
+  box-shadow: 0 0 0 3px rgba(109, 122, 99, 0.14) !important;
+  outline: none;
 }
 
 .homepage :global(a),
@@ -32,28 +148,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.homepage :global(a:focus-visible),
-.homepage :global(button:focus-visible),
-.homepage :global(input:focus-visible),
-.homepage :global(select:focus-visible),
-.homepage :global(textarea:focus-visible) {
-  outline: 2px solid var(--home-teal);
-  outline-offset: 3px;
-}
-
-.homepage :global(input),
-.homepage :global(select),
-.homepage :global(textarea) {
-  border-radius: 6px !important;
-  border-color: #d5dfdc !important;
-  background: #fff !important;
-}
-
-.homepage :global(input:focus),
-.homepage :global(select:focus),
-.homepage :global(textarea:focus) {
-  border-color: var(--home-teal) !important;
-  box-shadow: 0 0 0 3px rgba(23, 110, 109, .12) !important;
+@media (max-width: 640px) {
+  .homepage > :global(section) {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
