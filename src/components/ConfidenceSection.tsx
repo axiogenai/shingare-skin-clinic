@@ -1,96 +1,56 @@
-"use client";
+import Link from "next/link";
+import { ArrowRight, ClipboardCheck, HeartHandshake, Stethoscope } from "lucide-react";
 
-import React, { useEffect, useState, useRef } from "react";
-
-function AnimatedCounter({ end, suffix = "", duration = 2 }: { end: number; suffix?: string; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let startTime: number | null = null;
-          const animate = (time: number) => {
-            if (!startTime) startTime = time;
-            const progress = Math.min((time - startTime) / (duration * 1000), 1);
-            setCount(Math.floor(progress * end));
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            } else {
-              setCount(end);
-            }
-          };
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.25 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [end, duration, hasAnimated]);
-
-  return (
-    <span ref={ref} className="font-playfair font-normal italic">
-      {count}
-      {suffix}
-    </span>
-  );
-}
+const principles = [
+  {
+    icon: Stethoscope,
+    title: "Start with a consultation",
+    description: "Discuss your concern and history before deciding whether a treatment is appropriate.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Understand your options",
+    description: "Receive clear information about the care plan, expected steps and follow-up.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Care shaped around you",
+    description: "Recommendations are considered in the context of your skin, scalp and personal needs.",
+  },
+];
 
 export default function ConfidenceSection() {
-  const stats = [
-    { label: "Years in Dermatology & Hair Care", value: 12, suffix: "+" },
-    { label: "Patients Treated Annually", value: 3, suffix: "k+" },
-    { label: "Doctor-Led Procedures", value: 100, suffix: "%" },
-    { label: "MMC / Medical Council Verified Doctors", value: 2, suffix: "" },
-  ];
-
   return (
-    <section className="bg-transparent py-20 md:py-28 relative font-source">
-      <div className="max-w-[1140px] mx-auto px-5 sm:px-6 md:px-8 flex flex-col items-center text-center">
-        {/* Pill Badge */}
-        <div className="inline-block bg-[#FAEDDA]/90 backdrop-blur-md text-gray-900 text-xs md:text-sm font-semibold px-5 py-1.5 rounded-full mb-5 uppercase tracking-wider border border-[#E8DCBE]/70 shadow-2xs">
-          CONFIDENCE ROOTED IN CLINICAL SCIENCE
-        </div>
+    <section aria-labelledby="care-principles-heading" className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="grid gap-9 lg:grid-cols-[.78fr_1.22fr] lg:gap-16">
+          <div className="max-w-xl">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[.18em] text-[#287a78]">A clear approach to care</p>
+            <h2 id="care-principles-heading" className="font-['Cormorant_Garamond',Georgia,serif] text-4xl font-medium leading-[1.02] tracking-[-.035em] text-[#202a28] sm:text-5xl">
+              Good care begins with listening.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-[#596560]">
+              Every concern is different. We focus on understanding what brings you in, explaining the available options and helping you make an informed decision with your clinician.
+            </p>
+            <Link href="/about" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#176e6d] hover:text-[#125958]">
+              Learn about the clinic <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
 
-        {/* Short, Clean Headline */}
-        <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-normal leading-[1.2] text-gray-950 max-w-3xl mb-4">
-          Skin, Hair &amp; Laser Health.{" "}
-          <span className="italic text-[#108283] font-medium">
-            Expertly cared for.
-          </span>
-        </h2>
-
-        {/* Concise Subtitle */}
-        <p className="font-source text-gray-700 text-base sm:text-lg font-normal max-w-2xl mb-12 md:mb-16 leading-relaxed">
-          Evidence-based dermatological therapies at <strong className="font-semibold text-gray-950">Shingare Skin &amp; Cosmetics Clinic</strong>, Peth Vadgaon, delivering scientific care with zero guesswork.
-        </p>
-
-        {/* 4 Stats Grid - Clean numbers and text without card wrappers */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 w-full pt-4">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center justify-center text-center"
-            >
-              {/* Number on top in teal italic serif */}
-              <div className="text-[#108283] text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-normal leading-none mb-3 font-playfair">
-                <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-              </div>
-
-              {/* Label underneath in delicate italic serif */}
-              <p className="font-playfair text-sm sm:text-base lg:text-[17px] text-gray-800 italic font-normal tracking-wide max-w-[200px]">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+          <div className="divide-y divide-[#e5eae7] border-y border-[#e5eae7]">
+            {principles.map(({ icon: Icon, title, description }, index) => (
+              <article key={title} className="grid gap-3 py-6 sm:grid-cols-[44px_1fr] sm:gap-5 sm:py-7">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#edf4f1] text-[#287a78]">
+                  <Icon size={19} strokeWidth={1.7} aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="mb-1 text-[10px] font-semibold uppercase tracking-[.15em] text-[#7a8983]">0{index + 1}</p>
+                  <h3 className="text-lg font-semibold text-[#25322f]">{title}</h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-[#64716b] sm:text-base">{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

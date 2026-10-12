@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import QRRedirectHandler from "@/components/QRRedirectHandler";
 import ThreePageExperience from "@/components/ThreePageExperience";
+import ConfidenceSection from "@/components/ConfidenceSection";
 import PatientJourneySection from "@/components/PatientJourneySection";
-import ClinicalInfrastructureSection from "@/components/ClinicalInfrastructureSection";
 import DoctorsSilkEditorial from "@/components/DoctorsSilkEditorial";
-import ClinicalCaseStudiesSection from "@/components/ClinicalCaseStudiesSection";
+import ClinicalInfrastructureSection from "@/components/ClinicalInfrastructureSection";
 import ClinicOSFeaturesSection from "@/components/ClinicOSFeaturesSection";
-import Testimonials2 from "@/components/watermelon-ui/testimonials-2";
 import OPDTimingsLocationSection from "@/components/OPDTimingsLocationSection";
 import AppointmentSection from "@/components/AppointmentSection";
 import FAQSection from "@/components/FAQSection";
@@ -17,9 +16,7 @@ export const metadata: Metadata = {
   title: "Skin & Hair Clinic in Peth Vadgaon, Kolhapur",
   description:
     "Explore skin, hair and cosmetic care at Shingare Skin & Cosmetics Clinic in Peth Vadgaon, Kolhapur. Learn about services and request a consultation.",
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Shingare Skin & Cosmetics Clinic | Peth Vadgaon, Kolhapur",
     description:
@@ -36,12 +33,11 @@ export default function HomePage() {
       </Suspense>
       <div className={styles.homepage}>
         <ThreePageExperience />
+        <ConfidenceSection />
+        <DoctorsSilkEditorial />
         <PatientJourneySection />
         <ClinicalInfrastructureSection />
-        <DoctorsSilkEditorial />
-        <ClinicalCaseStudiesSection />
         <ClinicOSFeaturesSection />
-        <Testimonials2 />
         <OPDTimingsLocationSection />
         <AppointmentSection />
         <FAQSection />
