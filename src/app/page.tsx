@@ -12,6 +12,7 @@ import Testimonials2 from "@/components/watermelon-ui/testimonials-2";
 import OPDTimingsLocationSection from "@/components/OPDTimingsLocationSection";
 import AppointmentSection from "@/components/AppointmentSection";
 import FAQSection from "@/components/FAQSection";
+import styles from "./homepage-redesign.module.css";
 
 function QRRedirectHandler() {
   const router = useRouter();
@@ -40,35 +41,18 @@ export default function HomePage() {
         <QRRedirectHandler />
       </Suspense>
 
-      {/* 1. Cinematic Hero + Marquee + Confidence Stats + 4 Specialties */}
-      <ThreePageExperience />
-
-      {/* 2. The 4-Step Clinical Protocol (Diagnostics -> Diagnosis -> Procedure -> Home Regimen) */}
-      <PatientJourneySection />
-
-      {/* 3. Hospital-Grade Laser & Diagnostic Platforms Showcase */}
-      <ClinicalInfrastructureSection />
-
-      {/* 4. Dual-Specialist Editorial Profiles with Credentials (Silk Drapery) */}
-      <DoctorsSilkEditorial />
-
-      {/* 5. Documented Clinical Case Outcomes / Case Studies Archive */}
-      <ClinicalCaseStudiesSection />
-
-      {/* 6. Smart Digital Health Features (ClinicOS: Audio Rx, Live Queue, Verifier, Skin Quiz) */}
-      <ClinicOSFeaturesSection />
-
-      {/* 7. Verified Patient Testimonials (Watermelon UI Testimonials-2) */}
-      <Testimonials2 />
-
-      {/* 8. Clinical OPD Hours, Landmark Location & Directions Hub */}
-      <OPDTimingsLocationSection />
-
-      {/* 9. Direct OPD Consultation Booking Section */}
-      <AppointmentSection />
-
-      {/* 10. Clinical & Procedural Frequently Asked Questions */}
-      <FAQSection />
+      <main className={styles.homepage}>
+        <ThreePageExperience />
+        <PatientJourneySection />
+        <ClinicalInfrastructureSection />
+        <DoctorsSilkEditorial />
+        <ClinicalCaseStudiesSection />
+        <ClinicOSFeaturesSection />
+        <Testimonials2 />
+        <OPDTimingsLocationSection />
+        <AppointmentSection />
+        <FAQSection />
+      </main>
     </>
   );
 }
