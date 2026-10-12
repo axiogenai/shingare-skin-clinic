@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CalendarCheck, Stethoscope, Activity, Waves, Droplets } from "lucide-react";
+import { ArrowRight, CalendarCheck, Stethoscope, Activity, Waves, Droplets, type LucideIcon } from "lucide-react";
 
 type Specialty = {
   id: string;
@@ -10,9 +10,8 @@ type Specialty = {
   eyebrow: string;
   summary: string;
   image: string;
-  alt: string;
   conditions: string[];
-  icon: typeof Stethoscope;
+  icon: LucideIcon;
   href: string;
   bookingParam: string;
 };
@@ -23,8 +22,7 @@ const specialties: Specialty[] = [
     title: "Clinical dermatology",
     eyebrow: "SKIN HEALTH",
     summary: "Consultation and treatment planning for common skin concerns, including acne, eczema, psoriasis and pigmentation.",
-    image: "/girl-latest.png",
-    alt: "Portrait representing skin and cosmetic care",
+    image: "/services/clinical-dermatology.png",
     conditions: ["Acne", "Eczema", "Psoriasis", "Pigmentation"],
     icon: Stethoscope,
     href: "/skin",
@@ -35,8 +33,7 @@ const specialties: Specialty[] = [
     title: "Hair & scalp care",
     eyebrow: "HAIR HEALTH",
     summary: "Assessment of hair fall and scalp concerns, with suitable options discussed during consultation.",
-    image: "/docbg.png",
-    alt: "Clinic editorial background used for care information",
+    image: "/services/hair-care.png",
     conditions: ["Hair fall", "Scalp concerns", "Thinning"],
     icon: Activity,
     href: "/hair",
@@ -47,8 +44,7 @@ const specialties: Specialty[] = [
     title: "Laser & scar care",
     eyebrow: "CLINICAL AESTHETICS",
     summary: "Learn about laser-based and scar-care options. Suitability, possible outcomes and recovery are reviewed with your clinician.",
-    image: "/docbg1.png",
-    alt: "Soft neutral editorial background used for clinical aesthetics",
+    image: "/services/pigmentation.png",
     conditions: ["Acne scars", "Pigmentation", "Texture"],
     icon: Waves,
     href: "/cosmetics",
@@ -59,8 +55,7 @@ const specialties: Specialty[] = [
     title: "Medi-facials & peels",
     eyebrow: "SKIN TREATMENTS",
     summary: "Explore clinic-based facial and peel options selected around your skin type, concerns and skin-barrier health.",
-    image: "/girl-latest.png",
-    alt: "Portrait representing cosmetic skin care",
+    image: "/services/medifacial.png",
     conditions: ["Medi-facials", "Chemical peels", "Oil control"],
     icon: Droplets,
     href: "/cosmetics",
@@ -85,14 +80,14 @@ export default function SpecialtyCardsSection() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {specialties.map((item, index) => {
+          {specialties.map((item) => {
             const Icon = item.icon;
             return (
               <article key={item.id} className="group flex min-w-0 flex-col overflow-hidden border border-[#e1e7e3] bg-white transition-colors duration-200 hover:border-[#a6c4bd]">
                 <div className="relative aspect-[4/3] overflow-hidden bg-[#e8eeea]">
                   <Image
                     src={item.image}
-                    alt={item.alt}
+                    alt=""
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1280px) 45vw, 24vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
