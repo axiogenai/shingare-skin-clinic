@@ -97,6 +97,7 @@
 
 .homepage > :global(section) [class*="rounded-3xl"][class*="border"]:hover,
 .homepage > :global(section) [class*="rounded-2xl"][class*="border"]:hover {
+  transform: translateY(-3px);
   border-color: rgba(126, 66, 62, 0.22);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
@@ -161,13 +162,6 @@
 .homepage :global(a),
 .homepage :global(button) {
   -webkit-tap-highlight-color: transparent;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .homepage > :global(section) [class*="rounded-3xl"][class*="border"],
-  .homepage > :global(section) [class*="rounded-2xl"][class*="border"] {
-    transform: translateZ(0);
-  }
 }
 
 @media (max-width: 640px) {
