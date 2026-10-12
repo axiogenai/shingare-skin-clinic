@@ -1,11 +1,19 @@
-﻿import React from "react";
+import React from "react";
+import type { Metadata } from "next";
 import CategoryTreatmentPage from "@/components/CategoryTreatmentPage";
 import { TREATMENTS } from "@/data/treatments";
 
-export const metadata = {
-  title: "Cosmetic Treatments | Shingare Skin & Cosmetics Clinic",
+export const metadata: Metadata = {
+  title: "Cosmetic Skin Treatments in Kolhapur",
   description:
-    "Medical-grade hydra facials, Q-Switched carbon laser glow peels, microneedling scar revision, and clinical peels under Dr. Pramod Shingare (MD Dermatology).",
+    "Explore clinic-based facials, chemical peels, laser and acne-scar care options at Shingare Skin & Cosmetics Clinic in Peth Vadgaon, Kolhapur.",
+  alternates: { canonical: "/cosmetics" },
+  openGraph: {
+    title: "Cosmetic Skin Treatments in Kolhapur",
+    description:
+      "Learn about cosmetic skin-care options and request a consultation at Shingare Skin & Cosmetics Clinic.",
+    url: "/cosmetics",
+  },
 };
 
 export default function CosmeticTreatmentsPage() {
@@ -26,5 +34,3 @@ export default function CosmeticTreatmentsPage() {
     />
   );
 }
-
-
