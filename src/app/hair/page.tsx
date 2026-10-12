@@ -1,11 +1,19 @@
-﻿import React from "react";
+import React from "react";
+import type { Metadata } from "next";
 import CategoryTreatmentPage from "@/components/CategoryTreatmentPage";
 import { TREATMENTS } from "@/data/treatments";
 
-export const metadata = {
-  title: "Hair Treatments | Shingare Skin & Cosmetics Clinic",
+export const metadata: Metadata = {
+  title: "Hair & Scalp Treatments in Kolhapur",
   description:
-    "Advanced trichology and hair restoration treatments including autologous PRP, GFC, mesotherapy, and alopecia care by Dr. Pramod Shingare (MD Dermatology).",
+    "Explore hair-fall and scalp-care consultations, including assessment for thinning, PRP and GFC options, at Shingare Skin & Cosmetics Clinic in Peth Vadgaon.",
+  alternates: { canonical: "/hair" },
+  openGraph: {
+    title: "Hair & Scalp Treatments in Kolhapur",
+    description:
+      "Learn about hair and scalp care options and request a consultation at Shingare Skin & Cosmetics Clinic.",
+    url: "/hair",
+  },
 };
 
 export default function HairTreatmentsPage() {
@@ -25,5 +33,3 @@ export default function HairTreatmentsPage() {
     />
   );
 }
-
-
