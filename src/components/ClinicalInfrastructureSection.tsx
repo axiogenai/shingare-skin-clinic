@@ -104,7 +104,7 @@ export default function ClinicalInfrastructureSection() {
                     <span className="font-mono text-[11px] font-bold text-stone-500 tracking-wider">
                       {plat.code}
                     </span>
-                    <div className="w-8 h-8 rounded-lg bg-stone-100 text-[#108283] flex items-center justify-center group-hover:bg-[#108283] group-hover:text-white transition-colors duration-200 border border-stone-200/60">
+                    <div className="w-8 h-8 rounded-lg bg-stone-100 text-[#108283] flex items-center justify-center transition-colors duration-200 border border-stone-200/60">
                       <Icon className="w-4 h-4" />
                     </div>
                   </div>

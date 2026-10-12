@@ -9,7 +9,6 @@ import {
   CalendarCheck,
   Clock3,
   Droplets,
-  Sparkles,
   Stethoscope,
   Waves,
   Activity,
@@ -116,8 +115,8 @@ export default function SpecialtyCardsSection() {
           className="mx-auto mb-10 max-w-3xl text-center md:mb-14"
         >
           <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/65 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.19em] text-[#626a59] shadow-[inset_0_1px_0_rgba(255,255,255,.9),0_8px_24px_rgba(41,45,39,.05)] backdrop-blur-xl sm:text-[11px]">
-            <Sparkles size={13} className="text-[#7e423e]" />
-            Care, considered
+            
+            Our services
           </span>
           <h2
             id="specialties-heading"
@@ -144,12 +143,7 @@ export default function SpecialtyCardsSection() {
                   delay: reduceMotion ? 0 : index * 0.07,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                whileHover={
-                  reduceMotion
-                    ? undefined
-                    : { y: -7, rotateX: 1.5, rotateY: index % 2 === 0 ? 1.5 : -1.5 }
-                }
-                style={{ transformStyle: "preserve-3d", perspective: 1200 }}
+                whileHover={reduceMotion ? undefined : { y: -3 }}
                 className="group relative flex min-w-0 flex-col overflow-hidden rounded-[26px] border border-white/85 bg-[#fbfaf6]/80 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.95),0_12px_36px_rgba(48,53,43,.055)] backdrop-blur-2xl transition-[border-color,box-shadow] duration-300 hover:border-[#b7bfae] hover:shadow-[0_24px_58px_rgba(48,53,43,.12)]"
               >
                 <div
@@ -161,11 +155,11 @@ export default function SpecialtyCardsSection() {
                   <div className="pointer-events-none absolute right-[16%] top-[16%] h-28 w-28 rounded-full border border-white/55 bg-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,.7),0_20px_40px_rgba(45,48,38,.06)] backdrop-blur-md transition-transform duration-700 group-hover:translate-x-2 group-hover:-translate-y-2 sm:h-36 sm:w-36" />
                   <div
                     className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/75 bg-white/60 text-[#30372d] shadow-[inset_0_1px_0_rgba(255,255,255,.95),0_12px_30px_rgba(45,48,38,.1)] backdrop-blur-xl transition-transform duration-500 group-hover:rotate-[-5deg] group-hover:scale-105 sm:h-16 sm:w-16"
-                    style={{ color: item.accent, transform: "translateZ(28px)" }}
+                    style={{ color: item.accent }}
                   >
                     <Icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.45} />
                   </div>
-                  <div className="relative z-10 ml-auto max-w-[58%] text-right" style={{ transform: "translateZ(20px)" }}>
+                  <div className="relative z-10 ml-auto max-w-[58%] text-right">
                     <p className="text-[9px] font-bold uppercase tracking-[.2em] text-[#3d4438]/70 sm:text-[10px]">
                       {item.eyebrow}
                     </p>
