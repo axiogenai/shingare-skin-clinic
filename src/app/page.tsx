@@ -1,7 +1,6 @@
-"use client";
-
-import React, { useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import QRRedirectHandler from "@/components/QRRedirectHandler";
 import ThreePageExperience from "@/components/ThreePageExperience";
 import PatientJourneySection from "@/components/PatientJourneySection";
 import ClinicalInfrastructureSection from "@/components/ClinicalInfrastructureSection";
@@ -14,25 +13,20 @@ import AppointmentSection from "@/components/AppointmentSection";
 import FAQSection from "@/components/FAQSection";
 import styles from "./homepage-redesign.module.css";
 
-function QRRedirectHandler() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const drVoice = searchParams.get("dr_voice");
-    const rxId = searchParams.get("rx_id");
-    const rx = searchParams.get("rx");
-    const cert = searchParams.get("cert");
-
-    if (drVoice || rxId || rx) {
-      router.push(`/my-rx?${searchParams.toString()}`);
-    } else if (cert) {
-      router.push(`/verify?${searchParams.toString()}`);
-    }
-  }, [searchParams, router]);
-
-  return null;
-}
+export const metadata: Metadata = {
+  title: "Skin & Hair Clinic in Peth Vadgaon, Kolhapur",
+  description:
+    "Explore skin, hair and cosmetic care at Shingare Skin & Cosmetics Clinic in Peth Vadgaon, Kolhapur. Learn about services and request a consultation.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Shingare Skin & Cosmetics Clinic | Peth Vadgaon, Kolhapur",
+    description:
+      "Explore skin, hair and cosmetic care and request a consultation at Shingare Skin & Cosmetics Clinic, Peth Vadgaon, Kolhapur.",
+    url: "/",
+  },
+};
 
 export default function HomePage() {
   return (
@@ -40,7 +34,6 @@ export default function HomePage() {
       <Suspense fallback={null}>
         <QRRedirectHandler />
       </Suspense>
-
       <div className={styles.homepage}>
         <ThreePageExperience />
         <PatientJourneySection />
