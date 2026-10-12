@@ -131,16 +131,8 @@
     transparent !important;
 }
 
-.homepage :global(#services) [class*="grid"] > div {
+.homepage :global(#services) [class*="grid"] > * {
   min-width: 0;
-}
-
-.homepage :global(#services) [class*="rounded-2xl"] {
-  border-radius: 1.35rem;
-}
-
-.homepage :global(#services) [class*="group"]:hover {
-  transform: translateY(-3px);
 }
 
 .homepage :global(#booking),
@@ -169,6 +161,13 @@
 .homepage :global(a),
 .homepage :global(button) {
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .homepage > :global(section) [class*="rounded-3xl"][class*="border"],
+  .homepage > :global(section) [class*="rounded-2xl"][class*="border"] {
+    transform: translateZ(0);
+  }
 }
 
 @media (max-width: 640px) {
