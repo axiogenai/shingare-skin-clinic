@@ -104,22 +104,6 @@
     0 20px 48px rgba(48, 53, 43, 0.085);
 }
 
-.homepage > :global(section) [class*="text-[#108283]"],
-.homepage > :global(section) [class*="text-[#0e787a]"] {
-  color: var(--home-sage) !important;
-}
-
-.homepage > :global(section) [class*="bg-[#108283]"],
-.homepage > :global(section) [class*="bg-[#0e787a]"] {
-  background-color: var(--home-sage) !important;
-}
-
-.homepage > :global(section) [class*="text-[#93231f]"],
-.homepage > :global(section) [class*="text-[#991b1b]"],
-.homepage > :global(section) [class*="text-[#881337]"] {
-  color: var(--home-wine) !important;
-}
-
 .homepage > :global(section) a:focus-visible,
 .homepage > :global(section) button:focus-visible {
   outline: 2px solid var(--home-wine);
