@@ -1,37 +1,38 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, MapPin, Phone } from "lucide-react";
+"use client";
 
-const footerLinks = [
-  { label: "About the clinic", href: "/about" },
-  { label: "Skin treatments", href: "/skin" },
-  { label: "Hair care", href: "/hair" },
-  { label: "Cosmetic care", href: "/cosmetics" },
-  { label: "Book appointment", href: "/book-now" },
-  { label: "Live queue", href: "/live-queue" },
-];
+import React from "react";
+import { Footer11 } from "@/components/ui/footer-11";
 
 export default function Footer() {
+  const navLinks = [
+    { label: "Skin Care", href: "/skin" },
+    { label: "Hair & PRP", href: "/hair" },
+    { label: "Cosmetics", href: "/cosmetics" },
+    { label: "Live Queue", href: "/live-queue" },
+    { label: "Book Token", href: "/book-now" },
+  ];
+
   return (
-    <footer className="clinic-footer print:hidden">
-      <div className="clinic-footer-top">
-        <div className="clinic-footer-brand">
-          <Link href="/" aria-label="Shingare Clinic home"><Image src="/shingare-logo.png" alt="Shingare Skin & Cosmetics Clinic" width={160} height={75} className="clinic-footer-logo" /></Link>
-          <p>Thoughtful skin, hair and cosmetic care — with clear guidance at every step.</p>
-          <a href="tel:+917249727104" className="clinic-footer-call"><Phone size={16} /> +91 72497 27104 <ArrowUpRight size={15} /></a>
-        </div>
-        <div className="clinic-footer-links">
-          <span>Explore</span>
-          {footerLinks.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
-        </div>
-        <div className="clinic-footer-location">
-          <span>Visit the clinic</span>
-          <p><MapPin size={16} /> Peth Vadgaon, Kolhapur, Maharashtra, India</p>
-          <p>Monday–Saturday<br />10:00 AM–1:30 PM · 5:00 PM–9:00 PM</p>
-          <Link href="/contact">Contact & directions <ArrowUpRight size={15} /></Link>
-        </div>
+    <footer className="w-full relative print:hidden">
+      {/* Seamless Ambient Feather Blend from page canvas into dark footer */}
+      <div
+        className="w-full h-24 sm:h-36 -mt-24 sm:-mt-36 pointer-events-none relative z-10"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(9,9,11,0) 0%, rgba(9,9,11,0.03) 15%, rgba(9,9,11,0.12) 32%, rgba(9,9,11,0.32) 52%, rgba(9,9,11,0.62) 74%, rgba(9,9,11,0.88) 90%, #09090b 100%)",
+        }}
+      />
+      <div className="flex w-full items-end justify-center bg-zinc-950">
+        <Footer11
+          badgeText="Shingare Skin & Cosmetics"
+          heading="Want to book a consultation, explore our skin & laser treatments, or just curious to know more?"
+          contactLabel="Reach out at:"
+          contactEmail="+91 72497 27104"
+          contactEmailHref="tel:+917249727104"
+          navLinks={navLinks}
+          brandName="Shingare"
+        />
       </div>
-      <div className="clinic-footer-bottom"><span>© {new Date().getFullYear()} Shingare Skin & Cosmetics Clinic</span><span>Medical information on this website is general and does not replace a consultation.</span><Link href="#top">Back to top ↑</Link></div>
     </footer>
   );
 }

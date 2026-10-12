@@ -1,8 +1,14 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, CalendarDays, CheckCircle2, Sparkles } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowRight, CalendarCheck, ShieldCheck, Stethoscope } from "lucide-react";
+
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 interface HeroBannerProps {
   title: string;
@@ -11,25 +17,59 @@ interface HeroBannerProps {
 }
 
 export function HeroBanner({ title, subtitle, badge }: HeroBannerProps) {
-  const reduceMotion = useReducedMotion();
   return (
-    <section className="clinic-subhero">
-      <div className="clinic-subhero-glow" aria-hidden="true" />
+    <section
+      className="relative w-full pt-28 md:pt-32 pb-20 md:pb-28 overflow-hidden font-source"
+      style={{
+        background:
+          "linear-gradient(160deg, #FDF5EE 0%, #FAEAE0 35%, #F5E2D4 65%, #F0DAC8 100%)",
+      }}
+    >
+      {/* Decorative silk ribbon watermark */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(248,178,148,0.13) 0%, transparent 70%)",
+        }}
+      />
+
       <motion.div
-        className="clinic-subhero-content"
-        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+        className="relative z-10 max-w-[860px] mx-auto text-center px-5 sm:px-6"
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.7 }}
       >
-        {badge && <span className="clinic-subhero-badge"><Sparkles size={13} />{badge}</span>}
-        <h1>{title}</h1>
-        {subtitle && <p>{subtitle}</p>}
-        <div className="clinic-subhero-actions">
-          <Link href="/book-now" className="clinic-subhero-primary">Request an appointment <ArrowRight size={16} /></Link>
-          <Link href="/contact" className="clinic-subhero-secondary">Contact the clinic</Link>
-        </div>
-        <div className="clinic-subhero-foot"><span><CheckCircle2 size={14} /> Personalised consultations</span><span><CheckCircle2 size={14} /> Peth Vadgaon · Kolhapur</span></div>
+        {badge && (
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md text-[#108283] text-[10px] font-bold uppercase tracking-[0.2em] mb-5 border border-[#E0D0C0]/60 shadow-xs">
+            <Stethoscope className="w-3 h-3" />
+            <span>{badge}</span>
+          </div>
+        )}
+
+        <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-normal leading-[1.12] text-gray-950 mb-5 tracking-tight">
+          {title}
+        </h1>
+
+        {subtitle && (
+          <p className="font-playfair text-base sm:text-lg md:text-xl italic text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            {subtitle}
+          </p>
+        )}
       </motion.div>
+
+      {/* Smooth wave into content */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+        <svg
+          viewBox="0 0 1440 60"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          className="w-full h-[32px] md:h-[48px]"
+        >
+          <path d="M0 20 Q360 0 720 28 Q1080 56 1440 12 L1440 60 L0 60 Z" fill="#F4F7F8" />
+        </svg>
+      </div>
     </section>
   );
 }
@@ -42,34 +82,52 @@ interface CTABannerProps {
 }
 
 export function CTABanner({
-  heading = "A thoughtful next step for your skin and hair",
-  text = "Start with a consultation and get clear information about the options that may suit your concern.",
-  buttonText = "Request an appointment",
+  heading = "Begin Your Skin & Hair Journey at Shingare Clinic",
+  text = "Experience personalized, evidence-based dermatological care. Reserve your appointment token at Shingare Skin & Cosmetics Clinic, Peth Vadgaon today.",
+  buttonText = "Book Your Appointment Token",
   buttonHref = "/book-now",
 }: CTABannerProps) {
-  const reduceMotion = useReducedMotion();
   return (
-    <section className="clinic-cta-wrap">
+    <section className="w-full py-16 md:py-20 px-5 sm:px-6 md:px-8 font-source bg-white">
       <motion.div
-        className="clinic-cta-banner"
-        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-[1140px] mx-auto bg-[#108283] text-white py-14 px-6 sm:px-12 md:px-16 text-center rounded-3xl shadow-[0_12px_40px_rgba(16,130,131,0.25)] relative overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
       >
-        <div className="clinic-cta-glow" aria-hidden="true" />
-        <div className="clinic-cta-copy">
-          <span className="clinic-cta-kicker"><CalendarDays size={14} /> YOUR CARE, YOUR PACE</span>
-          <h2>{heading}</h2>
-          <p>{text}</p>
-          <Link href={buttonHref} className="clinic-cta-button">{buttonText} <ArrowRight size={16} /></Link>
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/10 text-white/90 text-xs font-semibold uppercase tracking-widest mb-5 backdrop-blur-sm border border-white/20">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
+          <span>Clinical Excellence • MMC Registered</span>
         </div>
-        <div className="clinic-cta-seal" aria-hidden="true"><span>S.</span><small>SHINGARE CLINIC</small></div>
+
+        <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-5 leading-tight max-w-2xl mx-auto">
+          {heading}
+        </h2>
+
+        <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto font-light">
+          {text}
+        </p>
+
+        <Link
+          href={buttonHref}
+          className="inline-flex items-center gap-2.5 bg-white hover:bg-[#FAEDDA] text-[#108283] font-bold text-sm sm:text-base px-8 py-3.5 rounded-full transition-all shadow-lg active:scale-95 cursor-pointer"
+        >
+          <CalendarCheck className="w-4 h-4 text-[#108283]" />
+          <span>{buttonText}</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </motion.div>
     </section>
   );
 }
 
 export function LeafDivider() {
-  return <div className="flex items-center justify-center my-6 text-[#6f8873]" aria-hidden="true"><span className="w-10 h-px bg-current opacity-40" /><span className="mx-3 text-xs">✳</span><span className="w-10 h-px bg-current opacity-40" /></div>;
+  return (
+    <div className="flex items-center justify-center my-6">
+      <div className="w-12 h-0.5 bg-[#108283]/30 rounded-full" />
+      <div className="w-2 h-2 rounded-full bg-[#108283] mx-2" />
+      <div className="w-12 h-0.5 bg-[#108283]/30 rounded-full" />
+    </div>
+  );
 }

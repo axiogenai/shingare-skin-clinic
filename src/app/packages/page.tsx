@@ -85,15 +85,15 @@ export default function PackagesPage() {
       {/* 1. Hero Banner */}
       <HeroBanner
         badge="CURATED CLINICAL PROGRAMMES"
-        title="Clinical Packages & Series"
-        subtitle="Dermatologist-formulated multi-session protocols for sustained skin & hair results"
+        title="Clinical Packages &amp; Series"
+        subtitle="Dermatologist-formulated multi-session protocols for sustained skin &amp; hair results"
       />
 
       {/* 2. Packages Grid */}
-      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-8 bg-[#f6f3eb]">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-8 bg-[#F4F7F8]">
         <div className="max-w-[1140px] mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-block bg-[#e9ece2] text-[#355a48] text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-3 uppercase tracking-wider">
+            <div className="inline-block bg-[#FAEDDA] text-[#108283] text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-3 uppercase tracking-wider">
               COMPREHENSIVE PROTOCOLS
             </div>
             <h2 className="font-playfair text-3xl sm:text-4xl text-gray-950 font-normal leading-tight mb-3">
@@ -114,10 +114,10 @@ export default function PackagesPage() {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-11 h-11 rounded-2xl bg-[#355a48]/10 text-[#355a48] flex items-center justify-center group-hover:bg-[#355a48] group-hover:text-white transition-colors">
+                      <div className="w-11 h-11 rounded-2xl bg-[#108283]/10 text-[#108283] flex items-center justify-center group-hover:bg-[#108283] group-hover:text-white transition-colors">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#e9ece2] text-[#355a48]">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#FAF0DD] text-[#108283]">
                         {pkg.category}
                       </span>
                     </div>
@@ -125,7 +125,7 @@ export default function PackagesPage() {
                     <h3 className="font-playfair text-xl font-bold text-gray-950 mb-1">
                       {pkg.title}
                     </h3>
-                    <p className="text-xs font-semibold text-[#355a48] uppercase tracking-wider mb-3">
+                    <p className="text-xs font-semibold text-[#108283] uppercase tracking-wider mb-3">
                       {pkg.tagline}
                     </p>
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 font-normal">
@@ -149,7 +149,7 @@ export default function PackagesPage() {
 
                     <Link
                       href={`/book-now?concern=${encodeURIComponent(pkg.bookingParam)}`}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#355a48] hover:bg-[#294a3a] text-white py-3 rounded-full text-xs font-semibold shadow-xs transition-all active:scale-95"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#108283] hover:bg-[#0c6b6c] text-white py-3 rounded-full text-xs font-semibold shadow-xs transition-all active:scale-95"
                     >
                       <CalendarCheck className="w-3.5 h-3.5" />
                       <span>Book Package Token</span>
