@@ -41,7 +41,7 @@ export default function HomePage() {
         <QRRedirectHandler />
       </Suspense>
 
-      <main className={styles.homepage}>
+      <div className={styles.homepage}>
         <ThreePageExperience />
         <PatientJourneySection />
         <ClinicalInfrastructureSection />
@@ -52,7 +52,7 @@ export default function HomePage() {
         <OPDTimingsLocationSection />
         <AppointmentSection />
         <FAQSection />
-      </main>
+      </div>
     </>
   );
 }
