@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import {
   CalendarCheck,
@@ -9,9 +9,6 @@ import {
   MapPin,
   Phone,
   ShieldCheck,
-  Stethoscope,
-  Activity,
-  ArrowRight,
   ExternalLink,
 } from "lucide-react";
 
@@ -22,28 +19,40 @@ const TREATMENT_OPTIONS = [
   { label: "Signature Medi-Facials & Peels", sub: "Hydra Facial, Carbon Glow Peels" },
 ];
 
+function getLocalDateString(d: Date): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export default function AppointmentSection() {
+  const todayStr = useMemo(() => getLocalDateString(new Date()), []);
+
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     concern: "Clinical Dermatology",
-    date: new Date().toISOString().split("T")[0],
+    date: todayStr,
     slot: "Morning (10:00 AM – 1:30 PM)",
     notes: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [submittedToken, setSubmittedToken] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{ fullName?: string; phone?: string }>({});
+  const [errors, setErrors] = useState<{ fullName?: string; phone?: string; date?: string }>({});
 
   const validate = () => {
-    const errs: { fullName?: string; phone?: string } = {};
+    const errs: { fullName?: string; phone?: string; date?: string } = {};
     if (!formData.fullName.trim() || formData.fullName.trim().length < 2) {
       errs.fullName = "Please enter patient full name";
     }
     const cleanPhone = formData.phone.replace(/\D/g, "");
     if (!cleanPhone || cleanPhone.length < 10) {
       errs.phone = "Please enter valid 10-digit mobile number";
+    }
+    if (formData.date < todayStr) {
+      errs.date = "Previous dates are locked. Please pick today or a future date.";
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -58,7 +67,6 @@ export default function AppointmentSection() {
     const tokenNum = `TK-${Math.floor(100 + Math.random() * 900)}`;
 
     try {
-      // Post to ClinicOS server if available
       await fetch("http://localhost:5000/api/portal/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -71,7 +79,7 @@ export default function AppointmentSection() {
           notes: formData.notes,
           token: tokenNum,
         }),
-      }).catch(() => null); // Graceful fallback
+      }).catch(() => null);
     } catch {
       // Local fallback
     }
@@ -81,7 +89,7 @@ export default function AppointmentSection() {
   };
 
   return (
-    <section id="booking" className="py-20 md:py-28 bg-white relative font-source scroll-mt-20">
+    <section id="booking" className="py-20 md:py-28 bg-[#f4f0e8] relative font-source scroll-mt-20">
       <div className="max-w-[1140px] mx-auto px-5 sm:px-6 md:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
@@ -99,7 +107,7 @@ export default function AppointmentSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           {/* Left Column: Form Card (7 cols) */}
           <div className="lg:col-span-7 flex flex-col h-full">
-            <div className="bg-[#F4F7F8] border border-gray-100 rounded-3xl p-6 sm:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.04)] h-full flex flex-col justify-between">
+            <div className="bg-white border border-stone-200/80 rounded-3xl p-6 sm:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.03)] h-full flex flex-col justify-between">
               {submittedToken ? (
                 <div className="text-center py-8 space-y-4 animate-in fade-in duration-300 my-auto">
                   <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
@@ -138,6 +146,7 @@ export default function AppointmentSection() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 flex flex-col justify-between h-full">
                   <div className="space-y-4">
+                    {/* Patient Name & Mobile */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
@@ -170,6 +179,7 @@ export default function AppointmentSection() {
                       </div>
                     </div>
 
+                    {/* Concern / Service */}
                     <div>
                       <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
                         Clinical Concern / Service
@@ -187,35 +197,77 @@ export default function AppointmentSection() {
                       </select>
                     </div>
 
+                    {/* Preferred Date & Session Slot (Clean, Flat, Simple UI) */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Preferred Date with previous date locking */}
                       <div>
-                        <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                          Preferred Date
-                        </label>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
+                            Preferred Date
+                          </label>
+                          <span className="text-[11px] text-gray-400 font-medium">
+                            Past dates locked
+                          </span>
+                        </div>
                         <input
                           type="date"
+                          min={todayStr}
                           value={formData.date}
-                          min={new Date().toISOString().split("T")[0]}
-                          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:outline-none focus:border-[#108283] transition-colors"
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            if (val && val < todayStr) {
+                              setFormData({ ...formData, date: todayStr });
+                              setErrors((prev) => ({ ...prev, date: "Previous dates cannot be selected." }));
+                            } else {
+                              setFormData({ ...formData, date: val });
+                              setErrors((prev) => ({ ...prev, date: undefined }));
+                            }
+                          }}
+                          className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:outline-none focus:border-[#108283] transition-colors cursor-pointer"
                         />
+                        {errors.date && <p className="text-xs text-red-500 mt-1">{errors.date}</p>}
                       </div>
 
+                      {/* Session Slot: Simple Flat 2-Button Toggle */}
                       <div>
                         <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
                           Session Slot
                         </label>
-                        <select
-                          value={formData.slot}
-                          onChange={(e) => setFormData({ ...formData, slot: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:outline-none focus:border-[#108283] transition-colors cursor-pointer"
-                        >
-                          <option value="Morning (10:00 AM – 1:30 PM)">Morning (10:00 AM – 1:30 PM)</option>
-                          <option value="Evening (5:00 PM – 9:00 PM)">Evening (5:00 PM – 9:00 PM)</option>
-                        </select>
+                        <div className="grid grid-cols-2 gap-2">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setFormData({ ...formData, slot: "Morning (10:00 AM – 1:30 PM)" })
+                            }
+                            className={`py-3 px-2 rounded-xl border text-center transition-all cursor-pointer font-medium text-xs ${
+                              formData.slot.startsWith("Morning")
+                                ? "bg-[#108283] text-white border-[#108283] font-bold"
+                                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                            }`}
+                          >
+                            <div>Morning</div>
+                            <div className="text-[10px] opacity-85 font-normal">10:00 – 1:30</div>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setFormData({ ...formData, slot: "Evening (5:00 PM – 9:00 PM)" })
+                            }
+                            className={`py-3 px-2 rounded-xl border text-center transition-all cursor-pointer font-medium text-xs ${
+                              formData.slot.startsWith("Evening")
+                                ? "bg-[#108283] text-white border-[#108283] font-bold"
+                                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                            }`}
+                          >
+                            <div>Evening</div>
+                            <div className="text-[10px] opacity-85 font-normal">5:00 – 9:00</div>
+                          </button>
+                        </div>
                       </div>
                     </div>
 
+                    {/* Chief Complaint */}
                     <div>
                       <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
                         Chief Complaint / Brief Note (Optional)
@@ -249,58 +301,64 @@ export default function AppointmentSection() {
             </div>
           </div>
 
-          {/* Right Column: OPD Info & Helpline (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-            <div className="bg-[#FAF0DD]/70 border border-[#F0DAAA] rounded-3xl p-6 space-y-4">
-              <div className="flex items-center gap-2 text-[#108283]">
-                <Clock className="w-5 h-5" />
-                <h3 className="font-playfair font-bold text-gray-950 text-lg">
-                  Daily OPD Schedule
-                </h3>
-              </div>
-
-              <div className="space-y-2 text-xs text-gray-800">
-                <div className="flex justify-between py-1.5 border-b border-[#F0DAAA]/60">
-                  <span className="font-semibold">Monday – Saturday Morning</span>
-                  <span className="font-bold text-[#108283]">10:00 AM – 1:30 PM</span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-[#F0DAAA]/60">
-                  <span className="font-semibold">Monday – Saturday Evening</span>
-                  <span className="font-bold text-[#108283]">5:00 PM – 9:00 PM</span>
-                </div>
-                <div className="flex justify-between py-1.5">
-                  <span className="font-semibold text-amber-900">Sunday</span>
-                  <span className="font-bold text-red-600">Closed (Emergency Only)</span>
-                </div>
-              </div>
+          {/* Right Column: Information Bento (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
+            <div className="bg-[#FAF0DD] border border-[#F0DAAA] rounded-3xl p-6 sm:p-7">
+              <span className="text-[11px] uppercase tracking-wider font-bold text-[#108283] block mb-1">
+                Queue Efficiency
+              </span>
+              <h3 className="font-playfair text-xl sm:text-2xl font-bold text-gray-950 mb-3">
+                Why Pre-Book a Token?
+              </h3>
+              <ul className="space-y-3 text-xs sm:text-sm text-gray-700">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#108283] shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Zero Waiting Confusion:</strong> Receive a real-time token tracking link via SMS/WhatsApp.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#108283] shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Prioritized Consultation:</strong> Guaranteed consult window in morning or evening session.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#108283] shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Direct EMR Sync:</strong> Your clinical concerns are pre-loaded for Dr. Pramod Shingare.
+                  </span>
+                </li>
+              </ul>
             </div>
 
-            <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_25px_rgba(0,0,0,0.03)] space-y-3">
-              <div className="flex items-center gap-2 text-[#108283]">
-                <Phone className="w-5 h-5" />
-                <h3 className="font-playfair font-bold text-gray-950 text-lg">
-                  Clinic Helpline
-                </h3>
-              </div>
-              <p className="text-xs text-gray-600">
-                Need urgent appointment assistance or post-procedure guidance? Call our reception desk directly:
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-7 shadow-xs space-y-4">
+              <h4 className="font-playfair text-lg font-bold text-gray-950">
+                Need Immediate Help?
+              </h4>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                For acute skin flares, drug rashes, or urgent same-day consultations, speak directly with our clinic desk.
               </p>
-              <a
-                href="tel:+917249727104"
-                className="block text-center py-2.5 px-4 rounded-xl bg-[#108283]/10 hover:bg-[#108283]/20 text-[#108283] font-bold text-sm transition-colors"
-              >
-                +91 72497 27104
-              </a>
-            </div>
 
-            <div className="bg-[#F4F7F8] border border-gray-100 rounded-3xl p-6 space-y-2 text-xs text-gray-700">
-              <div className="flex items-center gap-2 text-gray-900 font-semibold">
-                <MapPin className="w-4 h-4 text-[#F0A070]" />
-                <span>Clinic Address</span>
+              <div className="space-y-2.5 pt-1 text-xs">
+                <a
+                  href="tel:+917249727104"
+                  className="flex items-center justify-between p-3 rounded-xl bg-gray-50 border border-gray-200 hover:border-[#108283] transition-colors group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Phone className="w-4 h-4 text-[#108283]" />
+                    <span className="font-medium text-gray-800">Direct Desk: +91 72497 27104</span>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#108283]" />
+                </a>
+
+                <div className="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-start gap-2.5">
+                  <MapPin className="w-4 h-4 text-[#108283] shrink-0 mt-0.5" />
+                  <span className="text-gray-700 leading-snug">
+                    Shingare Skin &amp; Cosmetics Clinic, Near Central Bus Stand, Peth Vadgaon, Kolhapur — 416112
+                  </span>
+                </div>
               </div>
-              <p className="leading-relaxed">
-                Shingare Skin Clinic, Main Road, Near Bus Stand, Peth Vadgaon, Kolhapur – 416112. Free parking available.
-              </p>
             </div>
           </div>
         </div>
@@ -308,5 +366,3 @@ export default function AppointmentSection() {
     </section>
   );
 }
-
-

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -19,6 +19,12 @@ import {
   X,
   Activity,
   AlertCircle,
+  Sun,
+  Moon,
+  Calendar as CalendarIcon,
+  Lock,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { HeroBanner } from "@/components/SharedSections";
 import { bookAppointment, type BookingResult } from "@/lib/clinicApi";
@@ -504,32 +510,77 @@ function BookNowContent() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div className="space-y-3.5">
+                      {/* Preferred Date */}
                       <div>
-                        <label className="block font-bold uppercase tracking-wider text-gray-700 mb-1">
-                          Preferred Date
-                        </label>
+                        <div className="flex items-center justify-between mb-1">
+                          <label className="block font-bold uppercase tracking-wider text-gray-700">
+                            Preferred Date
+                          </label>
+                          <span className="text-[10px] text-gray-500 font-medium flex items-center gap-1">
+                            <Lock className="w-2.5 h-2.5 text-gray-400" />
+                            Past dates locked
+                          </span>
+                        </div>
                         <input
                           type="date"
                           value={preferredDate}
                           min={new Date().toISOString().split("T")[0]}
-                          onChange={(e) => setPreferredDate(e.target.value)}
-                          className="w-full px-3.5 py-2 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const todayStr = new Date().toISOString().split("T")[0];
+                            if (val >= todayStr) setPreferredDate(val);
+                          }}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs bg-white font-medium cursor-pointer"
                         />
                       </div>
 
+                      {/* OPD Session Slot Cards */}
                       <div>
-                        <label className="block font-bold uppercase tracking-wider text-gray-700 mb-1">
+                        <label className="block font-bold uppercase tracking-wider text-gray-700 mb-1.5">
                           OPD Session
                         </label>
-                        <select
-                          value={preferredSlot}
-                          onChange={(e) => setPreferredSlot(e.target.value)}
-                          className="w-full px-3 py-2 rounded-xl border border-gray-200 focus:border-[#108283] focus:outline-none text-xs"
-                        >
-                          <option value="Morning (10:00 AM – 01:30 PM)">Morning (10:00 AM – 1:30 PM)</option>
-                          <option value="Evening (05:00 PM – 09:00 PM)">Evening (5:00 PM – 9:00 PM)</option>
-                        </select>
+                        <div className="grid grid-cols-2 gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setPreferredSlot("Morning (10:00 AM – 1:30 PM)")}
+                            className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
+                              preferredSlot.startsWith("Morning")
+                                ? "border-[#108283] bg-[#108283]/8 text-[#108283] font-bold shadow-2xs"
+                                : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                            }`}
+                          >
+                            <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                              preferredSlot.startsWith("Morning") ? "bg-[#108283] text-white" : "bg-amber-100 text-amber-700"
+                            }`}>
+                              <Sun className="w-3.5 h-3.5" />
+                            </div>
+                            <div>
+                              <div className="text-xs font-bold text-gray-900 leading-tight">Morning</div>
+                              <div className="text-[10px] text-gray-500 font-normal">10:00 – 1:30</div>
+                            </div>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => setPreferredSlot("Evening (5:00 PM – 9:00 PM)")}
+                            className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
+                              preferredSlot.startsWith("Evening")
+                                ? "border-[#108283] bg-[#108283]/8 text-[#108283] font-bold shadow-2xs"
+                                : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                            }`}
+                          >
+                            <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                              preferredSlot.startsWith("Evening") ? "bg-[#108283] text-white" : "bg-indigo-100 text-indigo-700"
+                            }`}>
+                              <Moon className="w-3.5 h-3.5" />
+                            </div>
+                            <div>
+                              <div className="text-xs font-bold text-gray-900 leading-tight">Evening</div>
+                              <div className="text-[10px] text-gray-500 font-normal">5:00 – 9:00</div>
+                            </div>
+                          </button>
+                        </div>
                       </div>
                     </div>
 

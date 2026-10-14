@@ -120,11 +120,25 @@
   min-width: 0;
 }
 
+.homepage :global(#testimonials) {
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem) !important;
+  border-bottom: none !important;
+}
+
+.homepage :global(#opd-timings) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  background-color: transparent !important;
+}
+
 .homepage :global(#booking),
 .homepage :global(section[id*="appointment"]) {
+  border-top: none !important;
   background:
     radial-gradient(ellipse at 10% 10%, rgba(205, 215, 195, 0.32), transparent 32rem),
-    #ecece3 !important;
+    var(--home-paper) !important;
 }
 
 .homepage :global(input),

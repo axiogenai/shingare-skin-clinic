@@ -6,176 +6,178 @@ import {
   Clock,
   MapPin,
   Phone,
-  CalendarCheck,
-  Navigation,
-  ShieldAlert,
-  Car,
-  Activity,
   ArrowRight,
+  ArrowUpRight,
+  Leaf,
 } from "lucide-react";
 
 export default function OPDTimingsLocationSection() {
-  const timings = [
-    { session: "Morning OPD", hours: "10:00 AM – 1:30 PM", days: "Monday to Saturday", active: true },
-    { session: "Evening OPD", hours: "5:00 PM – 9:00 PM", days: "Monday to Saturday", active: true },
-    { session: "Sunday OPD", hours: "Emergency On-Call Only", days: "Priority Acute Care", active: false },
-  ];
-
   return (
-    <section className="py-20 md:py-28 bg-[#FBFBFA] relative font-source border-t border-stone-200/70">
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 md:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 md:mb-18">
-          <div className="inline-flex items-center gap-2 bg-[#FAF0DD] text-[#108283] text-xs font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider border border-[#E8DCBE]/70">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#108283]" />
-            OPD Timings &amp; Location
-          </div>
-
-          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-stone-950 font-normal leading-tight mb-4">
-            Visit Our Clinic in{" "}
-            <span className="text-[#108283] font-semibold italic">
-              Peth Vadgaon, Kolhapur
-            </span>
-          </h2>
-
-          <p className="text-stone-600 text-base md:text-lg font-normal leading-relaxed">
-            Conveniently located near the central bus stand. Walk-in and prior-booked consultations available every morning and evening.
-          </p>
+    <section id="opd-timings" className="relative w-full select-none">
+      {/* Centered Pill Badge Label at Top (Centered in middle above panels, perfectly blended) */}
+      <div className="w-full pt-6 pb-4 sm:pt-8 sm:pb-6 flex justify-center items-center">
+        <div className="inline-flex items-center gap-2 bg-[#FAF0DD] text-[#244231] text-[11px] sm:text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider border border-[#E8DCBE] shadow-xs">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#244231]" />
+          <span>VISIT OUR CLINIC</span>
         </div>
+      </div>
 
-        {/* 2-Column High-Clarity Bento Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left Column: OPD Schedule (6 cols) */}
-          <div className="lg:col-span-6 bg-white border border-stone-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between pb-4 mb-6 border-b border-stone-100">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#108283]/8 text-[#108283] flex items-center justify-center border border-[#108283]/15">
-                    <Clock className="w-4 h-4" />
-                  </div>
-                  <h3 className="font-playfair text-xl font-bold text-stone-950">
-                    Clinical OPD Hours
-                  </h3>
-                </div>
+      {/* Both Panels Unified with Same Background & Crisp Middle Divider */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full">
+        {/* Left Panel: Information & Actions */}
+        <div className="border-b lg:border-b-0 lg:border-r border-[#c8d4c5] px-6 sm:px-12 md:px-16 lg:px-20 py-10 sm:py-14 flex flex-col justify-center">
+          <div className="max-w-[460px] w-full">
+            {/* Main Editorial Heading */}
+            <h2 className="font-['Cormorant_Garamond',serif] text-4xl sm:text-5xl lg:text-[52px] font-normal leading-[1.08] tracking-[-0.01em] mb-4">
+              <span className="block text-[#23382b]">Your next step</span>
+              <span className="block italic text-[#9b6863]">starts here.</span>
+            </h2>
 
-                <Link
-                  href="/live-queue"
-                  className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#108283] bg-[#108283]/8 px-3 py-1 rounded-full border border-[#108283]/20 hover:bg-[#108283] hover:text-white transition-all"
-                >
-                  <Activity className="w-3 h-3" />
-                  <span>Check Live Token</span>
-                </Link>
-              </div>
+            {/* Subtitle / Description */}
+            <p className="text-xs sm:text-[13.5px] leading-relaxed text-[#5c6e62] mb-7 font-sans">
+              Visit Shingare Skin &amp; Cosmetics Clinic in Peth Vadgaon, Kolhapur.
+              Call the clinic if you need help choosing a suitable appointment.
+            </p>
 
-              {/* Schedule List */}
-              <div className="space-y-3 mb-6">
-                {timings.map((t, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-xl bg-stone-50 border border-stone-200/60 flex items-center justify-between"
-                  >
-                    <div>
-                      <div className="text-xs font-bold text-stone-900 font-playfair">
-                        {t.session}
-                      </div>
-                      <div className="text-[11px] text-stone-500 font-mono">
-                        {t.days}
-                      </div>
-                    </div>
-
-                    <div className="text-right">
-                      <div className="text-xs font-semibold font-mono text-[#108283]">
-                        {t.hours}
-                      </div>
-                      {t.active ? (
-                        <div className="text-[10px] text-stone-500 font-medium">
-                          Token Registration Open
-                        </div>
-                      ) : (
-                        <div className="text-[10px] text-stone-400 font-medium">
-                          Call Reception Desk
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Emergency Line */}
-            <div className="pt-4 border-t border-stone-100 flex items-center justify-between text-xs text-stone-600">
-              <div className="flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4 text-[#93231f]" />
-                <span>Urgent Acute Skin Flare? Call:</span>
-              </div>
+            {/* Contact / Clinic Info Rows - Internal Dividers Preserved */}
+            <div className="border-t border-b border-[#d2dcd0] divide-y divide-[#d2dcd0] mb-7">
+              {/* Row 1: Phone */}
               <a
                 href="tel:+917249727104"
-                className="font-mono font-bold text-stone-950 hover:text-[#93231f] transition-colors"
+                className="group flex items-center justify-between py-3.5 transition-colors"
               >
-                +91 72497 27104
+                <div className="flex items-center gap-3.5">
+                  <div className="w-8 h-8 rounded-full bg-[#dde5db] border border-[#cbd6c8] flex items-center justify-center text-[#2f513f] shrink-0">
+                    <Phone className="w-3.5 h-3.5 stroke-[1.75]" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-semibold tracking-[0.14em] uppercase text-[#768678]">
+                      Call the clinic
+                    </div>
+                    <div className="text-xs sm:text-[13px] font-medium text-[#23382b] group-hover:text-[#2f513f] transition-colors">
+                      +91 72497 27104
+                    </div>
+                  </div>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#768678] group-hover:text-[#23382b] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </a>
-            </div>
-          </div>
 
-          {/* Right Column: Physical Address, Landmark & Navigation (6 cols) */}
-          <div className="lg:col-span-6 bg-white border border-stone-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-2.5 pb-4 mb-6 border-b border-stone-100">
-                <div className="w-8 h-8 rounded-lg bg-stone-100 text-[#108283] flex items-center justify-center border border-stone-200/60">
-                  <MapPin className="w-4 h-4" />
+              {/* Row 2: OPD Hours */}
+              <div className="flex items-center gap-3.5 py-3.5">
+                <div className="w-8 h-8 rounded-full bg-[#dde5db] border border-[#cbd6c8] flex items-center justify-center text-[#2f513f] shrink-0">
+                  <Clock className="w-3.5 h-3.5 stroke-[1.75]" />
                 </div>
-                <h3 className="font-playfair text-xl font-bold text-stone-950">
-                  Address &amp; Landmark
-                </h3>
+                <div>
+                  <div className="text-[10px] font-semibold tracking-[0.14em] uppercase text-[#768678]">
+                    OPD Hours
+                  </div>
+                  <div className="text-xs sm:text-[13px] font-medium text-[#23382b]">
+                    Mon–Sat : 10:00–13:30 &amp; 17:00–21:00
+                  </div>
+                </div>
               </div>
 
-              {/* Exact Location Card */}
-              <div className="p-4 rounded-xl bg-stone-50 border border-stone-200/60 mb-5">
-                <h4 className="text-xs font-mono font-bold text-stone-500 uppercase tracking-wider mb-1">
-                  Primary OPD Clinic
-                </h4>
-                <p className="text-sm text-stone-900 font-semibold leading-relaxed">
-                  Shingare Skin &amp; Cosmetics Clinic
-                </p>
-                <p className="text-xs text-stone-600 leading-relaxed mt-1">
-                  Main Road, Near Central Bus Stand, Peth Vadgaon,<br />
-                  Taluka Hatkanangle, Dist. Kolhapur, Maharashtra — 416112
-                </p>
-              </div>
-
-              {/* Transit & Parking Details */}
-              <div className="space-y-2 mb-6 text-xs text-stone-600">
-                <div className="flex items-center gap-2">
-                  <Navigation className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>2 minutes walking distance from Peth Vadgaon Bus Stand</span>
+              {/* Row 3: Clinic Location */}
+              <div className="flex items-center gap-3.5 py-3.5">
+                <div className="w-8 h-8 rounded-full bg-[#dde5db] border border-[#cbd6c8] flex items-center justify-center text-[#2f513f] shrink-0">
+                  <MapPin className="w-3.5 h-3.5 stroke-[1.75]" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <Car className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Designated patient two-wheeler &amp; four-wheeler parking available</span>
+                <div>
+                  <div className="text-[10px] font-semibold tracking-[0.14em] uppercase text-[#768678]">
+                    Clinic Location
+                  </div>
+                  <div className="text-xs sm:text-[13px] font-medium text-[#23382b]">
+                    Peth Vadgaon, Kolhapur, Maharashtra
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Direct Action Buttons */}
-            <div className="pt-4 border-t border-stone-100 flex flex-wrap items-center gap-3">
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-5 sm:gap-6">
+              <Link
+                href="/book-now"
+                className="inline-flex items-center gap-2 bg-[#2f513f] hover:bg-[#254233] text-white text-xs sm:text-[13px] font-medium px-5 py-2.5 sm:px-6 sm:py-3 rounded-full shadow-md shadow-[#2f513f]/25 hover:shadow-lg transition-all active:scale-95"
+              >
+                <span>Request appointment</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+
               <a
                 href="https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-stone-950 hover:bg-[#108283] text-stone-50 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-95 flex-1 text-center"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-medium text-[#23382b] hover:text-[#2f513f] transition-colors group"
               >
-                <Navigation className="w-3.5 h-3.5 text-[#FAF0DD]" />
-                <span>Get Directions</span>
+                <span>Get directions</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#768678] group-hover:text-[#23382b] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
-
-              <Link
-                href="/book-now"
-                className="inline-flex items-center justify-center gap-2 bg-[#FAF0DD] hover:bg-[#faedd0] text-stone-900 border border-[#E8DCBE] px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-95 flex-1 text-center"
-              >
-                <CalendarCheck className="w-3.5 h-3.5 text-[#108283]" />
-                <span>Book Slot</span>
-              </Link>
             </div>
+          </div>
+        </div>
+
+        {/* Right Panel: Arched Map Graphic (Same Unified Background, Middle Line Intact) */}
+        <div className="px-6 sm:px-12 md:px-16 lg:px-20 py-10 sm:py-14 flex items-center justify-center relative overflow-hidden">
+          {/* Arched Architectural Map Card */}
+          <div className="relative w-full max-w-[290px] sm:max-w-[310px] h-[310px] sm:h-[330px] rounded-t-[145px] sm:rounded-t-[155px] rounded-b-2xl bg-[#edf3eb] border border-[#cbd5c8] shadow-[0_12px_32px_rgba(35,55,42,0.06)] overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+            {/* SVG Decorative Architectural Map Grid */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              viewBox="0 0 310 330"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <circle cx="65" cy="110" r="48" fill="#d8e3d6" opacity="0.85" />
+              <circle cx="250" cy="225" r="58" fill="#d8e3d6" opacity="0.85" />
+
+              <line x1="-30" y1="200" x2="340" y2="90" stroke="#c4d0c1" strokeWidth="2.2" />
+              <line x1="-30" y1="240" x2="340" y2="130" stroke="#c4d0c1" strokeWidth="2.2" />
+              <line x1="-30" y1="130" x2="340" y2="20" stroke="#c4d0c1" strokeWidth="2.2" />
+              <line x1="-30" y1="300" x2="340" y2="190" stroke="#c4d0c1" strokeWidth="2.2" />
+
+              <line x1="80" y1="-20" x2="20" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
+              <line x1="160" y1="-20" x2="90" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
+              <line x1="240" y1="-20" x2="170" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
+              <line x1="310" y1="-20" x2="250" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
+
+              <line x1="110" y1="55" x2="190" y2="115" stroke="#c4d0c1" strokeWidth="1.8" />
+              <line x1="60" y1="170" x2="130" y2="230" stroke="#c4d0c1" strokeWidth="1.8" />
+              <line x1="180" y1="190" x2="270" y2="260" stroke="#c4d0c1" strokeWidth="1.8" />
+              <line x1="20" y1="85" x2="90" y2="135" stroke="#c4d0c1" strokeWidth="1.8" />
+            </svg>
+
+            {/* Map Center Marker & Details */}
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#2f513f] flex items-center justify-center text-white shadow-lg shadow-[#2f513f]/30 ring-8 ring-[#2f513f]/12 mb-2.5">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </div>
+
+              <div className="text-xs sm:text-[13px] font-bold tracking-[0.18em] uppercase text-[#23382b] font-mono">
+                PETH VADGAON
+              </div>
+
+              <div className="text-[9px] sm:text-[10px] font-medium tracking-[0.22em] uppercase text-[#6f7f72] font-mono mt-0.5">
+                KOLHAPUR • MAHARASHTRA
+              </div>
+
+              <a
+                href="https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/95 hover:bg-white text-[#23382b] border border-[#cad5c7] text-[11px] font-medium shadow-sm hover:shadow transition-all group"
+              >
+                <span>Open in Maps</span>
+                <ArrowUpRight className="w-3 h-3 text-[#768678] group-hover:text-[#23382b] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Floating Pill Badge: Bottom Right */}
+          <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-6 lg:bottom-5 lg:right-8 inline-flex items-center gap-2 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#cbd5c8] shadow-xs select-none">
+            <Leaf className="w-3.5 h-3.5 text-[#2f513f]" />
+            <span className="text-[10px] sm:text-[11px] text-[#556758] font-normal tracking-wide">
+              Personalised care, rooted in listening.
+            </span>
           </div>
         </div>
       </div>
