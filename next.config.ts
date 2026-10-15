@@ -10,9 +10,8 @@ const nextConfig: NextConfig = {
         pathname: "/wp-content/uploads/**",
       },
       {
-        protocol: "http",
-        hostname: "dermafusion.co.uk",
-        pathname: "/wp-content/uploads/**",
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
     ],
   },

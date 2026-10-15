@@ -1,231 +1,527 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
+  ChevronLeft,
+  ChevronRight,
   ArrowRight,
   ArrowUpRight,
   CalendarCheck,
-  Clock3,
-  Droplets,
-  Stethoscope,
-  Waves,
-  Activity,
+  Clock,
 } from "lucide-react";
 
-type Specialty = {
+export interface ClinicCard {
   id: string;
-  index: string;
+  number: string;
   title: string;
-  eyebrow: string;
-  summary: string;
-  conditions: string[];
-  duration: string;
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  category: string;
+  badge: string;
+  description: string;
+  tags: string[];
+  image: string;
   href: string;
-  bookingParam: string;
-  art: string;
-  accent: string;
-  note: string;
-};
+  duration: string;
+  bgColor: string;
+  accentColor: string;
+  mutedColor: string;
+}
 
-const specialties: Specialty[] = [
+const CLINIC_CARDS: ClinicCard[] = [
   {
     id: "skin",
-    index: "01",
+    number: "01",
     title: "Clinical Dermatology",
-    eyebrow: "SKIN HEALTH",
-    summary:
-      "Consultation and treatment planning for common and complex skin concerns, guided by an individual clinical assessment.",
-    conditions: ["Acne", "Eczema", "Psoriasis", "Pigmentation"],
-    duration: "Consultation-led",
-    icon: Stethoscope,
+    category: "SKIN HEALTH",
+    badge: "Consultation-led",
+    description:
+      "Doctor-led evaluation and treatment planning for acne, eczema, psoriasis, and persistent skin concerns.",
+    tags: ["Acne Clearance", "Eczema", "Psoriasis"],
+    image:
+      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
     href: "/skin",
-    bookingParam: "Clinical Dermatology",
-    art: "radial-gradient(circle at 78% 18%, rgba(255,255,255,.95) 0 7%, transparent 7.5%), radial-gradient(circle at 75% 24%, rgba(255,255,255,.22), transparent 33%), linear-gradient(135deg,#e3e9dd 0%,#c5d2bd 48%,#f1e8df 100%)",
-    accent: "#62765b",
-    note: "Doctor-led assessment",
+    duration: "30-45 mins",
+    bgColor: "#6d3816", // Warm rich chocolate brown matching Dribbble shot!
+    accentColor: "#FEE787", // Warm golden yellow title matching Dribbble shot!
+    mutedColor: "#FBD4BA", // Warm peach caramel text
   },
   {
     id: "hair",
-    index: "02",
-    title: "Hair & Scalp Care",
-    eyebrow: "TRICHOLOGY",
-    summary:
-      "Explore options for hair fall and scalp concerns, including diagnostic assessment and suitable treatment planning.",
-    conditions: ["Hair fall", "Scalp health", "PRP / GFC", "Thinning"],
-    duration: "Plan varies by case",
-    icon: Activity,
+    number: "02",
+    title: "Hair & Scalp Diagnostics",
+    category: "TRICHOLOGY",
+    badge: "Trichology Review",
+    description:
+      "Specialized scalp assessments, hair thinning analysis, and evidence-based PRP / GFC restoration protocols.",
+    tags: ["Hair Fall", "Scalp Health", "PRP / GFC"],
+    image:
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200&auto=format&fit=crop",
     href: "/hair",
-    bookingParam: "Trichology & Hair Restoration",
-    art: "radial-gradient(ellipse at 72% 24%, rgba(255,255,255,.65), transparent 24%), radial-gradient(ellipse at 80% 90%, rgba(112,73,75,.22), transparent 42%), linear-gradient(135deg,#eee0d7 0%,#d7b9b0 48%,#f5ede6 100%)",
-    accent: "#8b5550",
-    note: "Personalised scalp review",
+    duration: "40 mins",
+    bgColor: "#293A2C", // Deep forest sage olive
+    accentColor: "#D4EDDA", // Pale mint accent
+    mutedColor: "#C3DAC7", // Muted sage cream
   },
   {
     id: "laser",
-    index: "03",
+    number: "03",
     title: "Laser & Scar Treatments",
-    eyebrow: "ADVANCED AESTHETICS",
-    summary:
-      "Learn about laser-based and scar-care options. Suitability, expected results and recovery are reviewed during consultation.",
-    conditions: ["Acne scars", "Melasma", "Pigment", "Texture"],
-    duration: "Assessment first",
-    icon: Waves,
+    category: "ADVANCED AESTHETICS",
+    badge: "US-FDA Approved",
+    description:
+      "Targeted laser resurfacing for post-acne scarring, hyperpigmentation toning, and textural refinement.",
+    tags: ["Acne Scars", "Melasma Toning", "Textural"],
+    image:
+      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop",
     href: "/cosmetics",
-    bookingParam: "Aesthetic Lasers & Scar Revision",
-    art: "radial-gradient(circle at 76% 24%, rgba(255,255,255,.9) 0 4%, transparent 4.5%), radial-gradient(circle at 76% 24%, transparent 0 15%, rgba(255,255,255,.3) 15.5% 16%, transparent 16.5% 28%, rgba(255,255,255,.24) 28.5% 29%, transparent 29.5%), linear-gradient(135deg,#e8dfd0 0%,#c7c5b3 50%,#f5e7df 100%)",
-    accent: "#7b6b50",
-    note: "Treatment suitability assessed",
+    duration: "45-60 mins",
+    bgColor: "#5C3822", // Warm espresso bronze
+    accentColor: "#FAD1A8", // Warm apricot accent
+    mutedColor: "#EAD4C3", // Warm cream
   },
   {
     id: "facials",
-    index: "04",
+    number: "04",
     title: "Medi-Facials & Peels",
-    eyebrow: "CLINICAL COSMETOLOGY",
-    summary:
-      "Discover clinic-based facial and peel options selected around your skin type, concerns and barrier health.",
-    conditions: ["Hydra-facial", "Chemical peels", "Oil control", "Skin texture"],
-    duration: "Varies by procedure",
-    icon: Droplets,
-    href: "/cosmetics",
-    bookingParam: "Signature Medi-Facials & Peels",
-    art: "radial-gradient(ellipse at 74% 24%, rgba(255,255,255,.85), transparent 25%), radial-gradient(circle at 80% 76%, rgba(255,255,255,.3), transparent 30%), linear-gradient(135deg,#e9d9dc 0%,#d7b7c0 45%,#f3eae1 100%)",
-    accent: "#946b77",
-    note: "Skin-first care planning",
+    category: "CLINICAL COSMETOLOGY",
+    badge: "Barrier Renewal",
+    description:
+      "Doctor-formulated chemical peels and hydra-infusion facials to restore cellular barrier health and radiance.",
+    tags: ["Hydra-Infusion", "Gentle Peels", "Barrier Care"],
+    image:
+      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop",
+    href: "/facials",
+    duration: "45 mins",
+    bgColor: "#632738", // Deep berry wine
+    accentColor: "#FCD0DC", // Rose cream accent
+    mutedColor: "#EFC8D2", // Soft blush cream
+  },
+  {
+    id: "body",
+    number: "05",
+    title: "Body & Skin Rejuvenation",
+    category: "RESTORATIVE CARE",
+    badge: "Advanced Protocol",
+    description:
+      "Clinical body contouring, stretch mark revision, and targeted tone restoration for uneven body skin.",
+    tags: ["Body Contouring", "Stretch Marks", "Tone"],
+    image:
+      "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop",
+    href: "/body-treatments",
+    duration: "60 mins",
+    bgColor: "#6E4A25", // Warm caramel umber
+    accentColor: "#FEE2B3", // Golden honey accent
+    mutedColor: "#E8D5BF", // Warm sand
+  },
+  {
+    id: "acne",
+    number: "06",
+    title: "Targeted Acne Protocol",
+    category: "CLINICAL DERMA",
+    badge: "Zero Guesswork",
+    description:
+      "Medical-grade comedone extraction, anti-inflammatory treatment, and prescription regimens for active breakouts.",
+    tags: ["Active Acne", "Pore Clearance", "Inflammation"],
+    image:
+      "https://images.unsplash.com/photo-1761718209835-c8586b7dcac0?q=80&w=1200&auto=format&fit=crop",
+    href: "/treatments",
+    duration: "30 mins",
+    bgColor: "#5C261A", // Deep warm mahogany terracotta
+    accentColor: "#FFCBBF", // Coral cream accent
+    mutedColor: "#EAC3BA", // Terracotta blush
+  },
+  {
+    id: "consultation",
+    number: "07",
+    title: "Doctor Consultation",
+    category: "MMC VERIFIED",
+    badge: "Individual Assessment",
+    description:
+      "Comprehensive 1-on-1 clinical examination with dermoscopy imaging and personalized medical prescription.",
+    tags: ["Dermoscopy", "Personalized Rx", "Follow-up"],
+    image:
+      "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200&auto=format&fit=crop",
+    href: "/book-now",
+    duration: "30 mins",
+    bgColor: "#232624", // Deep obsidian onyx
+    accentColor: "#E5C07B", // Brushed champagne gold
+    mutedColor: "#D2D6D0", // Soft mineral grey
   },
 ];
 
 export default function SpecialtyCardsSection() {
-  const reduceMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const total = CLINIC_CARDS.length;
+
+  const handleNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % total);
+  }, [total]);
+
+  const handlePrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + total) % total);
+  }, [total]);
+
+  // Touch and swipe gestures
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) handleNext();
+      else handlePrev();
+    }
+    touchStartX.current = null;
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isHovered) return;
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isHovered, handleNext, handlePrev]);
+
+  // Wheel scroll with throttle
+  const lastWheelTime = useRef(0);
+  const handleWheel = (e: React.WheelEvent) => {
+    const now = Date.now();
+    if (now - lastWheelTime.current < 400) return;
+    if (Math.abs(e.deltaX) > 25 || Math.abs(e.deltaY) > 35) {
+      lastWheelTime.current = now;
+      if (e.deltaX > 0 || e.deltaY > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+  };
 
   return (
     <section
       id="services"
-      aria-labelledby="specialties-heading"
-      className="scroll-mt-28 relative bg-transparent px-4 py-20 font-source sm:px-6 md:px-8 md:py-28"
+      className="scroll-mt-24 relative w-full overflow-hidden py-14 sm:py-20 md:py-24"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onWheel={handleWheel}
     >
-      <div className="mx-auto max-w-[1240px]">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mb-10 max-w-3xl text-center md:mb-14"
+      {/* Abron Studio Dribbble 25530455 Seamlessly Blended Wavy Ribbon Background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-gradient-to-b from-transparent via-[#faf1eb]/70 to-transparent [mask-image:linear-gradient(to_bottom,transparent_0%,black_80px,black_calc(100%-80px),transparent_100%)]"
+      >
+        {/* Soft atmospheric ambient glow */}
+        <div className="absolute -top-16 left-1/4 h-[420px] w-[420px] rounded-full bg-[#fde1d0]/35 blur-3xl" />
+        <div className="absolute -bottom-16 right-1/4 h-[420px] w-[420px] rounded-full bg-[#fbd9c5]/35 blur-3xl" />
+
+        {/* Dynamic Animated Serpentine Ribbon */}
+        <svg
+          className="absolute inset-0 h-full w-full min-h-[850px] min-w-[1240px]"
+          viewBox="0 0 1440 880"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/65 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.19em] text-[#626a59] shadow-[inset_0_1px_0_rgba(255,255,255,.9),0_8px_24px_rgba(41,45,39,.05)] backdrop-blur-xl sm:text-[11px]">
-            
-            Our services
-          </span>
-          <h2
-            id="specialties-heading"
-            className="font-['Cormorant_Garamond',Georgia,serif] text-4xl font-medium leading-[.98] tracking-[-.04em] text-[#292d27] sm:text-5xl md:text-6xl"
-          >
-            Find the right place to <span className="italic text-[#7e423e]">start.</span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#66695f] sm:text-base">
-            Explore our care areas, learn what each involves, and book a consultation when you are ready. Your clinician will help determine what is appropriate for you.
-          </p>
-        </motion.div>
+          <defs>
+            <linearGradient id="dribbbleRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#f89566" stopOpacity="0.75" />
+              <stop offset="50%" stopColor="#f48652" stopOpacity="0.70" />
+              <stop offset="100%" stopColor="#e8733a" stopOpacity="0.65" />
+            </linearGradient>
+            <filter id="ribbonSoftGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="16" stdDeviation="22" floodColor="#d76632" floodOpacity="0.08" />
+            </filter>
+          </defs>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:gap-6">
-          {specialties.map((item, index) => {
-            const Icon = item.icon;
+          {/* Single Unified Continuous Flowing Ribbon (Smooth organic curve safely within bounds, zero hard edges) */}
+          <motion.path
+            d="M -60,880 C 140,840 305,870 385,825 C 475,775 465,700 375,655 C 190,565 75,475 90,320 C 105,160 220,95 340,80 C 480,68 700,65 840,90 C 930,105 1010,120 1065,185 C 1125,275 1045,455 1085,615 C 1125,725 1240,820 1480,910"
+            stroke="url(#dribbbleRibbonGrad)"
+            strokeWidth="110"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="url(#ribbonSoftGlow)"
+            initial={false}
+            animate={{
+              x: activeIndex * -12,
+              y: [-8, 8, -8],
+              rotate: [-0.3, 0.3, -0.3],
+            }}
+            transition={{
+              x: { type: "spring", stiffness: 180, damping: 25 },
+              y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              rotate: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+            }}
+          />
+        </svg>
+
+        {/* Central Luminous Contrast Halo: Keeps foreground cards crystal-clear and prominent */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_62%_56%_at_50%_54%,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0.4)_55%,transparent_82%)]" />
+      </div>
+
+      {/* Editorial Section Header */}
+      <div className="mx-auto max-w-3xl text-center px-4 mb-8 sm:mb-12">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#292d27]/15 bg-white/80 px-4 py-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[#626a59] shadow-[0_2px_10px_rgba(41,45,39,0.04)] backdrop-blur-xl">
+          Our services
+        </span>
+        <h2 className="mt-4 font-['DM_Serif_Display',serif] text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-normal leading-[1.06] tracking-tight text-[#292d27]">
+          Find the right place to <span className="italic font-normal text-[#7e423e]">start.</span>
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-[#66695f]">
+          Explore our care areas, learn what each involves, and book a consultation when you are ready. Your clinician will help determine what is appropriate for you.
+        </p>
+      </div>
+
+      {/* Abron Studio Card Scrolling Carousel Stage */}
+      <div
+        ref={containerRef}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        className="relative w-full max-w-[1360px] mx-auto px-4 overflow-visible py-4"
+      >
+        <div className="relative flex items-center justify-center min-h-[460px] sm:min-h-[500px]">
+          {CLINIC_CARDS.map((card, idx) => {
+            // Compute offset relative to active card
+            const offset = (idx - activeIndex + total) % total;
+            const normalizedOffset = offset > total / 2 ? offset - total : offset;
+
+            // Only render cards within viewing window (-2 to +2)
+            const isVisible = Math.abs(normalizedOffset) <= 2;
+            if (!isVisible) return null;
+
+            const isActive = normalizedOffset === 0;
+
+            // Dynamic transforms based on scroll position
+            const xTranslation = normalizedOffset * (isMobile ? 310 : 540);
+            const cardScale = isActive ? 1 : 0.88 - Math.abs(normalizedOffset) * 0.04;
+            const cardOpacity = isActive ? 1 : 0.42;
+            const zIndex = 20 - Math.abs(normalizedOffset);
+
             return (
-              <motion.article
-                key={item.id}
-                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.55,
-                  delay: reduceMotion ? 0 : index * 0.07,
-                  ease: [0.22, 1, 0.36, 1],
+              <motion.div
+                key={card.id}
+                onClick={() => !isActive && setActiveIndex(idx)}
+                initial={false}
+                animate={{
+                  x: xTranslation,
+                  scale: cardScale,
+                  opacity: cardOpacity,
+                  zIndex,
                 }}
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                className="group relative flex min-w-0 flex-col overflow-hidden rounded-[26px] border border-white/85 bg-[#fbfaf6]/80 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.95),0_12px_36px_rgba(48,53,43,.055)] backdrop-blur-2xl transition-[border-color,box-shadow] duration-300 hover:border-[#b7bfae] hover:shadow-[0_24px_58px_rgba(48,53,43,.12)]"
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 26,
+                  mass: 0.8,
+                }}
+                className={`absolute top-0 w-[88vw] max-w-[360px] sm:max-w-[680px] md:max-w-[740px] rounded-3xl overflow-hidden cursor-pointer select-none border transition-shadow duration-300 ${
+                  isActive
+                    ? "shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] ring-1 ring-white/10"
+                    : "shadow-md"
+                }`}
+                style={{
+                  height: isMobile ? "460px" : "360px",
+                  backgroundColor: card.bgColor,
+                  borderColor: "rgba(255, 255, 255, 0.12)",
+                }}
               >
-                <div
-                  aria-hidden="true"
-                  className="relative isolate flex min-h-[190px] items-end overflow-hidden rounded-[19px] p-5 sm:min-h-[220px] sm:p-6"
-                  style={{ background: item.art }}
-                >
-                  <div className="pointer-events-none absolute -right-8 -top-12 h-48 w-48 rounded-full border border-white/45 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,.6)] backdrop-blur-sm transition-transform duration-700 group-hover:scale-110 sm:h-56 sm:w-56" />
-                  <div className="pointer-events-none absolute right-[16%] top-[16%] h-28 w-28 rounded-full border border-white/55 bg-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,.7),0_20px_40px_rgba(45,48,38,.06)] backdrop-blur-md transition-transform duration-700 group-hover:translate-x-2 group-hover:-translate-y-2 sm:h-36 sm:w-36" />
-                  <div
-                    className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/75 bg-white/60 text-[#30372d] shadow-[inset_0_1px_0_rgba(255,255,255,.95),0_12px_30px_rgba(45,48,38,.1)] backdrop-blur-xl transition-transform duration-500 group-hover:rotate-[-5deg] group-hover:scale-105 sm:h-16 sm:w-16"
-                    style={{ color: item.accent }}
-                  >
-                    <Icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.45} />
-                  </div>
-                  <div className="relative z-10 ml-auto max-w-[58%] text-right">
-                    <p className="text-[9px] font-bold uppercase tracking-[.2em] text-[#3d4438]/70 sm:text-[10px]">
-                      {item.eyebrow}
-                    </p>
-                    <p className="mt-1 font-['Cormorant_Garamond',Georgia,serif] text-3xl font-medium leading-none tracking-[-.03em] text-[#292d27] sm:text-4xl">
-                      {item.index}
-                    </p>
-                  </div>
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/20 to-transparent" />
-                </div>
+                <div className="relative w-full h-full flex flex-col sm:flex-row overflow-hidden">
+                  {/* Left Side Content Area (matching Dribbble shot layout) */}
+                  <div className="relative z-10 flex-1 p-5 sm:p-7 md:p-8 flex flex-col justify-between max-w-full sm:max-w-[56%]">
+                    {/* Top Header: Badge + Category + Title */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <span className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/15 backdrop-blur-md text-white font-mono text-[10px] sm:text-xs font-bold border border-white/20">
+                          {card.number}
+                        </span>
+                        <span
+                          className="text-[10px] font-mono uppercase tracking-[0.18em] font-semibold"
+                          style={{ color: card.mutedColor }}
+                        >
+                          {card.category} • {card.duration}
+                        </span>
+                      </div>
 
-                <div className="flex flex-1 flex-col px-3 pb-3 pt-5 sm:px-4 sm:pt-6">
-                  <div className="mb-3 flex items-start justify-between gap-3">
-                    <h3 className="max-w-[85%] font-['Cormorant_Garamond',Georgia,serif] text-[27px] font-semibold leading-[1.02] tracking-[-.025em] text-[#292d27] transition-colors duration-300 group-hover:text-[#7e423e] sm:text-[32px]">
-                      {item.title}
-                    </h3>
-                    <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#dfe2d8] bg-white/65 text-[#737a69] transition-all duration-300 group-hover:border-[#7e423e]/25 group-hover:bg-[#7e423e] group-hover:text-white">
-                      <ArrowUpRight size={16} />
-                    </span>
-                  </div>
-
-                  <p className="max-w-xl text-sm leading-6 text-[#686b61] sm:text-[15px] sm:leading-7">
-                    {item.summary}
-                  </p>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {item.conditions.map((condition) => (
-                      <span
-                        key={condition}
-                        className="rounded-full border border-[#e1e3db] bg-white/55 px-3 py-1.5 text-[10px] font-medium text-[#565d50] sm:text-[11px]"
+                      <h3
+                        className="font-['DM_Serif_Display',serif] text-xl sm:text-2xl md:text-3xl font-normal leading-tight tracking-tight drop-shadow-sm"
+                        style={{ color: card.accentColor }}
                       >
-                        {condition}
-                      </span>
-                    ))}
+                        {card.title}
+                      </h3>
+                    </div>
+
+                    {/* Bottom Area: Description + Tag chips + CTA Buttons */}
+                    <div className="mt-3 sm:mt-4">
+                      <p
+                        className="text-xs sm:text-[13px] md:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none"
+                        style={{ color: card.mutedColor }}
+                      >
+                        {card.description}
+                      </p>
+
+                      {/* Tag Chips */}
+                      <div className="flex flex-wrap gap-1.5 mb-3 sm:mb-4">
+                        {card.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white/10 text-white/90 border border-white/15 backdrop-blur-xs"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Card CTA Row */}
+                      <div className="flex items-center gap-3 pt-2 border-t border-white/15">
+                        <Link
+                          href={`/book-now?concern=${encodeURIComponent(card.title)}`}
+                          className="inline-flex items-center gap-1.5 rounded-full px-3.5 sm:px-4 py-1.5 text-xs font-semibold transition-all duration-200 active:scale-95 shadow-sm"
+                          style={{
+                            backgroundColor: card.accentColor,
+                            color: card.bgColor,
+                          }}
+                          onClick={(e) => !isActive && e.preventDefault()}
+                        >
+                          <CalendarCheck className="h-3 w-3" /> Book
+                        </Link>
+
+                        <Link
+                          href={card.href}
+                          className="inline-flex items-center gap-1 text-xs font-medium"
+                          style={{ color: card.mutedColor }}
+                          onClick={(e) => !isActive && e.preventDefault()}
+                        >
+                          Explore care <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-[#dfe1d8] pt-4 text-[10px] font-medium text-[#73766d] sm:text-[11px]">
-                    <Clock3 size={13} className="text-[#7e423e]" />
-                    <span>{item.duration}</span>
-                    <span aria-hidden="true" className="mx-1 h-1 w-1 rounded-full bg-[#a9ada2]" />
-                    <span>{item.note}</span>
-                  </div>
+                  {/* Right Side Image with Signature Organic Wavy Cutout */}
+                  <div className="relative w-full sm:w-[48%] h-[190px] sm:h-full sm:absolute sm:right-0 sm:top-0 sm:bottom-0 overflow-hidden bg-neutral-900">
+                    <motion.div
+                      className="relative w-full h-full"
+                      animate={{
+                        scale: isActive ? 1.04 : 1,
+                      }}
+                      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <Image
+                        src={card.image}
+                        alt={card.title}
+                        fill
+                        unoptimized
+                        sizes="(max-width: 640px) 90vw, 400px"
+                        className="object-cover object-center"
+                        priority={idx <= 2}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/25 via-transparent to-transparent pointer-events-none" />
+                    </motion.div>
 
-                  <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-                    <Link
-                      href={item.href}
-                      className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-[#d9ddd3] bg-white/55 px-4 text-xs font-semibold text-[#343a30] transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#7e423e]"
+                    {/* Desktop Organic Wavy Divider SVG (smooth bezier curve separating left color and right photo) */}
+                    <svg
+                      className="hidden sm:block absolute top-0 -left-1 bottom-0 h-full w-20 md:w-28 pointer-events-none z-10"
+                      viewBox="0 0 100 400"
+                      preserveAspectRatio="none"
+                      fill={card.bgColor}
                     >
-                      Explore care <ArrowRight size={14} />
-                    </Link>
-                    <Link
-                      href={`/book-now?concern=${encodeURIComponent(item.bookingParam)}`}
-                      className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-[#292d27] px-4 text-xs font-semibold text-white shadow-[0_8px_20px_rgba(41,45,39,.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#7e423e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#7e423e]"
+                      <path d="M 0,0 L 45,0 C 85,75 15,150 75,230 C 120,290 20,355 50,400 L 0,400 Z" />
+                    </svg>
+
+                    {/* Mobile Horizontal Organic Wavy Divider SVG */}
+                    <svg
+                      className="sm:hidden absolute top-0 left-0 right-0 w-full h-8 pointer-events-none z-10"
+                      viewBox="0 0 400 50"
+                      preserveAspectRatio="none"
+                      fill={card.bgColor}
                     >
-                      <CalendarCheck size={14} />
-                      Book consultation
-                    </Link>
+                      <path d="M 0,0 L 400,0 L 400,15 C 310,45 230,5 150,40 C 80,48 30,12 0,28 Z" />
+                    </svg>
                   </div>
                 </div>
-              </motion.article>
+              </motion.div>
             );
           })}
         </div>
 
-        <p className="mx-auto mt-6 max-w-3xl text-center text-[11px] leading-5 text-[#797b72]">
-          Treatment options, expected outcomes, session counts and recovery times vary by individual. A consultation is needed to determine suitability.
-        </p>
+        {/* Modern Minimalist Bottom Navigation with New Simple Style Arrows */}
+        <div className="flex items-center justify-center gap-4 sm:gap-6 mt-8">
+          {/* Previous Arrow Button - New & Simple Minimal Style */}
+          <button
+            onClick={handlePrev}
+            aria-label="Previous card"
+            className="group flex h-9 w-9 items-center justify-center rounded-full border border-[#292d27]/15 bg-white/90 text-[#292d27] shadow-[0_2px_10px_rgba(41,45,39,0.06)] backdrop-blur-md transition-all duration-200 hover:bg-[#292d27] hover:text-white hover:border-[#292d27] hover:scale-105 active:scale-95 focus-visible:outline-none"
+          >
+            <ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" strokeWidth={2} />
+          </button>
+
+          {/* Indicator Dots Track */}
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/60 border border-[#292d27]/10 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+            {CLINIC_CARDS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                aria-label={`Go to card ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activeIndex === i
+                    ? "w-6 bg-[#7e423e]"
+                    : "w-1.5 bg-[#292d27]/25 hover:bg-[#292d27]/50"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Next Arrow Button - New & Simple Minimal Style */}
+          <button
+            onClick={handleNext}
+            aria-label="Next card"
+            className="group flex h-9 w-9 items-center justify-center rounded-full border border-[#292d27]/15 bg-white/90 text-[#292d27] shadow-[0_2px_10px_rgba(41,45,39,0.06)] backdrop-blur-md transition-all duration-200 hover:bg-[#292d27] hover:text-white hover:border-[#292d27] hover:scale-105 active:scale-95 focus-visible:outline-none"
+          >
+            <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+          </button>
+        </div>
+      </div>
+
+      {/* Bottom Global Consultation Link Bar */}
+      <div className="border-t border-[#292d27]/10 px-4 pt-10 mt-10 max-w-4xl mx-auto">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <p className="text-xs text-[#696c61] max-w-md">
+            Treatment options, session counts, and recovery times vary by individual. A consultation is required to assess suitability.
+          </p>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/treatments"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[#292d27]/15 bg-white/80 px-4 py-2.5 text-xs font-semibold text-[#292d27] hover:bg-white transition-colors shadow-[0_2px_8px_rgba(41,45,39,0.04)]"
+            >
+              Explore all care <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <Link
+              href={`/book-now?concern=${encodeURIComponent(CLINIC_CARDS[activeIndex]?.title || "Consultation")}`}
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#292d27] px-4 py-2.5 text-xs font-semibold text-white hover:bg-[#7e423e] transition-colors shadow-[0_8px_20px_rgba(41,45,39,0.12)]"
+            >
+              <CalendarCheck className="h-3.5 w-3.5" /> Book consultation
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

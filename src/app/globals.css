@@ -2,6 +2,14 @@
 
 @custom-variant xl-custom (@media (min-width: 1234px));
 
+@font-face {
+  font-family: 'Brown Sugar';
+  src: url('/fonts/BrownSugar.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-primary: #108283;
   --color-primary-dark: #0c6b6c;

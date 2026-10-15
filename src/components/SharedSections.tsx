@@ -41,8 +41,8 @@ export function HeroBanner({ title, subtitle, badge }: HeroBannerProps) {
         transition={{ duration: 0.7 }}
       >
         {badge && (
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md text-[#108283] text-[10px] font-bold uppercase tracking-[0.2em] mb-5 border border-[#E0D0C0]/60 shadow-xs">
-            <Stethoscope className="w-3 h-3" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md text-[#873f3b] text-[10px] font-bold uppercase tracking-[0.2em] mb-5 border border-[#873f3b]/18 shadow-xs">
+            <Stethoscope className="w-3 h-3 text-[#873f3b]" />
             <span>{badge}</span>
           </div>
         )}

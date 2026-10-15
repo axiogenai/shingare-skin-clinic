@@ -1,132 +1,156 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import {
   Zap,
   Microscope,
   Activity,
   Droplets,
   Flame,
+  Sparkles,
   ShieldCheck,
-  CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 
-const platforms = [
+interface Platform {
+  code: string;
+  name: string;
+  spec: string;
+  indications: string[];
+  clinicalImpact: string;
+  safetyProfile: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const platforms: Platform[] = [
   {
-    code: "PLATFORM // 01",
+    code: "PLATFORM 01",
     name: "Dual-Wavelength Q-Switched Nd:YAG Laser",
-    wavelength: "1064nm / 532nm Sub-Nanosecond Energy",
-    indications: ["Dermal Melasma & Freckles", "Acne Scar Resurfacing", "Carbon Laser Glow Peel", "Tattoo Pigment Breakdown"],
+    spec: "1064nm / 532nm Sub-Nanosecond Energy",
+    indications: ["Melasma & Dark Spots", "Acne Scar Resurfacing", "Carbon Glow Peel"],
     clinicalImpact:
-      "Selectively fractures deep cutaneous pigment deposits via photoacoustic shockwaves without thermal destruction to adjacent epidermal tissue. Tailored specifically for safe use on Indian Fitzpatrick III–V skin types.",
-    safetyProfile: "Zero epidermal charring • Minimal downtime (12–24h mild erythema)",
+      "Selectively shatters deep dermal pigment via photoacoustic energy with zero thermal damage to surrounding tissue.",
+    safetyProfile: "Zero burning • Safe for Indian skin types",
     icon: Zap,
   },
   {
-    code: "PLATFORM // 02",
+    code: "PLATFORM 02",
     name: "High-Resolution Polarized Digital Dermatoscope",
-    wavelength: "Cross-Polarized & Non-Polarized Optical Microscopy",
-    indications: ["Follicular Density Mapping", "Early Androgenetic Alopecia", "Atypical Nevi & Lesions", "Erythema & Vascular Mapping"],
+    spec: "40× Optical Magnification & Cross-Polarized Lens",
+    indications: ["Follicle Density Mapping", "Hair Loss Diagnosis", "Mole & Lesion Screening"],
     clinicalImpact:
-      "Provides up to 40× optical magnification with cross-polarized light, eliminating skin surface reflection to reveal deep dermal melanin patterns, hair miniaturization ratios, and microscopic follicular health.",
-    safetyProfile: "Non-invasive • Instant high-resolution optical readout",
+      "Eliminates surface glare to reveal deep dermal melanin patterns, root miniaturization, and micro-vascular health.",
+    safetyProfile: "100% non-invasive • Instant digital readout",
     icon: Microscope,
   },
   {
-    code: "PLATFORM // 03",
+    code: "PLATFORM 03",
     name: "Closed-System Autologous Centrifuge Platform",
-    wavelength: "Precision RCF Speed & Temperature Stabilization",
-    indications: ["Growth Factor Concentrate (GFC)", "Autologous Platelet PRP", "Follicular Revascularization", "Facial Collagen Induction"],
+    spec: "Precision RCF Speed & Temperature Control",
+    indications: ["Growth Factor Concentrate (GFC)", "Autologous Platelet PRP", "Hair Revascularization"],
     clinicalImpact:
-      "A closed-system sterile centrifugation unit that isolates high concentrations of PDGF, VEGF, and TGF-beta growth factors without chemical additives or contamination risk, accelerating follicular stem cell activation.",
-    safetyProfile: "100% autologous biocompatible • Zero foreign-body reaction risk",
+      "Isolates pure natural growth factors without chemical additives or contamination risk, accelerating cellular regeneration.",
+    safetyProfile: "100% autologous biocompatible • Zero allergy risk",
     icon: Activity,
   },
   {
-    code: "PLATFORM // 04",
+    code: "PLATFORM 04",
     name: "Medical Ultrasonic Vortex Hydro-Extractor",
-    wavelength: "Negative Pressure Vacuum + Micro-Jet Infusion",
-    indications: ["Comedone & Blackhead Extraction", "Corneocyte Decongestion", "Medical Hydra Medi-Facials", "Deep Hyaluronic Acid Delivery"],
+    spec: "Negative Pressure Vacuum + Micro-Jet Infusion",
+    indications: ["Pore & Blackhead Purge", "Barrier Decongestion", "Medical Medi-Facials"],
     clinicalImpact:
-      "Simultaneously executes non-irritating vortex suction to dislodge impacted follicular debris while infusing medical-grade antioxidant and barrier-replenishing serums deep into porous strata.",
-    safetyProfile: "Comfortable, non-invasive • Zero downtime post-session",
+      "Gently vacuums out deep follicular debris while infusing medical-grade barrier serums deep into the skin.",
+    safetyProfile: "Non-irritating suction • Zero peeling or downtime",
     icon: Droplets,
   },
   {
-    code: "PLATFORM // 05",
+    code: "PLATFORM 05",
     name: "High-Frequency Radiofrequency Electrocautery",
-    wavelength: "3.8 MHz Sub-Tissue Monopolar / Bipolar Micro-Current",
-    indications: ["Skin Tags (Acrochordons)", "Dermatosis Papulosa Nigra (DPN)", "Benign Warts & Verrucae", "Milia Clearance"],
+    spec: "3.8 MHz Sub-Tissue Monopolar Micro-Current",
+    indications: ["Skin Tags & DPN Removal", "Benign Warts & Moles", "Instant Hemostasis"],
     clinicalImpact:
-      "High-frequency radiofrequency current vaporizes unwanted superficial benign skin growths with microscopic margin precision, providing instantaneous coagulation with minimal scar formation.",
-    safetyProfile: "Local anesthetic application • Rapid re-epithelialization in 4–6 days",
+      "Precision radiofrequency current vaporizes unwanted superficial benign growths with microscopic margin accuracy.",
+    safetyProfile: "Local numbing • Rapid healing with minimal marking",
     icon: Flame,
+  },
+  {
+    code: "PLATFORM 06",
+    name: "Narrowband UVB (311nm) Phototherapy System",
+    spec: "311nm Peak Narrowband Monochromatic Light",
+    indications: ["Psoriasis & Vitiligo", "Chronic Atopic Eczema", "Alopecia Areata"],
+    clinicalImpact:
+      "Delivers therapeutic 311nm light waves to calm inflammatory immune cells and stimulate natural repigmentation.",
+    safetyProfile: "Drug-free, non-thermal • Controlled dosimetry",
+    icon: Sparkles,
   },
 ];
 
 export default function ClinicalInfrastructureSection() {
   return (
-    <section className="py-20 md:py-28 bg-white relative font-source border-t border-stone-200/70">
+    <section
+      id="clinical-infrastructure"
+      className="py-16 sm:py-20 md:py-24 bg-white relative font-source border-t border-[#292d27]/8 [&_*]:!transform-none [&_*]:!transition-none [&_*]:hover:!transform-none"
+    >
       <div className="max-w-[1240px] mx-auto px-5 sm:px-6 md:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 bg-[#FAF0DD] text-[#108283] text-xs font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider border border-[#E8DCBE]/70">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#108283]" />
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 bg-[#7e423e]/8 text-[#7e423e] text-[10px] sm:text-[11px] font-mono font-semibold px-3.5 py-1.5 rounded-full mb-3 uppercase tracking-[0.2em] border border-[#7e423e]/15">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#7e423e]" />
             Clinical Infrastructure
           </div>
 
-          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-stone-950 font-normal leading-tight mb-4">
+          <h2 className="font-['Playfair_Display',Georgia,serif] text-3xl sm:text-4xl md:text-5xl text-[#1b261e] font-bold leading-tight mb-3">
             Hospital-Grade Aesthetic &amp;{" "}
-            <span className="text-[#108283] font-semibold italic">
+            <span className="italic font-medium text-[#873f3b]">
               Diagnostic Hardware
             </span>
           </h2>
 
-          <p className="text-stone-600 text-base md:text-lg font-normal leading-relaxed">
+          <p className="text-[#616558] text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
             Unlike commercial salons using uncalibrated parlor machines, every procedure at Shingare Clinic is powered by calibrated, physician-grade medical instrumentation.
           </p>
         </div>
 
-        {/* Platforms List / Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 6 Balanced Cards Grid (3x2, Compact Height, Zero Hover Animation) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {platforms.map((plat) => {
             const Icon = plat.icon;
             return (
               <div
                 key={plat.code}
-                className="group relative bg-[#F7F6F4] border border-stone-200/90 rounded-2xl p-6 sm:p-7 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-[#108283]/60 hover:bg-white hover:shadow-[0_8px_24px_rgba(16,130,131,0.06)] transition-all duration-300 flex flex-col justify-between"
+                className="bg-[#FAF8F5] border border-[#292d27]/10 rounded-2xl p-5 sm:p-6 shadow-[0_2px_10px_rgba(41,45,39,0.03)] flex flex-col justify-between"
               >
                 <div>
-                  {/* Top Bar */}
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-stone-200/60">
-                    <span className="font-mono text-[11px] font-bold text-stone-500 tracking-wider">
+                  {/* Top Bar: Code & Icon */}
+                  <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#292d27]/8">
+                    <span className="font-mono text-xs font-bold text-[#873f3b] tracking-wider">
                       {plat.code}
                     </span>
-                    <div className="w-8 h-8 rounded-lg bg-stone-100 text-[#108283] flex items-center justify-center transition-colors duration-200 border border-stone-200/60">
-                      <Icon className="w-4 h-4" />
+                    <div className="w-7 h-7 rounded-lg bg-white border border-[#292d27]/10 flex items-center justify-center text-[#1a241d]">
+                      <Icon className="w-3.5 h-3.5" />
                     </div>
                   </div>
 
-                  <h3 className="font-playfair text-lg sm:text-xl font-bold text-stone-950 mb-1 leading-snug group-hover:text-[#108283] transition-colors">
+                  {/* Platform Title */}
+                  <h3 className="font-['Playfair_Display',Georgia,serif] text-base sm:text-[17px] font-bold text-[#1a241d] mb-1 leading-snug">
                     {plat.name}
                   </h3>
 
-                  <div className="font-mono text-[11px] text-[#108283] font-medium mb-3">
-                    {plat.wavelength}
+                  {/* Spec */}
+                  <div className="font-mono text-[10px] sm:text-[11px] text-[#873f3b] font-semibold mb-2.5">
+                    {plat.spec}
                   </div>
 
-                  <p className="text-xs text-stone-600 leading-relaxed mb-4">
+                  {/* Clinical Impact Description */}
+                  <p className="text-xs text-[#555d4d] leading-relaxed mb-3.5">
                     {plat.clinicalImpact}
                   </p>
 
                   {/* Indications Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
+                  <div className="flex flex-wrap gap-1.5 mb-3.5">
                     {plat.indications.map((ind, i) => (
                       <span
                         key={i}
-                        className="text-[10.5px] font-medium text-stone-700 bg-white/90 px-2.5 py-0.5 rounded-md border border-stone-200/70"
+                        className="text-[10px] font-medium text-[#292d27] bg-white px-2 py-0.5 rounded-md border border-[#292d27]/8 shadow-2xs"
                       >
                         {ind}
                       </span>
@@ -134,9 +158,9 @@ export default function ClinicalInfrastructureSection() {
                   </div>
                 </div>
 
-                {/* Safety Profile */}
-                <div className="pt-3 border-t border-stone-200/60 flex items-center gap-2 text-[11px] text-stone-600">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
+                {/* Safety Profile Footer */}
+                <div className="pt-2.5 border-t border-[#292d27]/8 flex items-center gap-1.5 text-[11px] text-[#616558]">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#873f3b] shrink-0" />
                   <span className="leading-tight font-medium">{plat.safetyProfile}</span>
                 </div>
               </div>

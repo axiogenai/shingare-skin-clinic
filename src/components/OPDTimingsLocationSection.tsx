@@ -8,7 +8,8 @@ import {
   Phone,
   ArrowRight,
   ArrowUpRight,
-  Leaf,
+  Navigation,
+  Crosshair,
 } from "lucide-react";
 
 export default function OPDTimingsLocationSection() {
@@ -116,68 +117,64 @@ export default function OPDTimingsLocationSection() {
           </div>
         </div>
 
-        {/* Right Panel: Arched Map Graphic (Same Unified Background, Middle Line Intact) */}
-        <div className="px-6 sm:px-12 md:px-16 lg:px-20 py-10 sm:py-14 flex items-center justify-center relative overflow-hidden">
-          {/* Arched Architectural Map Card */}
-          <div className="relative w-full max-w-[290px] sm:max-w-[310px] h-[310px] sm:h-[330px] rounded-t-[145px] sm:rounded-t-[155px] rounded-b-2xl bg-[#edf3eb] border border-[#cbd5c8] shadow-[0_12px_32px_rgba(35,55,42,0.06)] overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-            {/* SVG Decorative Architectural Map Grid */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              viewBox="0 0 310 330"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <circle cx="65" cy="110" r="48" fill="#d8e3d6" opacity="0.85" />
-              <circle cx="250" cy="225" r="58" fill="#d8e3d6" opacity="0.85" />
+        {/* Right Panel: Exact Reference Map Card Widget */}
+        <div className="px-4 sm:px-8 md:px-12 lg:px-14 py-8 sm:py-12 flex items-center justify-center relative overflow-hidden">
+          {/* Main Map Card Container */}
+          <div className="relative w-full max-w-[370px] sm:max-w-[420px] aspect-square select-none group">
+            {/* Base Photorealistic Transparent Card Asset (No Outer Background, 100% Squircle Cutout) */}
+            <img
+              src="/images/clinic-map-cutout.png"
+              alt="Shingare Skin Clinic Location Map - Peth Vadgaon, Kolhapur"
+              className="w-full h-full object-contain pointer-events-none drop-shadow-[0_20px_45px_rgba(28,48,34,0.14)]"
+            />
 
-              <line x1="-30" y1="200" x2="340" y2="90" stroke="#c4d0c1" strokeWidth="2.2" />
-              <line x1="-30" y1="240" x2="340" y2="130" stroke="#c4d0c1" strokeWidth="2.2" />
-              <line x1="-30" y1="130" x2="340" y2="20" stroke="#c4d0c1" strokeWidth="2.2" />
-              <line x1="-30" y1="300" x2="340" y2="190" stroke="#c4d0c1" strokeWidth="2.2" />
-
-              <line x1="80" y1="-20" x2="20" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
-              <line x1="160" y1="-20" x2="90" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
-              <line x1="240" y1="-20" x2="170" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
-              <line x1="310" y1="-20" x2="250" y2="350" stroke="#c4d0c1" strokeWidth="2.2" />
-
-              <line x1="110" y1="55" x2="190" y2="115" stroke="#c4d0c1" strokeWidth="1.8" />
-              <line x1="60" y1="170" x2="130" y2="230" stroke="#c4d0c1" strokeWidth="1.8" />
-              <line x1="180" y1="190" x2="270" y2="260" stroke="#c4d0c1" strokeWidth="1.8" />
-              <line x1="20" y1="85" x2="90" y2="135" stroke="#c4d0c1" strokeWidth="1.8" />
-            </svg>
-
-            {/* Map Center Marker & Details */}
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#2f513f] flex items-center justify-center text-white shadow-lg shadow-[#2f513f]/30 ring-8 ring-[#2f513f]/12 mb-2.5">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </div>
-
-              <div className="text-xs sm:text-[13px] font-bold tracking-[0.18em] uppercase text-[#23382b] font-mono">
-                PETH VADGAON
-              </div>
-
-              <div className="text-[9px] sm:text-[10px] font-medium tracking-[0.22em] uppercase text-[#6f7f72] font-mono mt-0.5">
-                KOLHAPUR • MAHARASHTRA
-              </div>
-
-              <a
-                href="https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/95 hover:bg-white text-[#23382b] border border-[#cad5c7] text-[11px] font-medium shadow-sm hover:shadow transition-all group"
-              >
-                <span>Open in Maps</span>
-                <ArrowUpRight className="w-3 h-3 text-[#768678] group-hover:text-[#23382b] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+            {/* Live Interactive Pulse Wave over Clinic Pin */}
+            <div className="absolute top-[35.2%] left-[54%] -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center">
+              <span className="w-12 h-12 rounded-full border border-[#8b2626]/30 animate-ping [animation-duration:3s]" />
+              <span className="absolute w-20 h-20 rounded-full border border-[#8b2626]/18 animate-ping [animation-duration:3s] [animation-delay:1.5s]" />
             </div>
-          </div>
 
-          {/* Floating Pill Badge: Bottom Right */}
-          <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-6 lg:bottom-5 lg:right-8 inline-flex items-center gap-2 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#cbd5c8] shadow-xs select-none">
-            <Leaf className="w-3.5 h-3.5 text-[#2f513f]" />
-            <span className="text-[10px] sm:text-[11px] text-[#556758] font-normal tracking-wide">
-              Personalised care, rooted in listening.
-            </span>
+            {/* Interactive Clickable Area: OPEN IN MAPS Button */}
+            <a
+              href="https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Shingare Skin Clinic in Google Maps"
+              className="absolute bottom-[3%] left-[12%] w-[54%] h-[12.5%] rounded-full cursor-pointer hover:bg-black/5 active:scale-[0.98] transition-all"
+            />
+
+            {/* Interactive Clickable Area: Bottom-Right Directional Dial */}
+            <a
+              href="https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Get Directions to Clinic"
+              className="absolute bottom-[2%] right-[3%] w-[19%] h-[19%] rounded-full cursor-pointer hover:bg-black/5 active:scale-95 transition-all"
+            />
+
+            {/* Interactive Clickable Area: Top-Right Zoom In */}
+            <button
+              type="button"
+              aria-label="Zoom In"
+              onClick={() => window.open("https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur", "_blank")}
+              className="absolute top-[23%] right-[5%] w-[8.5%] h-[8.5%] rounded-full cursor-pointer hover:bg-black/5 active:scale-90 transition-all"
+            />
+
+            {/* Interactive Clickable Area: Top-Right Zoom Out */}
+            <button
+              type="button"
+              aria-label="Zoom Out"
+              onClick={() => window.open("https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur", "_blank")}
+              className="absolute top-[32%] right-[5%] w-[8.5%] h-[8.5%] rounded-full cursor-pointer hover:bg-black/5 active:scale-90 transition-all"
+            />
+
+            {/* Interactive Clickable Area: Top-Right Target/Locate */}
+            <button
+              type="button"
+              aria-label="Locate Clinic"
+              onClick={() => window.open("https://maps.google.com/?q=Shingare+Skin+Clinic+Peth+Vadgaon+Kolhapur", "_blank")}
+              className="absolute top-[41%] right-[5%] w-[8.5%] h-[8.5%] rounded-full cursor-pointer hover:bg-black/5 active:scale-90 transition-all"
+            />
           </div>
         </div>
       </div>

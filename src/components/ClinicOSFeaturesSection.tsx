@@ -2,214 +2,142 @@
 
 import React from "react";
 import Link from "next/link";
-import {
-  FileText,
-  Clock,
-  ShieldCheck,
-  Activity,
-  ArrowRight,
-  Volume2,
-  CircleCheck,
-} from "lucide-react";
+import { ArrowRight, Volume2, Clock, ShieldCheck, Activity } from "lucide-react";
+
+interface Feature {
+  step: string;
+  badge: string;
+  title: string;
+  description: string;
+  linkText: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const features: Feature[] = [
+  {
+    step: "01",
+    badge: "Marathi & English",
+    title: "Digital Prescription Audio Note",
+    description:
+      "Scan the QR code on your clinic paper to hear Dr. Pramod Shingare's voice instructions for medicines, dosages, and application tips anytime at home.",
+    linkText: "Open Voice Player",
+    href: "/my-rx",
+    icon: Volume2,
+  },
+  {
+    step: "02",
+    badge: "Live Token Sync",
+    title: "Real-Time OPD Queue Radar",
+    description:
+      "Track active consultation tokens and estimated wait times live from your phone. Arrive right when your turn is near without sitting in crowded waiting rooms.",
+    linkText: "Check Live Queue",
+    href: "/live-queue",
+    icon: Clock,
+  },
+  {
+    step: "03",
+    badge: "Tamper-Proof QR",
+    title: "Medical Certificate Verifier",
+    description:
+      "Instant cryptographic verification for medical fitness and clinical leave certificates issued by Dr. Pramod Shingare by scanning the official QR stamp.",
+    linkText: "Verify Certificate",
+    href: "/verify",
+    icon: ShieldCheck,
+  },
+  {
+    step: "04",
+    badge: "Saves 10 Minutes",
+    title: "Pre-Consultation Skin Quiz",
+    description:
+      "Answer 4 brief clinical questions about your skin type and concerns before arrival. Your details pre-load into the doctor's desk for a faster consultation.",
+    linkText: "Start Skin Quiz",
+    href: "/skin-quiz",
+    icon: Activity,
+  },
+];
 
 export default function ClinicOSFeaturesSection() {
   return (
-    <section className="py-20 md:py-28 bg-white relative font-source border-t border-gray-100">
+    <section className="py-16 md:py-24 bg-white relative font-source border-t border-[#292d27]/8 [&_*]:!transform-none [&_*]:!transition-none [&_*]:hover:!transform-none">
       <div className="max-w-[1140px] mx-auto px-5 sm:px-6 md:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 md:mb-16">
-          <div className="inline-flex items-center gap-2 bg-[#FAF0DD] text-[#108283] text-xs font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider border border-[#E8DCBE]/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#108283]" />
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 bg-[#7e423e]/8 text-[#7e423e] text-[10px] sm:text-[11px] font-mono font-semibold px-3.5 py-1.5 rounded-full mb-3 uppercase tracking-[0.2em] border border-[#7e423e]/15">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#7e423e]" />
             Powered by ClinicOS
           </div>
-          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-gray-950 font-normal leading-tight mb-4">
+          <h2 className="font-['Playfair_Display',Georgia,serif] text-3xl sm:text-4xl md:text-5xl text-[#1b261e] font-bold leading-tight mb-3">
             Smart Digital Health For{" "}
-            <span className="text-[#108283] font-semibold italic">
+            <span className="italic font-medium text-[#873f3b]">
               Every Patient
             </span>
           </h2>
-          <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed">
-            Our clinic integrates clinical-grade software to minimize waiting
-            time, provide audio dosage guidance in Marathi, and ensure 100%
-            verified medical records — built for the patients of Peth Vadgaon
-            and Kolhapur.
+          <p className="text-[#616558] text-xs sm:text-sm md:text-base leading-relaxed max-w-4xl mx-auto">
+            <span className="block">
+              Our clinic integrates clinical-grade software to minimize waiting time, provide audio dosage guidance
+            </span>
+            <span className="block">
+              in Marathi, and ensure 100% verified medical records — built for the patients of Peth Vadgaon and Kolhapur.
+            </span>
           </p>
         </div>
 
-        {/* 4 Feature Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-          {/* ── Card 1: Prescription Audio Player ── */}
-          <div className="group bg-[#F6F5F3] border border-stone-200/80 rounded-2xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.03)] hover:border-stone-300/80 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-11 h-11 rounded-xl bg-[#108283]/8 text-[#108283] flex items-center justify-center group-hover:bg-[#108283] group-hover:text-white transition-colors duration-200 border border-[#108283]/10">
-                  <Volume2 className="w-5 h-5" />
+        {/* 4 Compact, Professional Cards Grid (No emoji animation, sleek height) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          {features.map((feat) => {
+            const Icon = feat.icon;
+            return (
+              <div
+                key={feat.title}
+                className="bg-[#FAF8F5] border border-[#292d27]/10 rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(41,45,39,0.03)] flex flex-col justify-between"
+              >
+                <div>
+                  {/* Top Meta Strip */}
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#292d27]/8">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs font-bold text-[#873f3b]">
+                        {feat.step}
+                      </span>
+                      <span className="h-3 w-px bg-[#292d27]/20" />
+                      <span className="font-mono text-[10px] uppercase font-semibold text-[#616558] tracking-wider">
+                        {feat.badge}
+                      </span>
+                    </div>
+
+                    <div className="w-7 h-7 rounded-lg bg-white border border-[#292d27]/10 flex items-center justify-center text-[#873f3b]">
+                      <Icon className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-['Playfair_Display',Georgia,serif] text-lg sm:text-xl font-bold text-[#1a241d] mb-2 leading-snug">
+                    {feat.title}
+                  </h3>
+
+                  {/* Concise Description */}
+                  <p className="text-xs sm:text-[13px] text-[#555d4d] leading-relaxed mb-5">
+                    {feat.description}
+                  </p>
                 </div>
-                <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-[#FAF0DD] text-[#6B5C2E] border border-[#E8DCBE]/60 tracking-wide">
-                  QR Audio Sync
-                </span>
-              </div>
 
-              <h3 className="font-playfair text-xl sm:text-[22px] font-bold text-gray-950 mb-2 leading-snug">
-                Digital Prescription Audio Note
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-5">
-                Scan the QR code printed on your clinic case paper to instantly
-                play Dr. Pramod Shingare's audio instructions. Listen to
-                dosages, application guidelines, and diet tips in Marathi and
-                English — anytime at home.
-              </p>
+                {/* Bottom Action Link */}
+                <div className="pt-3 border-t border-[#292d27]/8 flex items-center justify-between">
+                  <Link
+                    href={feat.href}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1a241d] uppercase tracking-wider active:scale-95 transition-transform"
+                  >
+                    <span>{feat.linkText}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#873f3b]" />
+                  </Link>
 
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Plays directly in browser — zero app installation required</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Marathi voice recordings for elderly and rural patients</span>
-                </div>
-              </div>
-            </div>
-
-            <Link
-              href="/my-rx"
-              className="inline-flex items-center justify-center gap-2 bg-[#108283] hover:bg-[#0c6b6c] text-white rounded-full px-6 py-3 text-xs font-semibold transition-all active:scale-95 w-full sm:w-auto"
-            >
-              <FileText className="w-4 h-4" />
-              <span>Open My Rx Voice Player</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* ── Card 2: Live Queue ── */}
-          <div className="group bg-[#F6F5F3] border border-stone-200/80 rounded-2xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.03)] hover:border-stone-300/80 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-11 h-11 rounded-xl bg-stone-100 text-stone-500 flex items-center justify-center group-hover:bg-stone-800 group-hover:text-stone-50 transition-colors duration-200 border border-stone-200/60">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-stone-100 text-stone-600 border border-stone-200/60 tracking-wide">
-                  Live Sync
-                </span>
-              </div>
-
-              <h3 className="font-playfair text-xl sm:text-[22px] font-bold text-gray-950 mb-2 leading-snug">
-                Real-Time OPD Queue Radar
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-5">
-                Never sit aimlessly in crowded waiting rooms. Track the doctor
-                cabin state, current active token, and your exact wait time in
-                real-time from your phone before arriving at the clinic.
-              </p>
-
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Live cabin indicator: In Consultation / Ready</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Auto-refreshes every 15 seconds</span>
+                  <span className="text-[10px] font-mono text-[#8a8d83]">
+                    Instant Access
+                  </span>
                 </div>
               </div>
-            </div>
-
-            <Link
-              href="/live-queue"
-              className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 border border-stone-200 hover:border-stone-400 rounded-full px-6 py-3 text-xs font-semibold transition-all active:scale-95 w-full sm:w-auto"
-            >
-              <Clock className="w-4 h-4 text-[#108283]" />
-              <span>Launch Live Queue Radar</span>
-              <ArrowRight className="w-4 h-4 text-stone-400" />
-            </Link>
-          </div>
-
-          {/* ── Card 3: Certificate Verifier ── */}
-          <div className="group bg-[#F6F5F3] border border-stone-200/80 rounded-2xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.03)] hover:border-stone-300/80 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-11 h-11 rounded-xl bg-[#108283]/8 text-[#108283] flex items-center justify-center group-hover:bg-[#108283] group-hover:text-white transition-colors duration-200 border border-[#108283]/10">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-[#FAF0DD] text-[#6B5C2E] border border-[#E8DCBE]/60 tracking-wide">
-                  Tamper Proof
-                </span>
-              </div>
-
-              <h3 className="font-playfair text-xl sm:text-[22px] font-bold text-gray-950 mb-2 leading-snug">
-                Medical Certificate Verifier
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-5">
-                Institutions, employers, and colleges can instantly verify
-                medical fitness and sick leave certificates issued by Dr. Pramod
-                Shingare by scanning the cryptographic QR code.
-              </p>
-
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Instant SHA-256 digital signature validation</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Displays authentic issuance date &amp; diagnosis</span>
-                </div>
-              </div>
-            </div>
-
-            <Link
-              href="/verify"
-              className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 border border-stone-200 hover:border-stone-400 rounded-full px-6 py-3 text-xs font-semibold transition-all active:scale-95 w-full sm:w-auto"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#108283]" />
-              <span>Verify a Certificate</span>
-              <ArrowRight className="w-4 h-4 text-stone-400" />
-            </Link>
-          </div>
-
-          {/* ── Card 4: Pre-Consult Skin Quiz ── */}
-          <div className="group bg-[#F6F5F3] border border-stone-200/80 rounded-2xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.03)] hover:border-stone-300/80 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-11 h-11 rounded-xl bg-stone-100 text-stone-500 flex items-center justify-center group-hover:bg-stone-800 group-hover:text-stone-50 transition-colors duration-200 border border-stone-200/60">
-                  <Activity className="w-5 h-5" />
-                </div>
-                <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-stone-100 text-stone-600 border border-stone-200/60 tracking-wide">
-                  Pre-Consult
-                </span>
-              </div>
-
-              <h3 className="font-playfair text-xl sm:text-[22px] font-bold text-gray-950 mb-2 leading-snug">
-                Pre-Consultation Skin Quiz
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-5">
-                Answer 4 quick structured clinical questions about your skin
-                type, primary concern, and duration. Your answers pre-populate
-                your electronic case paper for a faster, deeper consultation.
-              </p>
-
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Pre-tags symptoms directly into doctor EMR</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <CircleCheck className="w-3.5 h-3.5 text-[#108283] shrink-0" />
-                  <span>Saves consultation time &amp; improves diagnostic focus</span>
-                </div>
-              </div>
-            </div>
-
-            <Link
-              href="/skin-quiz"
-              className="inline-flex items-center justify-center gap-2 bg-gray-950 hover:bg-gray-800 text-white rounded-full px-6 py-3 text-xs font-semibold transition-all active:scale-95 w-full sm:w-auto"
-            >
-              <Activity className="w-4 h-4 text-stone-300" />
-              <span>Start Free Skin Quiz</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
