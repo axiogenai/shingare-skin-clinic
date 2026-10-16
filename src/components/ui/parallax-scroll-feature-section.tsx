@@ -4,9 +4,17 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown } from "lucide-react"
 
+interface SectionItem {
+    id: number;
+    title: string;
+    description: string;
+    imageUrl: string;
+    reverse: boolean;
+}
+
 export const Component = () => {
     // Array of section data
-    const sections = [
+    const sections: SectionItem[] = [
         {
             id: 1,
             title: "Feature 1",
@@ -48,7 +56,7 @@ export const Component = () => {
     );
 };
 
-function ParallaxSectionItem({ section }: { section: any }) {
+function ParallaxSectionItem({ section }: { section: SectionItem }) {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,

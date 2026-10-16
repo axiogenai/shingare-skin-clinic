@@ -107,7 +107,7 @@ export default function Testimonials2() {
       rotate: 0,
       transition: {
         duration: 0.35,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     },
     exit: (dir: number) => ({
@@ -117,7 +117,7 @@ export default function Testimonials2() {
       rotate: dir > 0 ? -1.5 : 1.5,
       transition: {
         duration: 0.28,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     }),
   };
