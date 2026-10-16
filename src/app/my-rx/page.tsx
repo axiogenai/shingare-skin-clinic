@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { getPrescription, type PrescriptionResult } from "@/lib/clinicApi";
 import QRCode from "qrcode";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 export const dynamic = "force-dynamic";
 
@@ -54,6 +55,9 @@ function MyRxContent() {
 
   // Routine Modal
   const [showRoutineModal, setShowRoutineModal] = useState(false);
+
+  // Lock background scroll when either modal is active
+  useScrollLock(showSearchModal || showRoutineModal);
 
   const fetchRx = useCallback(async (q: string) => {
     if (!q.trim()) return;
@@ -644,7 +648,12 @@ function MyRxContent() {
 
         {/* Search Modal for Looking up Another Rx */}
         {showSearchModal && (
-          <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setShowSearchModal(false);
+            }}
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overscroll-contain"
+          >
             <div className="bg-white rounded-2xl max-w-md w-full p-5 space-y-4 shadow-xl border border-gray-200 animate-in fade-in">
               <div className="flex items-center justify-between pb-2 border-b border-gray-100">
                 <h3 className="font-bold text-base text-gray-900 flex items-center gap-2">
@@ -697,7 +706,12 @@ function MyRxContent() {
 
         {/* Routine Schedule Modal */}
         {showRoutineModal && (
-          <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setShowRoutineModal(false);
+            }}
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overscroll-contain"
+          >
             <div className="bg-white rounded-2xl max-w-lg w-full p-5 space-y-4 shadow-xl border border-gray-200 animate-in fade-in max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between pb-2 border-b border-gray-100">
                 <div>

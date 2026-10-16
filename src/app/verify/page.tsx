@@ -19,6 +19,7 @@ import {
   FileCheck2,
   Fingerprint,
 } from "lucide-react";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 export const dynamic = "force-dynamic";
 
@@ -58,6 +59,9 @@ function CertificateVerifyContent() {
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [showCameraModal, setShowCameraModal] = useState(false);
+
+  // Lock background scroll when either modal is active
+  useScrollLock(showCameraModal || showWhereModal);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const scanIntervalRef = useRef<NodeJS.Timeout | null>(null);

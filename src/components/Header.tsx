@@ -10,8 +10,8 @@ import {
   CalendarCheck,
   Activity,
   FileText,
-  Phone,
 } from "lucide-react";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 export default function Header() {
   const pathname = usePathname();
@@ -19,6 +19,9 @@ export default function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isTreatmentsOpen, setIsTreatmentsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Lock body scroll when mobile navigation drawer is open
+  useScrollLock(isMobileOpen);
 
   useEffect(() => {
     const onScroll = () => {

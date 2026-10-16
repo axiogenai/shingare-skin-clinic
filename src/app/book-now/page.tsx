@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { HeroBanner } from "@/components/SharedSections";
 import { bookAppointment, type BookingResult } from "@/lib/clinicApi";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 interface TreatmentOption {
   title: string;
@@ -99,6 +100,21 @@ function BookNowContent() {
   const [loading, setLoading] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState<BookingResult | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Lock background scrolling when the booking modal is open
+  useScrollLock(isModalOpen);
+
+  // Close modal on Escape key
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isModalOpen]);
 
   useEffect(() => {
     if (initialConcern) {
@@ -332,7 +348,12 @@ function BookNowContent() {
       {/* ================= MODAL APPOINTMENT BOOKING ================= */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto">
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setIsModalOpen(false);
+            }}
+            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto overscroll-contain"
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
