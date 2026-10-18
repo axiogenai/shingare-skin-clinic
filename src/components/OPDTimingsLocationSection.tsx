@@ -80,7 +80,11 @@ export default function OPDTimingsLocationSection() {
 
               {/* Row 3: Clinic Location */}
               <div className="flex items-center gap-3.5 py-3.5">
-                <div className="w-8 h-8 rounded-full bg-[#dde5db] border border-[#cbd6c8] flex items-center justify-center text-[#2f513f] shrink-0">
+                <div className="relative w-8 h-8 rounded-full bg-[#dde5db] border border-[#cbd6c8] flex items-center justify-center text-[#2f513f] shrink-0">
+                  <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8C231F] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8C231F]" />
+                  </span>
                   <MapPin className="w-3.5 h-3.5 stroke-[1.75]" />
                 </div>
                 <div>
@@ -128,10 +132,14 @@ export default function OPDTimingsLocationSection() {
               className="w-full h-full object-contain pointer-events-none drop-shadow-[0_20px_45px_rgba(28,48,34,0.14)]"
             />
 
-            {/* Live Interactive Pulse Wave over Clinic Pin */}
-            <div className="absolute top-[35.2%] left-[54%] -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center">
-              <span className="w-12 h-12 rounded-full border border-[#8b2626]/30 animate-ping [animation-duration:3s]" />
-              <span className="absolute w-20 h-20 rounded-full border border-[#8b2626]/18 animate-ping [animation-duration:3s] [animation-delay:1.5s]" />
+            {/* Live Interactive Pulse Wave over Clinic Pin (Works reliably on mobile & PC) */}
+            <div className="absolute top-[34.8%] left-[53.2%] -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center">
+              {/* Concentric Expanding Radar Wave 1 */}
+              <span className="absolute w-12 h-12 rounded-full border-2 border-[#8C231F] bg-[#8C231F]/20 map-radar-wave-1" />
+              {/* Concentric Expanding Radar Wave 2 */}
+              <span className="absolute w-12 h-12 rounded-full border-2 border-[#8C231F] bg-[#8C231F]/15 map-radar-wave-2" />
+              {/* Luminous Core Beacon Point */}
+              <span className="relative w-3.5 h-3.5 rounded-full bg-[#8C231F] border-2 border-white map-beacon-core shadow-[0_0_10px_rgba(140,35,31,0.9)]" />
             </div>
 
             {/* Interactive Clickable Area: OPEN IN MAPS Button */}

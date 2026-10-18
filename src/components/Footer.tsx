@@ -81,9 +81,9 @@ export default function Footer() {
       </div>
 
       {/* ── Ornamental Top Divider ── */}
-      <div className="w-full flex items-center px-6 sm:px-10 lg:px-16 pt-8 sm:pt-10 relative z-20">
+      <div className="w-full flex items-center px-4 sm:px-10 lg:px-16 pt-5 sm:pt-10 relative z-20">
         <div className="flex-1 h-px bg-[#D6CEBC]" />
-        <div className="mx-4 flex items-center gap-2 text-[#7A6E5A]">
+        <div className="mx-3 sm:mx-4 flex items-center gap-1.5 sm:gap-2 text-[#7A6E5A]">
           <svg width="6" height="6" viewBox="0 0 8 8" fill="currentColor">
             <circle cx="4" cy="4" r="2" />
           </svg>
@@ -97,12 +97,12 @@ export default function Footer() {
         <div className="flex-1 h-px bg-[#D6CEBC]" />
       </div>
 
-      {/* Main 4-Column Grid: Horizontally Aligned Baselines */}
-      <div className="relative max-w-[1320px] mx-auto px-6 sm:px-10 lg:px-16 pt-10 sm:pt-12 pb-16 sm:pb-20 z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      {/* Main Grid: Horizontally Aligned Baselines on Desktop, Compact 2-Col on Mobile */}
+      <div className="relative max-w-[1320px] mx-auto px-5 sm:px-10 lg:px-16 pt-6 sm:pt-12 pb-8 sm:pb-20 z-10">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-x-5 sm:gap-x-10 lg:gap-8 gap-y-6 sm:gap-y-10 items-start">
 
           {/* Column 1: Brand & Identity (Span 4) */}
-          <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-6">
+          <div className="col-span-2 lg:col-span-4 flex flex-col items-start pr-0 lg:pr-6">
             {/* Pure Typography Devanagari Brand Mark with Logo */}
             <Link href="/" className="inline-block group mb-4">
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap sm:flex-nowrap">
@@ -150,51 +150,51 @@ export default function Footer() {
             </Link>
 
             {/* Editorial Tagline */}
-            <h3 className="font-['Cormorant_Garamond',serif] text-2xl sm:text-[26px] text-[#183324] font-normal leading-tight mb-2">
+            <h3 className="font-['Cormorant_Garamond',serif] text-xl sm:text-[26px] text-[#183324] font-normal leading-tight mb-1.5 sm:mb-2">
               Healthy skin. Confident you.
             </h3>
-            <div className="w-10 h-[1.5px] bg-[#183324]/30 mb-3" />
+            <div className="w-10 h-[1.5px] bg-[#183324]/30 mb-2 sm:mb-3" />
 
             {/* Description */}
-            <p className="text-xs sm:text-[13px] leading-relaxed text-[#556958] max-w-[310px] mb-6 font-sans">
+            <p className="text-[11.5px] sm:text-[13px] leading-snug sm:leading-relaxed text-[#556958] max-w-[310px] mb-4 sm:mb-6 font-sans">
               Expert dermatology, personalised care and advanced aesthetic treatments for your natural beauty and healthy skin.
             </p>
 
             {/* Call Us Today Action Pill */}
             <a
               href="tel:+917249727104"
-              className="inline-flex items-center gap-3.5 p-1.5 pr-6 rounded-full bg-[#FAF5EB] hover:bg-[#F2ECE0] border border-[#DDD5C5] shadow-xs hover:shadow-sm transition-all duration-150 active:scale-[0.98] group"
+              className="inline-flex items-center gap-3 sm:gap-3.5 p-1 sm:p-1.5 pr-5 sm:pr-6 rounded-full bg-[#FAF5EB] hover:bg-[#F2ECE0] border border-[#DDD5C5] shadow-xs hover:shadow-sm transition-all duration-150 active:scale-[0.98] group"
             >
-              <div className="w-11 h-11 rounded-full bg-[#183324] text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
-                <Phone className="w-4 h-4 fill-white text-white" />
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#183324] text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#6B7D6E] font-semibold leading-tight">
+                <span className="text-[8.5px] sm:text-[9px] font-mono uppercase tracking-[0.2em] text-[#6B7D6E] font-semibold leading-tight">
                   CALL US TODAY
                 </span>
-                <span className="text-sm font-bold text-[#183324] font-sans tracking-tight leading-tight mt-0.5">
+                <span className="text-xs sm:text-sm font-bold text-[#183324] font-sans tracking-tight leading-tight mt-0.5">
                   +91 72497 27104
                 </span>
               </div>
             </a>
           </div>
 
-          {/* Column 2: Quick Links (Span 2) */}
-          <div className="lg:col-span-2 sm:col-span-1 pt-1">
-            <h4 className="font-['Cormorant_Garamond',serif] text-xl font-medium text-[#183324] tracking-tight">
+          {/* Column 2: Quick Links (Span 2 desktop, Span 1 mobile) */}
+          <div className="col-span-1 lg:col-span-2 pt-0 sm:pt-1">
+            <h4 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl font-medium text-[#183324] tracking-tight">
               Quick Links
             </h4>
-            <div className="w-8 h-[1.5px] bg-[#244231]/35 mt-1.5 mb-5" />
+            <div className="w-8 h-[1.5px] bg-[#244231]/35 mt-1 sm:mt-1.5 mb-2.5 sm:mb-5" />
 
-            <ul className="space-y-3">
+            <ul className="space-y-1.5 sm:space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="flex items-center justify-between text-xs sm:text-[13px] text-[#4D6050] hover:text-[#183324] transition-colors group"
+                    className="flex items-center justify-between text-[11.5px] sm:text-[13px] text-[#4D6050] hover:text-[#183324] transition-colors group py-0.5"
                   >
                     <span className="group-hover:translate-x-0.5 transition-transform">{link.label}</span>
-                    <span className="text-[#889C8C] group-hover:text-[#183324] group-hover:translate-x-1 transition-all text-sm leading-none">
+                    <span className="text-[#889C8C] group-hover:text-[#183324] group-hover:translate-x-1 transition-all text-xs sm:text-sm leading-none">
                       →
                     </span>
                   </Link>
@@ -203,22 +203,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Our Services (Span 2) */}
-          <div className="lg:col-span-2 sm:col-span-1 pt-1">
-            <h4 className="font-['Cormorant_Garamond',serif] text-xl font-medium text-[#183324] tracking-tight">
+          {/* Column 3: Our Services (Span 2 desktop, Span 1 mobile) */}
+          <div className="col-span-1 lg:col-span-2 pt-0 sm:pt-1">
+            <h4 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl font-medium text-[#183324] tracking-tight">
               Our Services
             </h4>
-            <div className="w-8 h-[1.5px] bg-[#244231]/35 mt-1.5 mb-5" />
+            <div className="w-8 h-[1.5px] bg-[#244231]/35 mt-1 sm:mt-1.5 mb-2.5 sm:mb-5" />
 
-            <ul className="space-y-3">
+            <ul className="space-y-1.5 sm:space-y-3">
               {services.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="flex items-center justify-between text-xs sm:text-[13px] text-[#4D6050] hover:text-[#183324] transition-colors group"
+                    className="flex items-center justify-between text-[11.5px] sm:text-[13px] text-[#4D6050] hover:text-[#183324] transition-colors group py-0.5"
                   >
                     <span className="group-hover:translate-x-0.5 transition-transform">{link.label}</span>
-                    <span className="text-[#889C8C] group-hover:text-[#183324] group-hover:translate-x-1 transition-all text-sm leading-none">
+                    <span className="text-[#889C8C] group-hover:text-[#183324] group-hover:translate-x-1 transition-all text-xs sm:text-sm leading-none">
                       →
                     </span>
                   </Link>
@@ -228,46 +228,46 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Stay Connected (Span 4) */}
-          <div className="lg:col-span-4 flex flex-col items-start pt-1 pr-0 lg:pr-8">
-            <h4 className="font-['Cormorant_Garamond',serif] text-xl font-medium text-[#183324] tracking-tight">
+          <div className="col-span-2 lg:col-span-4 flex flex-col items-start pt-1 sm:pt-1 pr-0 lg:pr-8">
+            <h4 className="font-['Cormorant_Garamond',serif] text-lg sm:text-xl font-medium text-[#183324] tracking-tight">
               Stay Connected
             </h4>
-            <div className="w-8 h-[1.5px] bg-[#244231]/35 mt-1.5 mb-5" />
+            <div className="w-8 h-[1.5px] bg-[#244231]/35 mt-1 sm:mt-1.5 mb-2.5 sm:mb-5" />
 
-            <p className="text-xs sm:text-[13px] text-[#556958] leading-relaxed mb-5 max-w-[300px]">
+            <p className="text-[11.5px] sm:text-[13px] text-[#556958] leading-snug sm:leading-relaxed mb-3 sm:mb-5 max-w-[300px]">
               Get expert skincare tips, updates and offers straight to your inbox.
             </p>
 
             {/* Newsletter Subscription Input */}
-            <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center w-full max-w-[320px] mb-5">
+            <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center w-full max-w-full sm:max-w-[320px] mb-3.5 sm:mb-5">
               <div className="absolute left-3.5 text-[#768678] pointer-events-none">
                 <Mail className="w-4 h-4" />
               </div>
               <input
                 type="email"
                 placeholder="Your email address"
-                className="w-full pl-10 pr-12 py-3 rounded-full bg-[#FAF5EB] border border-[#DDD5C5] text-xs text-[#183324] placeholder:text-[#768678] focus:outline-none focus:ring-1 focus:ring-[#183324] shadow-2xs"
+                className="w-full pl-10 pr-11 sm:pr-12 py-2.5 sm:py-3 rounded-full bg-[#FAF5EB] border border-[#DDD5C5] text-xs text-[#183324] placeholder:text-[#768678] focus:outline-none focus:ring-1 focus:ring-[#183324] shadow-2xs"
               />
               <button
                 type="submit"
                 aria-label="Subscribe"
-                className="absolute right-1.5 w-8 h-8 rounded-full bg-[#183324] hover:bg-[#112419] text-white flex items-center justify-center transition-transform active:scale-95 shadow-xs"
+                className="absolute right-1.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#183324] hover:bg-[#112419] text-white flex items-center justify-center transition-transform active:scale-95 shadow-xs"
               >
-                <span className="text-sm leading-none font-bold">→</span>
+                <span className="text-xs sm:text-sm leading-none font-bold">→</span>
               </button>
             </form>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2 sm:gap-2.5">
               {/* Instagram */}
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full bg-[#EAE3D4] hover:bg-[#DFD7C6] text-[#183324] flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-2xs"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#EAE3D4] hover:bg-[#DFD7C6] text-[#183324] flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-2xs"
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -280,9 +280,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat on WhatsApp"
-                className="w-9 h-9 rounded-full bg-[#EAE3D4] hover:bg-[#DFD7C6] text-[#183324] flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-2xs"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#EAE3D4] hover:bg-[#DFD7C6] text-[#183324] flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-2xs"
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
               </a>
@@ -293,9 +293,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Clinic Location on Maps"
-                className="w-9 h-9 rounded-full bg-[#EAE3D4] hover:bg-[#DFD7C6] text-[#183324] flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-2xs"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#EAE3D4] hover:bg-[#DFD7C6] text-[#183324] flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-2xs"
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
@@ -315,9 +315,9 @@ export default function Footer() {
           </svg>
         </div>
 
-        <div className="max-w-[1320px] mx-auto px-6 sm:px-10 lg:px-16 py-4 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-sans">
+        <div className="max-w-[1320px] mx-auto px-5 sm:px-10 lg:px-16 py-3.5 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-2.5 sm:gap-4 text-xs font-sans">
           {/* Left: Corrected Official Clinic Copyright */}
-          <div className="text-white/70 text-[11px] sm:text-xs text-center md:text-left">
+          <div className="text-white/70 text-[10.5px] sm:text-xs text-center md:text-left">
             © 2026 Shingare Skin &amp; Cosmetics Clinic. All rights reserved.
           </div>
 
@@ -331,7 +331,7 @@ export default function Footer() {
           </div>
 
           {/* Right: Legal Links */}
-          <div className="flex items-center gap-3 text-white/70 text-[11px] sm:text-xs">
+          <div className="flex items-center gap-3 text-white/70 text-[10.5px] sm:text-xs">
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>

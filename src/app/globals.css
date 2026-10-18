@@ -170,6 +170,85 @@ body {
   animation: pulse-subtle 3s ease-in-out infinite;
 }
 
+/* Clinic Map Pin Radar Pulse & Beacon Animations */
+@keyframes map-radar-pulse {
+  0% {
+    transform: scale(0.35);
+    -webkit-transform: scale(0.35);
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.3);
+    -webkit-transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes map-radar-pulse {
+  0% {
+    -webkit-transform: scale(0.35);
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.55;
+  }
+  100% {
+    -webkit-transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+@keyframes map-beacon-breathe {
+  0%, 100% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(140, 35, 31, 0.7);
+  }
+  50% {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    box-shadow: 0 0 8px 3px rgba(140, 35, 31, 0.85);
+  }
+}
+
+@-webkit-keyframes map-beacon-breathe {
+  0%, 100% {
+    -webkit-transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(140, 35, 31, 0.7);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+    box-shadow: 0 0 8px 3px rgba(140, 35, 31, 0.85);
+  }
+}
+
+.map-radar-wave-1 {
+  animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) infinite !important;
+  -webkit-animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) infinite !important;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+}
+
+.map-radar-wave-2 {
+  animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) 1.2s infinite !important;
+  -webkit-animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) 1.2s infinite !important;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+}
+
+.map-beacon-core {
+  animation: map-beacon-breathe 2s ease-in-out infinite !important;
+  -webkit-animation: map-beacon-breathe 2s ease-in-out infinite !important;
+  will-change: transform, box-shadow;
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+}
+
 /* Button base styles - Primederm Pill Design */
 .btn-primary {
   background-color: #108283;
