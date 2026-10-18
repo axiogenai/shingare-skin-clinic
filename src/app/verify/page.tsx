@@ -296,8 +296,8 @@ function CertificateVerifyContent() {
 
       {/* 2. Main Hybrid Glass + Neumorphic Verification Console */}
       <section className="max-w-[980px] mx-auto px-4 sm:px-8 space-y-7 relative z-10">
-        <div className="rounded-[32px] bg-white/60 backdrop-blur-2xl border border-white/85 shadow-[0_12px_34px_rgba(15,35,38,0.07),inset_0_1px_1px_rgba(255,255,255,0.95)] overflow-hidden">
-          <div className="p-6 sm:p-8 space-y-7">
+        <div className="rounded-2xl sm:rounded-[32px] bg-white/60 backdrop-blur-2xl border border-white/85 shadow-[0_12px_34px_rgba(15,35,38,0.07),inset_0_1px_1px_rgba(255,255,255,0.95)] overflow-hidden">
+          <div className="p-4 sm:p-8 space-y-5 sm:space-y-7">
             {/* Neumorphic Segmented Tab Trough inside Glass Card */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
@@ -309,21 +309,21 @@ function CertificateVerifyContent() {
                 </p>
               </div>
 
-              <div className="inline-flex p-1 rounded-xl bg-[#E6ECEF] shadow-[inset_2px_2px_5px_#c8ced1,inset_-2px_-2px_5px_#f8fafb] border border-white/50 shrink-0 self-start sm:self-auto">
+              <div className="inline-flex flex-wrap sm:flex-nowrap p-1 rounded-xl bg-[#E6ECEF] shadow-[inset_2px_2px_5px_#c8ced1,inset_-2px_-2px_5px_#f8fafb] border border-white/50 shrink-0 self-start sm:self-auto gap-1 sm:gap-0">
                 <button
                   type="button"
                   onClick={() => {
                     setTab("serial");
                     stopCamera();
                   }}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                     tab === "serial"
                       ? "bg-[#E6ECEF] text-[#0e787a] shadow-[2px_2px_5px_#c8ced1,-2px_-2px_5px_#f8fafb] border border-white/70"
                       : "text-slate-500 hover:text-slate-800"
                   }`}
                 >
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>By Serial Number</span>
+                  <span>By Serial</span>
                 </button>
 
                 <button
@@ -332,7 +332,7 @@ function CertificateVerifyContent() {
                     setTab("qr");
                     startCamera();
                   }}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                     tab === "qr"
                       ? "bg-[#E6ECEF] text-[#0e787a] shadow-[2px_2px_5px_#c8ced1,-2px_-2px_5px_#f8fafb] border border-white/70"
                       : "text-slate-500 hover:text-slate-800"

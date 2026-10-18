@@ -202,14 +202,14 @@ export default function AppointmentSection() {
           <div className="lg:col-span-7 flex flex-col">
             <div
               style={{ transform: "none", transition: "none" }}
-              className="bg-white border border-stone-200/80 rounded-3xl p-6 sm:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.03)] flex flex-col !transform-none !transition-none"
+              className="bg-white border border-stone-200/80 rounded-3xl p-4 sm:p-7 md:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.03)] flex flex-col !transform-none !transition-none"
             >
               {submittedToken ? (
                 <div className="space-y-4 my-auto">
                   {/* Perfect Authentic OPD Appointment Card */}
                   <div
                     style={{ transform: "none", transition: "none" }}
-                    className="bg-white border-2 border-[#873f3b]/30 rounded-2xl p-5 sm:p-7 shadow-[0_8px_30px_rgba(135,63,59,0.08)] relative overflow-hidden text-left !transform-none !transition-none"
+                    className="bg-white border-2 border-[#873f3b]/30 rounded-2xl p-3.5 sm:p-6 shadow-[0_8px_30px_rgba(135,63,59,0.08)] relative overflow-hidden text-left !transform-none !transition-none"
                   >
                     {/* Top Accent Strip */}
                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#873f3b]" />
@@ -237,7 +237,7 @@ export default function AppointmentSection() {
                     </div>
 
                     {/* Main Token Highlight */}
-                    <div className="my-4 p-4 rounded-xl bg-[#FAF4F2] border border-[#873f3b]/20 flex items-center justify-between">
+                    <div className="my-4 p-3 sm:p-4 rounded-xl bg-[#FAF4F2] border border-[#873f3b]/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
                       <div>
                         <span className="text-[10px] uppercase font-bold text-gray-500 tracking-wider block">
                           Your OPD Token Number
@@ -246,7 +246,7 @@ export default function AppointmentSection() {
                           {submittedToken}
                         </span>
                       </div>
-                      <div className="text-right">
+                      <div className="text-left sm:text-right">
                         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
                           <span className="w-2 h-2 rounded-full bg-emerald-500" />
                           <span>Active in Queue</span>
@@ -256,7 +256,7 @@ export default function AppointmentSection() {
                     </div>
 
                     {/* Structured Patient & Appointment Grid */}
-                    <div className="grid grid-cols-2 gap-2.5 text-left text-xs pb-4 border-b border-gray-100">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 text-left text-xs pb-4 border-b border-gray-100">
                       <div className="p-2.5 rounded-lg bg-gray-50/80">
                         <span className="text-[10px] text-gray-400 uppercase font-semibold block">Patient Name</span>
                         <span className="font-bold text-gray-900 line-clamp-1">{formData.fullName}</span>
@@ -287,9 +287,9 @@ export default function AppointmentSection() {
                     </div>
 
                     {/* Footer Verification Seal */}
-                    <div className="pt-3 flex items-center justify-between text-[11px] text-gray-500">
+                    <div className="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] sm:text-[11px] text-gray-500">
                       <div className="flex items-center gap-1.5">
-                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                         <span>Direct sync with ClinicOS Receptionist Dashboard</span>
                       </div>
                       <span className="font-mono text-[9px] text-gray-400">Peth Vadgaon, Kolhapur</span>
@@ -724,7 +724,7 @@ export default function AppointmentSection() {
           <div className="lg:col-span-5 flex flex-col gap-5">
             <div
               style={{ transform: "none", transition: "none" }}
-              className="bg-[#FAF0DD] border border-[#F0DAAA] rounded-3xl p-6 sm:p-7 !transform-none !transition-none"
+              className="bg-[#FAF0DD] border border-[#F0DAAA] rounded-3xl p-4 sm:p-7 !transform-none !transition-none"
             >
               <span className="text-[11px] uppercase tracking-wider font-bold text-[#873f3b] block mb-1">
                 Queue Efficiency

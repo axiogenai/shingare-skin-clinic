@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
 
 export default function Footer() {
@@ -46,7 +47,7 @@ export default function Footer() {
       </div>
 
       {/* Top Right Floating Seal: Glow Naturally */}
-      <div className="absolute top-8 right-6 sm:top-10 sm:right-12 lg:top-12 lg:right-20 pointer-events-none z-20">
+      <div className="hidden sm:block absolute top-8 right-6 sm:top-10 sm:right-12 lg:top-12 lg:right-20 pointer-events-none z-20">
         <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center">
           {/* Outer Organic Hairline Contour */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" fill="none">
@@ -102,9 +103,16 @@ export default function Footer() {
 
           {/* Column 1: Brand & Identity (Span 4) */}
           <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-6">
-            {/* Pure Typography Devanagari Brand Mark on the SAME line with vertical divider bar */}
+            {/* Pure Typography Devanagari Brand Mark with Logo */}
             <Link href="/" className="inline-block group mb-4">
-              <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="flex items-center gap-2 sm:gap-3 flex-wrap sm:flex-nowrap">
+                <Image
+                  src="/logo-hd.png"
+                  alt="Shingare Skin & Cosmetics Clinic"
+                  width={42}
+                  height={42}
+                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain shrink-0"
+                />
                 <span
                   style={{
                     fontFamily: "'Amita', serif",
@@ -113,12 +121,12 @@ export default function Footer() {
                     lineHeight: 1,
                     letterSpacing: "0.02em",
                   }}
-                  className="text-[28px] sm:text-[34px] whitespace-nowrap transition-opacity group-hover:opacity-90"
+                  className="text-[24px] xs:text-[28px] sm:text-[34px] whitespace-nowrap transition-opacity group-hover:opacity-90"
                 >
                   शिनगारे
                 </span>
                 {/* Bold Luxury Architectural Divider Bar */}
-                <div className="flex items-center justify-center px-1 sm:px-1.5 select-none" aria-hidden="true">
+                <div className="flex items-center justify-center px-0.5 sm:px-1.5 select-none" aria-hidden="true">
                   <svg width="12" height="28" viewBox="0 0 12 28" fill="none" className="shrink-0 drop-shadow-2xs">
                     {/* Upper solid tapered needle */}
                     <path d="M 6,2 L 7.2,10 L 4.8,10 Z" fill="#8C231F" />
@@ -132,9 +140,9 @@ export default function Footer() {
                 <span
                   style={{
                     fontFamily: "'Mukta', sans-serif",
-                    letterSpacing: "0.22em",
+                    letterSpacing: "0.18em",
                   }}
-                  className="text-[9.5px] sm:text-[10.5px] font-semibold text-[#6E645A] uppercase whitespace-nowrap tracking-[0.22em]"
+                  className="text-[8.5px] xs:text-[9.5px] sm:text-[10.5px] font-semibold text-[#6E645A] uppercase whitespace-nowrap tracking-[0.18em] sm:tracking-[0.22em]"
                 >
                   SKIN &amp; COSMETICS
                 </span>

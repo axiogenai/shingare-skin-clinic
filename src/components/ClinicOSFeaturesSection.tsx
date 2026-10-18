@@ -73,13 +73,8 @@ export default function ClinicOSFeaturesSection() {
               Every Patient
             </span>
           </h2>
-          <p className="text-[#616558] text-xs sm:text-sm md:text-base leading-relaxed max-w-4xl mx-auto">
-            <span className="block">
-              Our clinic integrates clinical-grade software to minimize waiting time, provide audio dosage guidance
-            </span>
-            <span className="block">
-              in Marathi, and ensure 100% verified medical records — built for the patients of Peth Vadgaon and Kolhapur.
-            </span>
+          <p className="text-[#616558] text-xs sm:text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
+            Our clinic integrates clinical-grade software to minimize waiting time, provide audio dosage guidance in Marathi, and ensure 100% verified medical records — built for the patients of Peth Vadgaon and Kolhapur.
           </p>
         </div>
 

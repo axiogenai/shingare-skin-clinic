@@ -170,7 +170,7 @@ export default function ClinicalCaseStudiesSection() {
         {/* Brand New Modern, Compact Case Card (Zero inner hover animation) */}
         <div
           id="clinical-cases-card"
-          className="max-w-[880px] mx-auto bg-white border border-[#292d27]/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(41,45,39,0.04)] !transform-none !transition-none hover:!transform-none [&_*]:!transform-none [&_*]:!transition-none [&_*]:hover:!transform-none"
+          className="max-w-[880px] mx-auto bg-white border border-[#292d27]/10 rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 shadow-[0_4px_24px_rgba(41,45,39,0.04)] !transform-none !transition-none hover:!transform-none [&_*]:!transform-none [&_*]:!transition-none [&_*]:hover:!transform-none"
         >
           {/* Card Top: Tag + Physician */}
           <div className="flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b border-[#292d27]/8">

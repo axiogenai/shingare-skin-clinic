@@ -548,14 +548,14 @@ function MyRxContent() {
 
           {/* Front Section ONLY: Simple Neumorphic Card (Inner elements kept clean & simple) */}
           {!loading && !p && !searched && (
-            <div className="rounded-3xl bg-[#E6ECEF] border border-white/80 max-w-2xl mx-auto p-7 sm:p-11 text-center animate-in fade-in duration-300">
+            <div className="rounded-2xl sm:rounded-3xl bg-[#E6ECEF] border border-white/80 max-w-2xl mx-auto p-4 sm:p-11 text-center animate-in fade-in duration-300">
               {/* Simple Editorial Eyebrow (No box) */}
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <span className="h-px w-8 bg-slate-300" />
-                <span className="text-[10.5px] font-semibold tracking-[0.24em] uppercase text-slate-500">
+              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3">
+                <span className="h-px w-6 sm:w-8 bg-slate-300 shrink-0" />
+                <span className="text-[9.5px] xs:text-[10.5px] font-semibold tracking-[0.16em] sm:tracking-[0.24em] uppercase text-slate-500 truncate">
                   Patient Consultation Archive
                 </span>
-                <span className="h-px w-8 bg-slate-300" />
+                <span className="h-px w-6 sm:w-8 bg-slate-300 shrink-0" />
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-950 tracking-tight leading-tight">

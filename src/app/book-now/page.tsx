@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -25,10 +25,28 @@ import {
   Lock,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
 } from "lucide-react";
 import { HeroBanner } from "@/components/SharedSections";
 import { bookAppointment, type BookingResult } from "@/lib/clinicApi";
 import { useScrollLock } from "@/lib/useScrollLock";
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+function formatDisplayDate(dateStr: string): string {
+  if (!dateStr) return "Select date";
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const dateObj = new Date(y, m - 1, d);
+  return dateObj.toLocaleDateString("en-US", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
 
 interface TreatmentOption {
   title: string;
@@ -96,6 +114,61 @@ function BookNowContent() {
   const [preferredDate, setPreferredDate] = useState(() => {
     return new Date().toISOString().split("T")[0];
   });
+
+  // Custom Gender Dropdown state
+  const [isGenderOpen, setIsGenderOpen] = useState(false);
+  const genderRef = useRef<HTMLDivElement>(null);
+
+  // Custom Calendar Picker state
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  const todayStr = useMemo(() => new Date().toISOString().split("T")[0], []);
+  const todayDate = useMemo(() => new Date(), []);
+  const todayYear = todayDate.getFullYear();
+  const todayMonth = todayDate.getMonth();
+
+  const [viewYear, setViewYear] = useState(todayYear);
+  const [viewMonth, setViewMonth] = useState(todayMonth);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (genderRef.current && !genderRef.current.contains(e.target as Node)) {
+        setIsGenderOpen(false);
+      }
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+        setCalendarOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const isPrevMonthDisabled =
+    viewYear < todayYear || (viewYear === todayYear && viewMonth <= todayMonth);
+
+  const handlePrevMonth = () => {
+    if (isPrevMonthDisabled) return;
+    if (viewMonth === 0) {
+      setViewYear((y) => y - 1);
+      setViewMonth(11);
+    } else {
+      setViewMonth((m) => m - 1);
+    }
+  };
+
+  const handleNextMonth = () => {
+    if (viewMonth === 11) {
+      setViewYear((y) => y + 1);
+      setViewMonth(0);
+    } else {
+      setViewMonth((m) => m + 1);
+    }
+  };
+
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+  const firstDayOfWeek = new Date(viewYear, viewMonth, 1).getDay();
 
   const [loading, setLoading] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState<BookingResult | null>(null);
@@ -336,11 +409,12 @@ function BookNowContent() {
             </div>
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-2 text-xs text-[#555a50]">
-            <Clock className="w-4 h-4 text-[#873f3b]" />
-            <span>
-              OPD Timings: Mon–Sat 10:00 AM – 1:30 PM &amp; 5:00 PM – 9:00 PM | Sunday Closed
-            </span>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#555a50] text-center">
+            <div className="flex items-center gap-1.5 shrink-0">
+              <Clock className="w-4 h-4 text-[#873f3b]" />
+              <span className="font-semibold text-gray-700">OPD Timings:</span>
+            </div>
+            <span>Mon–Sat 10:00 AM – 1:30 PM &amp; 5:00 PM – 9:00 PM | Sunday Closed</span>
           </div>
         </div>
       </section>
@@ -352,19 +426,19 @@ function BookNowContent() {
             onClick={(e) => {
               if (e.target === e.currentTarget) setIsModalOpen(false);
             }}
-            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto overscroll-contain"
+            className="fixed inset-0 z-[1000] flex items-center justify-center p-2.5 sm:p-4 bg-black/50 backdrop-blur-xs overflow-y-auto overscroll-contain"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white border border-gray-200 rounded-3xl w-full max-w-xl shadow-2xl p-6 sm:p-8 my-8 relative overflow-hidden"
+              className="bg-white border border-gray-200 rounded-3xl w-full max-w-xl shadow-2xl p-4 sm:p-7 md:p-8 my-3 sm:my-8 relative"
             >
               {/* Close Button */}
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-5 right-5 text-gray-400 hover:text-gray-700 p-1.5 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
+                className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 text-gray-400 hover:text-gray-700 p-1.5 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -503,19 +577,67 @@ function BookNowContent() {
                         />
                       </div>
 
-                      <div>
+                      <div ref={genderRef} className="relative">
                         <label className="block font-bold uppercase tracking-wider text-gray-700 mb-1">
                           Gender
                         </label>
-                        <select
-                          value={patientGender}
-                          onChange={(e) => setPatientGender(e.target.value as any)}
-                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#873f3b] focus:outline-none text-xs"
+                        <button
+                          type="button"
+                          onClick={() => setIsGenderOpen((prev) => !prev)}
+                          aria-haspopup="listbox"
+                          aria-expanded={isGenderOpen}
+                          className={`w-full px-3 py-2.5 rounded-xl border bg-white text-xs text-left text-gray-800 flex items-center justify-between transition-all cursor-pointer ${
+                            isGenderOpen
+                              ? "border-[#873f3b] ring-2 ring-[#FAF0DD]"
+                              : "border-gray-200 hover:border-gray-300"
+                          }`}
                         >
-                          <option value="F">Female</option>
-                          <option value="M">Male</option>
-                          <option value="Other">Other</option>
-                        </select>
+                          <span className="font-medium truncate">
+                            {patientGender === "F" ? "Female" : patientGender === "M" ? "Male" : "Other"}
+                          </span>
+                          <ChevronDown
+                            className={`w-3.5 h-3.5 text-gray-400 shrink-0 ml-1 transition-transform duration-200 ${
+                              isGenderOpen ? "rotate-180 text-[#873f3b]" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {isGenderOpen && (
+                          <div
+                            role="listbox"
+                            className="absolute left-0 right-0 top-full mt-1.5 bg-white rounded-xl border border-gray-200 shadow-xl py-1 z-50 overflow-hidden"
+                          >
+                            {[
+                              { label: "Female", val: "F" },
+                              { label: "Male", val: "M" },
+                              { label: "Other", val: "Other" },
+                            ].map((opt) => {
+                              const isSelected = patientGender === opt.val;
+                              return (
+                                <button
+                                  key={opt.val}
+                                  type="button"
+                                  role="option"
+                                  aria-selected={isSelected}
+                                  onClick={() => {
+                                    setPatientGender(opt.val as any);
+                                    setIsGenderOpen(false);
+                                  }}
+                                  className={`w-full px-3 py-2 text-xs text-left flex items-center justify-between transition-colors cursor-pointer ${
+                                    isSelected
+                                      ? "bg-[#FAF0DD]/80 text-[#873f3b] font-semibold"
+                                      : "text-gray-700 hover:bg-[#FAF8F5] hover:text-gray-900"
+                                  }`}
+                                >
+                                  <span>{opt.label}</span>
+                                  {isSelected && (
+                                    <Check className="w-3.5 h-3.5 text-[#108283] shrink-0" />
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
 
                       <div>
@@ -533,8 +655,8 @@ function BookNowContent() {
                     </div>
 
                     <div className="space-y-3.5">
-                      {/* Preferred Date */}
-                      <div>
+                      {/* Preferred Date with Custom Luxury Calendar Picker */}
+                      <div ref={calendarRef}>
                         <div className="flex items-center justify-between mb-1">
                           <label className="block font-bold uppercase tracking-wider text-gray-700">
                             Preferred Date
@@ -544,17 +666,134 @@ function BookNowContent() {
                             Past dates locked
                           </span>
                         </div>
-                        <input
-                          type="date"
-                          value={preferredDate}
-                          min={new Date().toISOString().split("T")[0]}
-                          onChange={(e) => {
-                            const val = e.target.value;
-                            const todayStr = new Date().toISOString().split("T")[0];
-                            if (val >= todayStr) setPreferredDate(val);
-                          }}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-[#873f3b] focus:outline-none text-xs bg-white font-medium cursor-pointer"
-                        />
+
+                        <div className="relative">
+                          <button
+                          type="button"
+                          onClick={() => setCalendarOpen((prev) => !prev)}
+                          className={`w-full px-3.5 py-2.5 rounded-xl border bg-white text-xs flex items-center justify-between transition-all cursor-pointer ${
+                            calendarOpen
+                              ? "border-[#873f3b] ring-2 ring-[#FAF0DD]"
+                              : "border-gray-200 hover:border-gray-300"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <CalendarIcon className="w-4 h-4 text-[#873f3b] shrink-0" />
+                            <span className="font-semibold text-gray-800 text-xs">
+                              {formatDisplayDate(preferredDate)}
+                            </span>
+                            {preferredDate === todayStr && (
+                              <span className="text-[10px] font-bold bg-[#FAF0DD] text-[#873f3b] border border-[#D4AF37]/35 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                                Today
+                              </span>
+                            )}
+                          </div>
+                          <ChevronDown
+                            className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                              calendarOpen ? "rotate-180 text-[#873f3b]" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {/* Compact Luxury Calendar Popover (Opens Upwards Above Button) */}
+                        {calendarOpen && (
+                          <div className="absolute left-0 right-0 sm:right-auto sm:w-[270px] bottom-[calc(100%+6px)] bg-white rounded-xl border border-gray-200 p-3 shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150">
+                            {/* Month & Year Navigation */}
+                            <div className="flex items-center justify-between mb-2 px-1">
+                              <span className="text-xs font-bold text-gray-900 tracking-wide">
+                                {MONTH_NAMES[viewMonth]} {viewYear}
+                              </span>
+                              <div className="flex items-center gap-0.5">
+                                <button
+                                  type="button"
+                                  disabled={isPrevMonthDisabled}
+                                  onClick={handlePrevMonth}
+                                  className="w-6 h-6 rounded-md flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                                  title="Previous month"
+                                >
+                                  <ChevronLeft className="w-3.5 h-3.5" />
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={handleNextMonth}
+                                  className="w-6 h-6 rounded-md flex items-center justify-center text-gray-600 hover:bg-gray-100 cursor-pointer transition-colors"
+                                  title="Next month"
+                                >
+                                  <ChevronRight className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Weekday Labels */}
+                            <div className="grid grid-cols-7 gap-1 text-center mb-1">
+                              {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((dayName) => (
+                                <span key={dayName} className="text-[10px] font-bold text-gray-400 py-0.5 uppercase">
+                                  {dayName}
+                                </span>
+                              ))}
+                            </div>
+
+                            {/* Days Grid */}
+                            <div className="grid grid-cols-7 gap-1 text-center">
+                              {Array.from({ length: firstDayOfWeek }).map((_, i) => (
+                                <div key={`empty-${i}`} className="w-7 h-7 mx-auto" />
+                              ))}
+
+                              {Array.from({ length: daysInMonth }).map((_, i) => {
+                                const dayNum = i + 1;
+                                const mStr = String(viewMonth + 1).padStart(2, "0");
+                                const dStr = String(dayNum).padStart(2, "0");
+                                const dateString = `${viewYear}-${mStr}-${dStr}`;
+                                const isPast = dateString < todayStr;
+                                const isSelected = dateString === preferredDate;
+                                const isToday = dateString === todayStr;
+
+                                return (
+                                  <button
+                                    key={dateString}
+                                    type="button"
+                                    disabled={isPast}
+                                    onClick={() => {
+                                      setPreferredDate(dateString);
+                                      setCalendarOpen(false);
+                                    }}
+                                    className={`w-7 h-7 mx-auto rounded-md text-[11px] font-medium flex items-center justify-center transition-all ${
+                                      isSelected
+                                        ? "bg-[#873f3b] text-white font-bold shadow-xs active:scale-95"
+                                        : isPast
+                                        ? "text-gray-300 cursor-not-allowed pointer-events-none line-through"
+                                        : isToday
+                                        ? "border border-[#873f3b] text-[#873f3b] font-bold hover:bg-[#FAF0DD]/50 cursor-pointer"
+                                        : "text-gray-700 hover:bg-[#FAF8F5] cursor-pointer"
+                                    }`}
+                                  >
+                                    {dayNum}
+                                  </button>
+                                );
+                              })}
+                            </div>
+
+                            {/* Quick Select Buttons */}
+                            <div className="mt-2 pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setPreferredDate(todayStr);
+                                  setViewYear(todayYear);
+                                  setViewMonth(todayMonth);
+                                  setCalendarOpen(false);
+                                }}
+                                className="text-[10.5px] font-bold text-[#873f3b] hover:underline cursor-pointer"
+                              >
+                                Select Today
+                              </button>
+                              <span className="text-[10px] text-gray-400">
+                                Mon–Sat OPD Open
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                        </div>
                       </div>
 
                       {/* OPD Session Slot Cards */}
@@ -566,40 +805,80 @@ function BookNowContent() {
                           <button
                             type="button"
                             onClick={() => setPreferredSlot("Morning (10:00 AM – 1:30 PM)")}
-                            className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
+                            className={`p-2.5 rounded-xl border-2 text-left transition-all cursor-pointer flex items-center gap-2.5 ${
                               preferredSlot.startsWith("Morning")
-                                ? "border-[#873f3b] bg-[#873f3b]/8 text-[#873f3b] font-bold shadow-2xs"
-                                : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                                ? "border-[#C5A059] bg-[#FAF8F4] shadow-xs"
+                                : "border-stone-200/80 bg-white text-stone-700 hover:border-stone-300"
                             }`}
                           >
-                            <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                              preferredSlot.startsWith("Morning") ? "bg-[#873f3b] text-white" : "bg-amber-100 text-amber-700"
-                            }`}>
-                              <Sun className="w-3.5 h-3.5" />
+                            <div
+                              className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border transition-colors ${
+                                preferredSlot.startsWith("Morning")
+                                  ? "bg-[#FAF2E6] text-[#8C6D32] border-[#E8D7BE] shadow-2xs"
+                                  : "bg-stone-50 text-stone-400 border-stone-200/70"
+                              }`}
+                            >
+                              <Sun className="w-4 h-4" />
                             </div>
                             <div>
-                              <div className="text-xs font-bold text-gray-900 leading-tight">Morning</div>
-                              <div className="text-[10px] text-gray-500 font-normal">10:00 – 1:30</div>
+                              <div
+                                className={`text-xs leading-tight ${
+                                  preferredSlot.startsWith("Morning")
+                                    ? "font-bold text-stone-900"
+                                    : "font-medium text-stone-700"
+                                }`}
+                              >
+                                Morning
+                              </div>
+                              <div
+                                className={`text-[10px] ${
+                                  preferredSlot.startsWith("Morning")
+                                    ? "text-stone-600 font-medium"
+                                    : "text-stone-400"
+                                }`}
+                              >
+                                10:00 – 1:30
+                              </div>
                             </div>
                           </button>
 
                           <button
                             type="button"
                             onClick={() => setPreferredSlot("Evening (5:00 PM – 9:00 PM)")}
-                            className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
+                            className={`p-2.5 rounded-xl border-2 text-left transition-all cursor-pointer flex items-center gap-2.5 ${
                               preferredSlot.startsWith("Evening")
-                                ? "border-[#873f3b] bg-[#873f3b]/8 text-[#873f3b] font-bold shadow-2xs"
-                                : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                                ? "border-[#C5A059] bg-[#FAF8F4] shadow-xs"
+                                : "border-stone-200/80 bg-white text-stone-700 hover:border-stone-300"
                             }`}
                           >
-                            <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                              preferredSlot.startsWith("Evening") ? "bg-[#873f3b] text-white" : "bg-indigo-100 text-indigo-700"
-                            }`}>
-                              <Moon className="w-3.5 h-3.5" />
+                            <div
+                              className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border transition-colors ${
+                                preferredSlot.startsWith("Evening")
+                                  ? "bg-[#EEF2F6] text-[#4A5D75] border-[#D0DBE8] shadow-2xs"
+                                  : "bg-stone-50 text-stone-400 border-stone-200/70"
+                              }`}
+                            >
+                              <Moon className="w-4 h-4" />
                             </div>
                             <div>
-                              <div className="text-xs font-bold text-gray-900 leading-tight">Evening</div>
-                              <div className="text-[10px] text-gray-500 font-normal">5:00 – 9:00</div>
+                              <div
+                                className={`text-xs leading-tight ${
+                                  preferredSlot.startsWith("Evening")
+                                    ? "font-bold text-stone-900"
+                                    : "font-medium text-stone-700"
+                                }`}
+                              >
+                                Evening
+                              </div>
+                              <div
+                                className={`text-[10px] ${
+                                  preferredSlot.startsWith("Evening")
+                                    ? "text-stone-600 font-medium"
+                                    : "text-stone-400"
+                                }`}
+                              >
+                                5:00 – 9:00
+                              </div>
                             </div>
                           </button>
                         </div>

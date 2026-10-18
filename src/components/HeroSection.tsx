@@ -5,13 +5,18 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowDownRight,
+  ArrowRight,
   ArrowUpRight,
   CalendarCheck,
   CheckCircle2,
+  Droplets,
+  HeartHandshake,
   MapPin,
   ScanFace,
-  Droplets,
+  ShieldCheck,
+  Sparkles,
   Stethoscope,
+  SunMedium,
 } from "lucide-react";
 
 const carePoints = [
@@ -25,7 +30,7 @@ export default function HeroSection() {
     <section
       id="hero"
       aria-labelledby="homepage-hero-title"
-      className="relative isolate overflow-hidden bg-[#f4f0e8] px-4 sm:px-8 lg:px-12 pt-20 sm:pt-24 lg:pt-24 pb-8 sm:pb-10 lg:pb-12 text-[#252923]"
+      className="relative isolate overflow-hidden bg-[#f4f0e8] px-0 lg:px-12 pt-[54px] lg:pt-24 pb-0 lg:pb-12 text-[#252923]"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -left-28 top-8 h-72 w-72 rounded-full bg-[#c8d3c1]/60 blur-3xl sm:h-[28rem] sm:w-[28rem]" />
@@ -33,7 +38,189 @@ export default function HeroSection() {
         <div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(62,70,57,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(62,70,57,.08)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
       </div>
 
-      <div className="mx-auto grid max-w-[1440px] items-center gap-8 sm:gap-10 lg:grid-cols-[1fr_1fr] lg:gap-8 xl:grid-cols-[0.95fr_1.05fr] xl:gap-16 2xl:gap-20">
+      {/* ============================================================== */}
+      {/* MOBILE HERO PRESENTATION (< lg)                                */}
+      {/* Full-Bleed Luxury Editorial Screen - Reference Design Aligned  */}
+      {/* ============================================================== */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="block lg:hidden w-full select-none"
+      >
+        {/* Upper Editorial Visual Zone */}
+        <div className="relative w-full min-h-[310px] xs:min-h-[340px] sm:min-h-[380px] bg-gradient-to-b from-[#F7F2EB] via-[#F4ECE2] to-[#EFE7DD] overflow-hidden pt-5 xs:pt-6 pb-3">
+          
+          {/* Subtle botanical leaf watermark in top right corner */}
+          <div aria-hidden="true" className="pointer-events-none absolute right-[-24px] top-[-10px] w-48 h-48 opacity-15">
+            <Image src="/leaf-outline.svg" alt="" fill className="object-contain rotate-45" />
+          </div>
+
+          {/* Soft ambient radial glow behind model */}
+          <div className="pointer-events-none absolute right-0 top-0 w-80 h-80 rounded-full bg-white/40 blur-3xl" />
+
+          {/* Left Column: Location, Headline, Subtitle, Verified Badge */}
+          <div className="relative z-20 w-[58%] xs:w-[56%] sm:w-[52%] pl-4 xs:pl-5 sm:pl-8 pr-1 pt-1 flex flex-col items-start select-none">
+            {/* Kolhapur Location Pill */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-[#292d27]/10 text-[9.5px] xs:text-[10px] font-semibold text-[#5c6054] mb-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] backdrop-blur-xs">
+              <MapPin size={11} className="text-[#873f3b]" />
+              <span className="tracking-[0.16em] uppercase font-mono">KOLHAPUR</span>
+            </div>
+
+            {/* Editorial Headline */}
+            <h1 className="font-['Playfair_Display',Georgia,serif] text-[24px] xs:text-[27px] sm:text-[32px] font-bold leading-[1.12] tracking-[-0.02em] text-[#1a221b]">
+              Healthy Skin,
+              <br />
+              <span className="relative inline-block italic font-medium text-[#873f3b]">
+                Naturally
+                <svg
+                  className="absolute -bottom-1 left-0 w-full h-1.5 text-[#873f3b]/50 pointer-events-none"
+                  viewBox="0 0 100 10"
+                  fill="none"
+                  preserveAspectRatio="none"
+                >
+                  <path d="M 2,5 Q 50,10 98,3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </span>
+              <br />
+              Beautiful You.
+            </h1>
+
+            {/* Category Subtitle */}
+            <div className="mt-2.5 xs:mt-3 flex flex-col items-start">
+              <span className="text-[9px] xs:text-[10px] font-mono font-bold tracking-[0.18em] text-[#555a50] uppercase">
+                SKIN • HAIR • COSMETICS
+              </span>
+              <div className="w-10 h-[2px] bg-[#873f3b] mt-1 rounded-full" />
+            </div>
+
+            {/* Medical Accreditation Badge (MMC Verified) */}
+            <div className="mt-3 xs:mt-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-[#873f3b]/25 shadow-[0_2px_10px_rgba(135,63,59,0.08)]">
+              <ShieldCheck size={13} className="text-[#873f3b]" />
+              <span className="text-[8.5px] xs:text-[9.5px] font-mono font-bold tracking-[0.14em] text-[#873f3b] uppercase">
+                MMC VERIFIED
+              </span>
+            </div>
+          </div>
+
+          {/* Right Column: Prominent Model Cutout Portrait */}
+          <div className="absolute right-[-14px] xs:right-[-6px] sm:right-4 bottom-0 w-[58%] xs:w-[56%] sm:w-[50%] h-[310px] xs:h-[340px] sm:h-[380px] pointer-events-none z-10">
+            <Image
+              src="/girl-latest.png"
+              alt="Portrait representing skin and cosmetic care at Shingare Skin Clinic"
+              fill
+              priority
+              sizes="(max-width: 768px) 60vw, 45vw"
+              className="object-contain object-bottom drop-shadow-[0_16px_32px_rgba(40,45,35,0.18)]"
+            />
+          </div>
+        </div>
+
+        {/* Lower Elevated Treatment Sheet / Card (Full Bleed with Rounded Top) */}
+        <div className="relative z-30 bg-[#FCFBF8] rounded-t-[32px] xs:rounded-t-[38px] -mt-5 border-t border-[#292d27]/10 shadow-[0_-12px_40px_rgba(40,45,35,0.08),inset_0_1px_0_0_rgba(255,255,255,0.95)] px-4 xs:px-6 pt-5 xs:pt-6 pb-6">
+          
+          {/* Doctor & Clinic Information */}
+          <div className="text-left">
+            <h2 className="font-['Playfair_Display',Georgia,serif] text-[18px] xs:text-[20px] sm:text-[22px] font-bold leading-tight tracking-tight text-[#1a221b]">
+              Dr. Pramod &amp; Dr. Priyanka Shingare
+            </h2>
+            <div className="flex items-center gap-2 mt-1.5">
+              <span className="text-[9.5px] xs:text-[10.5px] font-mono font-bold tracking-[0.2em] text-[#873f3b] uppercase">
+                CLINICAL AESTHETICS
+              </span>
+              <div className="h-[1.5px] w-6 bg-[#873f3b] rounded-full" />
+            </div>
+            <p className="mt-2 text-[12px] xs:text-[13px] leading-relaxed text-[#555a50]">
+              Doctor-led clinical dermatology, hair restoration &amp; US FDA lasers with personalized care.
+            </p>
+          </div>
+
+          {/* 4 Treatment Category Highlights with Minimal Consistent Line Icons & Hairline Dividers */}
+          <div className="grid grid-cols-4 my-4 py-3 border-y border-[#292d27]/8 divide-x divide-[#292d27]/10">
+            {/* 1. Skin Treatments */}
+            <div className="flex flex-col items-center text-center px-1">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+                <Sparkles size={19} strokeWidth={1.8} />
+              </div>
+              <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
+                Skin<br />Treatments
+              </span>
+            </div>
+
+            {/* 2. Hair Restoration */}
+            <div className="flex flex-col items-center text-center px-1">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+                <Droplets size={19} strokeWidth={1.8} />
+              </div>
+              <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
+                Hair<br />Restoration
+              </span>
+            </div>
+
+            {/* 3. Laser Aesthetics */}
+            <div className="flex flex-col items-center text-center px-1">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+                <SunMedium size={19} strokeWidth={1.8} />
+              </div>
+              <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
+                Laser<br />Aesthetics
+              </span>
+            </div>
+
+            {/* 4. Personalized Care */}
+            <div className="flex flex-col items-center text-center px-1">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+                <HeartHandshake size={19} strokeWidth={1.8} />
+              </div>
+              <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
+                Personalized<br />Care
+              </span>
+            </div>
+          </div>
+
+          {/* Editorial Motto Divider */}
+          <div className="flex items-center justify-center gap-3 my-3">
+            <div className="h-[1px] w-8 xs:w-12 bg-gradient-to-r from-transparent to-[#873f3b]/40" />
+            <span className="font-['Playfair_Display',Georgia,serif] italic text-[13px] xs:text-[14px] text-[#873f3b] tracking-wide select-none">
+              Real Care • Visible Results
+            </span>
+            <div className="h-[1px] w-8 xs:w-12 bg-gradient-to-l from-transparent to-[#873f3b]/40" />
+          </div>
+
+          {/* Primary CTA: Preserving Website's Signature Obsidian Button Color & Styling */}
+          <Link
+            href="/book-now"
+            className="w-full inline-flex min-h-[50px] xs:min-h-[54px] items-center justify-between rounded-full bg-[#292d27] hover:bg-[#1a241d] px-5 xs:px-6 py-2.5 text-white shadow-[0_12px_28px_rgba(41,45,39,0.18)] active:scale-[0.985] transition-all duration-150 group"
+          >
+            <div className="flex items-center gap-2.5">
+              <CalendarCheck size={18} className="text-[#C5A059]" />
+              <span className="text-[13.5px] xs:text-[14px] font-semibold tracking-wide">
+                Book Consultation
+              </span>
+            </div>
+            <span className="flex h-7 w-7 xs:h-8 xs:w-8 items-center justify-center rounded-full bg-white/10 group-hover:bg-white/20 text-white shadow-xs shrink-0 group-hover:translate-x-0.5 transition-all">
+              <ArrowRight size={15} strokeWidth={2.4} />
+            </span>
+          </Link>
+
+          {/* Subtle Secondary Exploration Link */}
+          <div className="mt-3 flex items-center justify-center gap-4 text-[11px] font-medium text-[#73776b]">
+            <Link
+              href="#services"
+              className="inline-flex items-center gap-1.5 hover:text-[#873f3b] transition-colors underline decoration-[#873f3b]/35 underline-offset-4"
+            >
+              <span>Explore services &amp; treatments</span>
+              <ArrowDownRight size={12} />
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ============================================================== */}
+      {/* DESKTOP / LAPTOP HERO PRESENTATION (lg+)                       */}
+      {/* 100% UNTOUCHED ORIGINAL DESKTOP LAYOUT                         */}
+      {/* ============================================================== */}
+      <div className="hidden lg:grid mx-auto max-w-[1440px] items-center gap-8 lg:gap-8 xl:grid-cols-[0.95fr_1.05fr] xl:gap-16 2xl:gap-20">
         {/* Left Column: Editorial Headline & Actions */}
         <motion.div
           initial={{ opacity: 0, y: 22 }}
@@ -43,23 +230,23 @@ export default function HeroSection() {
         >
 
           {/* Clinic Brand Sub-title */}
-          <div className="mb-4 sm:mb-5 flex items-center gap-3 sm:gap-4 select-none">
+          <div className="mb-4 sm:mb-5 flex items-center gap-2 sm:gap-3 select-none flex-wrap xs:flex-nowrap">
             <span
               style={{ fontFamily: "'Amita', serif" }}
-              className="text-[26px] sm:text-[30px] md:text-[34px] font-bold leading-none text-[#873f3b] tracking-normal"
+              className="text-[22px] xs:text-[26px] sm:text-[30px] md:text-[34px] font-bold leading-none text-[#873f3b] tracking-normal"
             >
               शिनगारे
             </span>
             {/* Rich & Unique Modern Architectural Twin Luxury Bar */}
             <div className="flex items-center justify-center gap-1 sm:gap-1.5 px-0.5 sm:px-1 select-none shrink-0" aria-hidden="true">
               {/* Primary Clinic Crimson Pillar */}
-              <span className="block w-[2.5px] sm:w-[3px] h-[22px] sm:h-[25px] rounded-full bg-gradient-to-b from-[#873f3b] via-[#9e4a46] to-[#873f3b] shadow-[0_1px_3px_rgba(135,63,59,0.22)]" />
+              <span className="block w-[2.5px] sm:w-[3px] h-[20px] sm:h-[25px] rounded-full bg-gradient-to-b from-[#873f3b] via-[#9e4a46] to-[#873f3b] shadow-[0_1px_3px_rgba(135,63,59,0.22)]" />
               {/* Secondary Brushed Champagne Gold Accent Pillar */}
-              <span className="block w-[1.5px] sm:w-[2px] h-[13px] sm:h-[15px] rounded-full bg-gradient-to-b from-[#E6CA85] via-[#C5A059] to-[#9E7B38] shadow-[0_1px_2px_rgba(197,160,89,0.25)]" />
+              <span className="block w-[1.5px] sm:w-[2px] h-[12px] sm:h-[15px] rounded-full bg-gradient-to-b from-[#E6CA85] via-[#C5A059] to-[#9E7B38] shadow-[0_1px_2px_rgba(197,160,89,0.25)]" />
             </div>
             <span
               style={{ fontFamily: "'Mukta', sans-serif" }}
-              className="text-[11px] sm:text-[12px] md:text-[12.5px] font-bold tracking-[0.22em] text-[#4a4c44] uppercase whitespace-nowrap self-center"
+              className="text-[9.5px] xs:text-[11px] sm:text-[12px] md:text-[12.5px] font-bold tracking-[0.16em] sm:tracking-[0.22em] text-[#4a4c44] uppercase whitespace-nowrap self-center"
             >
               SKIN &amp; COSMETICS
             </span>

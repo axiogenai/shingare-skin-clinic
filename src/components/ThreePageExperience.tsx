@@ -7,7 +7,7 @@ import SpecialtyCardsSection from "@/components/SpecialtyCardsSection";
 
 export default function ThreePageExperience() {
   return (
-    <div className="homepage-intro relative isolate w-full overflow-hidden">
+    <div className="homepage-intro relative isolate w-full overflow-x-clip">
       <HeroSection />
       <div className="homepage-specialty-strip relative z-10 overflow-hidden">
         <SpecialtyMarquee />

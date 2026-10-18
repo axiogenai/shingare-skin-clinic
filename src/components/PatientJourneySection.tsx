@@ -58,9 +58,9 @@ export default function PatientJourneySection() {
             The Clinical Protocol
           </div>
 
-          <h2 className="font-['Playfair_Display',Georgia,serif] text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold text-[#1b261e] leading-[1.14] tracking-tight mb-3">
+          <h2 className="font-['Cormorant_Garamond',Georgia,serif] text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold text-[#1b261e] leading-[1.16] tracking-tight mb-3">
             How We Care:{" "}
-            <span className="italic font-medium text-[#873f3b]">
+            <span className="font-['Cormorant_Garamond',Georgia,serif] font-semibold text-[#873f3b] whitespace-nowrap">
               A 4-Step Medical Journey
             </span>
           </h2>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -121,7 +121,7 @@ export default function SkinQuizPage() {
       <section className="w-full py-14 px-5 sm:px-6 md:px-8">
         <div className="max-w-[720px] mx-auto text-center">
           {!completed ? (
-            <div className="bg-white rounded-3xl border border-gray-100 p-6 sm:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.04)] relative text-left">
+            <div className="bg-white rounded-3xl border border-gray-100 p-4 sm:p-8 md:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.04)] relative text-left">
               {/* Progress Bar */}
               <div className="w-full bg-gray-100 rounded-full h-2 mb-8 overflow-hidden">
                 <div
@@ -190,7 +190,7 @@ export default function SkinQuizPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white rounded-3xl border border-gray-100 p-7 sm:p-10 shadow-md text-left space-y-6"
+              className="bg-white rounded-3xl border border-gray-100 p-4 sm:p-8 md:p-10 shadow-md text-left space-y-6"
             >
               <div className="text-center">
                 <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3">

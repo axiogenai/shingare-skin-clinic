@@ -90,7 +90,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-[100dvh] w-full flex flex-col font-['Source_Sans_3',sans-serif] bg-white text-gray-900 selection:bg-[#108283] selection:text-white antialiased overflow-x-hidden">
+      <body className="min-h-[100dvh] w-full flex flex-col font-['Source_Sans_3',sans-serif] bg-white text-gray-900 selection:bg-[#108283] selection:text-white antialiased overflow-x-clip">
         <Header />
         <main className="flex-1 w-full">{children}</main>
         <Footer />

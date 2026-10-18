@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   ChevronDown,
@@ -78,9 +79,9 @@ export default function Header() {
             : "bg-[#E8E2D8]/90 backdrop-blur-xl border-b border-[#D5CCC0]/60 shadow-[0_2px_16px_rgba(0,0,0,0.03)]"
         }`}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-[54px] sm:h-[60px] flex items-center justify-between">
+        <div className="w-full max-w-[1440px] mx-auto px-2.5 sm:px-6 lg:px-6 xl:px-10 h-[54px] sm:h-[60px] flex items-center justify-between">
           {/* 1. Left Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-[11px] xl:text-[11.5px] font-medium tracking-[0.18em] uppercase text-[#4A4238] whitespace-nowrap">
+          <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-7 text-[10.5px] xl:text-[11.5px] font-medium tracking-[0.12em] xl:tracking-[0.18em] uppercase text-[#4A4238] whitespace-nowrap">
             <Link
               href="/"
               className={`hover:text-[#991b1b] transition-colors ${
@@ -108,7 +109,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsTreatmentsOpen(!isTreatmentsOpen)}
-                className={`flex items-center gap-1.5 hover:text-[#991b1b] transition-colors py-1 cursor-pointer text-[11px] xl:text-[11.5px] font-medium uppercase tracking-[0.18em] ${
+                className={`flex items-center gap-1.5 hover:text-[#991b1b] transition-colors py-1 cursor-pointer text-[10.5px] xl:text-[11.5px] font-medium uppercase tracking-[0.12em] xl:tracking-[0.18em] ${
                   isTreatmentsOpen ||
                   pathname === "/skin" ||
                   pathname === "/hair" ||
@@ -167,46 +168,48 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* 2. Center Brand — Text-based Devanagari Logo */}
+          {/* 2. Center Brand — Logo + Devanagari Brand Mark */}
           <Link
             href="/"
             onClick={() => setIsMobileOpen(false)}
-            className="flex-shrink-0 flex items-center justify-center px-4 group cursor-pointer"
+            className="flex items-center gap-2 sm:gap-2.5 cursor-pointer"
           >
-            <div style={{ position: "relative", paddingBottom: "7px" }}>
+            <Image
+              src="/logo-hd.png"
+              alt="Shingare Skin & Cosmetics Clinic"
+              width={34}
+              height={34}
+              priority
+              className="w-7 h-7 xs:w-8 xs:h-8 sm:w-[32px] sm:h-[32px] xl:w-[34px] xl:h-[34px] object-contain shrink-0"
+            />
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <span
                 style={{
                   fontFamily: "'Amita', 'Karma', serif",
                   fontWeight: 700,
                   color: "#93231f",
-                  lineHeight: 1.15,
+                  lineHeight: 1,
                   letterSpacing: "0.02em",
                 }}
-                className="text-[24px] sm:text-[30px] transition-transform group-hover:scale-105 duration-200"
+                className="text-[19px] xs:text-[21px] sm:text-[22px] xl:text-[24px] whitespace-nowrap"
               >
                 शिनगारे
               </span>
+
               <span
                 style={{
                   fontFamily: "'Mukta', 'Poppins', sans-serif",
-                  fontSize: "8px",
-                  fontWeight: 600,
-                  color: "#6b6159",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                  position: "absolute",
-                  bottom: "0px",
-                  left: "45%",
+                  letterSpacing: "0.14em",
                 }}
+                className="text-[8px] xs:text-[8.5px] sm:text-[9px] xl:text-[9.5px] font-semibold text-[#6b6159] uppercase whitespace-nowrap tracking-[0.14em] xl:tracking-[0.18em]"
               >
-                SKIN & COSMETICS
+                SKIN &amp; COSMETICS
               </span>
             </div>
           </Link>
 
-          {/* 3. Right Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-[11px] xl:text-[11.5px] font-medium tracking-[0.18em] uppercase text-[#4A4238] whitespace-nowrap">
+          {/* 3. Right Navigation Links (Desktop) */}
+          <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-7 text-[10.5px] xl:text-[11.5px] font-medium tracking-[0.12em] xl:tracking-[0.18em] uppercase text-[#4A4238] whitespace-nowrap">
             <Link
               href="/my-rx"
               className={`hover:text-[#991b1b] transition-colors ${
@@ -236,27 +239,21 @@ export default function Header() {
 
             <Link
               href="/book-now"
-              className="bg-[#108283] hover:bg-[#0d6e6f] text-white px-4 py-1.5 rounded-full text-[10.5px] font-semibold tracking-wider uppercase shadow-xs transition-colors"
+              className="bg-[#108283] hover:bg-[#0d6e6f] text-white px-3 xl:px-4 py-1.5 rounded-full text-[10px] xl:text-[10.5px] font-semibold tracking-wider uppercase shadow-xs transition-colors"
             >
               Book Token
             </Link>
           </nav>
 
-          {/* Mobile Hamburger Button */}
-          <div className="lg:hidden flex items-center gap-2.5">
-            <Link
-              href="/book-now"
-              className="bg-[#991b1b] text-white px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-wider uppercase shadow-xs"
-            >
-              Book
-            </Link>
+          {/* Mobile Hamburger Menu Button */}
+          <div className="lg:hidden flex items-center">
             <button
               type="button"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="p-2 rounded-xl text-[#4A4238] hover:text-black hover:bg-black/5 transition-colors"
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-xl text-[#4A4238] hover:text-black hover:bg-black/5 active:scale-95 transition-all"
               aria-label="Toggle menu"
             >
-              {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -273,31 +270,40 @@ export default function Header() {
           <div className="fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-[#FAF7F2] shadow-2xl z-50 p-6 flex flex-col justify-between overflow-y-auto">
             <div>
               <div className="flex items-center justify-between pb-5 border-b border-[#E0D8CE]">
-                <div className="flex flex-col items-start leading-none">
-                  <span
-                    style={{
-                      fontFamily: "'Amita', 'Karma', serif",
-                      fontSize: "22px",
-                      fontWeight: 700,
-                      color: "#93231f",
-                      lineHeight: 1.1,
-                    }}
-                  >
-                    शिंगारे
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Mukta', 'Poppins', sans-serif",
-                      fontSize: "8px",
-                      fontWeight: 600,
-                      color: "#4A4238",
-                      letterSpacing: "0.25em",
-                      textTransform: "uppercase",
-                      marginTop: "1px",
-                    }}
-                  >
-                    SKIN & COSMETICS
-                  </span>
+                <div className="flex items-center gap-2">
+                  <Image
+                    src="/logo-hd.png"
+                    alt="Shingare Skin & Cosmetics Clinic"
+                    width={32}
+                    height={32}
+                    className="w-7 h-7 object-contain shrink-0"
+                  />
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      style={{
+                        fontFamily: "'Amita', 'Karma', serif",
+                        fontSize: "19px",
+                        fontWeight: 700,
+                        color: "#93231f",
+                        lineHeight: 1,
+                      }}
+                    >
+                      शिनगारे
+                    </span>
+
+                    <span
+                      style={{
+                        fontFamily: "'Mukta', 'Poppins', sans-serif",
+                        fontSize: "8px",
+                        fontWeight: 600,
+                        color: "#4A4238",
+                        letterSpacing: "0.16em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      SKIN &amp; COSMETICS
+                    </span>
+                  </div>
                 </div>
                 <button
                   onClick={() => setIsMobileOpen(false)}

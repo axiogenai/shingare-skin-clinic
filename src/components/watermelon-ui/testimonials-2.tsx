@@ -174,7 +174,7 @@ export default function Testimonials2() {
                     paginate(-1);
                   }
                 }}
-                className="w-full bg-[#FAF8F5] border border-[#292d27]/10 rounded-3xl p-6 sm:p-8 md:p-9 shadow-[0_8px_30px_rgba(41,45,39,0.05)] cursor-grab active:cursor-grabbing"
+                className="w-full bg-[#FAF8F5] border border-[#292d27]/10 rounded-3xl p-4 sm:p-8 md:p-9 shadow-[0_8px_30px_rgba(41,45,39,0.05)] cursor-grab active:cursor-grabbing"
               >
                 {/* Card Top: Stars & Treatment Pill */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-[#292d27]/8">
@@ -201,9 +201,9 @@ export default function Testimonials2() {
                 </div>
 
                 {/* Card Footer: Patient Profile */}
-                <div className="pt-4 border-t border-[#292d27]/8 flex items-center justify-between">
+                <div className="pt-4 border-t border-[#292d27]/8 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#1a241d] text-white font-mono text-xs font-bold flex items-center justify-center shadow-xs">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1a241d] text-white font-mono text-xs font-bold flex items-center justify-center shrink-0 shadow-xs">
                       {activeReview.initials}
                     </div>
 
@@ -212,14 +212,14 @@ export default function Testimonials2() {
                         {activeReview.patientName}
                       </h4>
                       <div className="flex items-center gap-1 text-[11px] text-[#616558]">
-                        <MapPin className="w-3 h-3 text-[#873f3b]" />
+                        <MapPin className="w-3 h-3 text-[#873f3b] shrink-0" />
                         <span>{activeReview.location}</span>
                       </div>
                     </div>
                   </div>
 
                   {activeReview.verified && (
-                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#1a241d] bg-white px-3 py-1 rounded-full border border-[#292d27]/10 shadow-2xs">
+                    <div className="flex items-center gap-1.5 text-[10.5px] sm:text-[11px] font-semibold text-[#1a241d] bg-white px-2.5 sm:px-3 py-1 rounded-full border border-[#292d27]/10 shadow-2xs shrink-0">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#873f3b]" />
                       <span>Verified Patient</span>
                     </div>

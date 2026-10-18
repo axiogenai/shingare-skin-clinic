@@ -56,7 +56,7 @@ export default function ConfidenceSection() {
     <section className="bg-transparent py-20 md:py-28 relative font-source">
       <div className="max-w-[1140px] mx-auto px-5 sm:px-6 md:px-8 flex flex-col items-center text-center">
         {/* Pill Badge */}
-        <div className="inline-block bg-[#FAEDDA]/90 backdrop-blur-md text-gray-900 text-xs md:text-sm font-semibold px-5 py-1.5 rounded-full mb-5 uppercase tracking-wider border border-[#E8DCBE]/70 shadow-2xs">
+        <div className="inline-block bg-[#FAEDDA]/90 backdrop-blur-md text-gray-900 text-[10px] xs:text-xs md:text-sm font-semibold px-3.5 sm:px-5 py-1.5 rounded-full mb-5 uppercase tracking-wider border border-[#E8DCBE]/70 shadow-2xs max-w-full truncate">
           CONFIDENCE ROOTED IN CLINICAL SCIENCE
         </div>
 
@@ -74,19 +74,19 @@ export default function ConfidenceSection() {
         </p>
 
         {/* 4 Stats Grid - Clean numbers and text without card wrappers */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 w-full pt-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 md:gap-12 w-full pt-4">
           {stats.map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col items-center justify-center text-center"
             >
               {/* Number on top in teal italic serif */}
-              <div className="text-[#108283] text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-normal leading-none mb-3 font-playfair">
+              <div className="text-[#108283] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-normal leading-none mb-2 sm:mb-3 font-playfair">
                 <AnimatedCounter end={stat.value} suffix={stat.suffix} />
               </div>
 
               {/* Label underneath in delicate italic serif */}
-              <p className="font-playfair text-sm sm:text-base lg:text-[17px] text-gray-800 italic font-normal tracking-wide max-w-[200px]">
+              <p className="font-playfair text-xs xs:text-sm sm:text-base lg:text-[17px] text-gray-800 italic font-normal tracking-wide max-w-[200px]">
                 {stat.label}
               </p>
             </div>

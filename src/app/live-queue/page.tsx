@@ -140,17 +140,17 @@ function LiveQueueContent() {
     >
       {/* 1. Neumorphic Console Header */}
       <div className="pt-[76px]">
-        <div className="max-w-[980px] mx-auto px-4 sm:px-8 pt-8 pb-6">
-          <div className="rounded-[32px] bg-[#E6ECEF] border border-white/80 px-6 py-8 sm:px-10 sm:py-9 text-center relative overflow-hidden">
+        <div className="max-w-[980px] mx-auto px-3.5 sm:px-8 pt-6 sm:pt-8 pb-4 sm:pb-6">
+          <div className="rounded-2xl sm:rounded-[32px] bg-[#E6ECEF] border border-white/80 px-4 py-6 sm:px-10 sm:py-9 text-center relative overflow-hidden">
             {/* Top Tactile Recessed Pill */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#E6ECEF] shadow-[inset_2px_2px_5px_#c8ced1,inset_-2px_-2px_5px_#f8fafb] px-4 py-1.5 mb-5 border border-white/50">
-              <span className="w-2 h-2 rounded-full bg-[#0e787a]" />
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#0e787a]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#E6ECEF] shadow-[inset_2px_2px_5px_#c8ced1,inset_-2px_-2px_5px_#f8fafb] px-3.5 sm:px-4 py-1.5 mb-4 sm:mb-5 border border-white/50 max-w-full">
+              <span className="w-2 h-2 rounded-full bg-[#0e787a] shrink-0" />
+              <span className="text-[9px] xs:text-[10px] font-bold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-[#0e787a] truncate">
                 CLINICOS REAL-TIME ENGINE • LIVE OPD TRACKER
               </span>
             </div>
 
-            <h1 className="font-playfair text-3xl sm:text-5xl font-normal text-slate-900 mb-3 tracking-tight leading-tight">
+            <h1 className="font-playfair text-2xl xs:text-3xl sm:text-5xl font-normal text-slate-900 mb-2 sm:mb-3 tracking-tight leading-tight">
               Live Consultation Queue
             </h1>
 
@@ -161,9 +161,9 @@ function LiveQueueContent() {
         </div>
       </div>
 
-      <section className="max-w-[980px] mx-auto px-4 sm:px-8 space-y-7">
+      <section className="max-w-[980px] mx-auto px-3.5 sm:px-8 space-y-6 sm:space-y-7">
         {/* 2. Doctor & Cabin Telemetry Console (Neumorphic Extruded Chassis) */}
-        <div className="rounded-[32px] bg-[#E6ECEF] border border-white/80 p-6 sm:p-8 space-y-7">
+        <div className="rounded-2xl sm:rounded-[32px] bg-[#E6ECEF] border border-white/80 p-4 sm:p-8 space-y-5 sm:space-y-7">
           {/* Top Doctor Bar */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
             <div className="flex items-start sm:items-center gap-4 flex-1">
@@ -341,30 +341,30 @@ function LiveQueueContent() {
             </div>
 
             {/* Neumorphic Segmented Tab Trough */}
-            <div className="inline-flex p-1 rounded-xl bg-[#E6ECEF] shadow-[inset_2px_2px_5px_#c8ced1,inset_-2px_-2px_5px_#f8fafb] border border-white/50 shrink-0">
+            <div className="inline-flex flex-wrap sm:flex-nowrap p-1 rounded-xl bg-[#E6ECEF] shadow-[inset_2px_2px_5px_#c8ced1,inset_-2px_-2px_5px_#f8fafb] border border-white/50 shrink-0 gap-1 sm:gap-0">
               <button
                 type="button"
                 onClick={() => setTab("token")}
-                className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                   tab === "token"
                     ? "bg-[#E6ECEF] text-[#0e787a] shadow-[2px_2px_5px_#c8ced1,-2px_-2px_5px_#f8fafb] border border-white/60"
                     : "text-slate-500 hover:text-slate-700"
                 }`}
               >
                 <Hash className="w-3.5 h-3.5" />
-                <span>By Token Number</span>
+                <span>By Token</span>
               </button>
               <button
                 type="button"
                 onClick={() => setTab("phone")}
-                className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                   tab === "phone"
                     ? "bg-[#E6ECEF] text-[#0e787a] shadow-[2px_2px_5px_#c8ced1,-2px_-2px_5px_#f8fafb] border border-white/60"
                     : "text-slate-500 hover:text-slate-700"
                 }`}
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span>By Mobile Number</span>
+                <span>By Mobile</span>
               </button>
             </div>
           </div>

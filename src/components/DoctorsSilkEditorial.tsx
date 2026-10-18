@@ -65,9 +65,9 @@ export default function DoctorsSilkEditorial() {
             <div className="relative w-full z-30 h-0 flex items-center justify-center pointer-events-none select-none">
               <div className="absolute -translate-y-1/2 w-full max-w-[1360px] px-2 sm:px-6 lg:px-16 flex items-center justify-center gap-1.5 sm:gap-4 md:gap-6 pointer-events-auto overflow-hidden">
                 <div className="flex-1 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-[#873f3b]/70 min-w-2 sm:min-w-6" />
-                <div className="flex items-center gap-1.5 sm:gap-2.5 md:gap-3 px-3 sm:px-5 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-[#E8DCBE] shadow-[0_4px_16px_rgba(212,175,55,0.12)] shrink-0 max-w-[calc(100vw-20px)] sm:max-w-none">
+                <div className="flex items-center gap-1 sm:gap-2.5 md:gap-3 px-2.5 sm:px-5 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-[#E8DCBE] shadow-[0_4px_16px_rgba(212,175,55,0.12)] shrink-0 max-w-[calc(100vw-20px)] sm:max-w-none overflow-hidden">
                   <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 bg-[#873f3b] shrink-0" />
-                  <span className="font-['Playfair_Display',Georgia,serif] text-[10px] min-[390px]:text-[11px] sm:text-xs md:text-sm tracking-tight min-[390px]:tracking-normal sm:tracking-wider text-[#1a241d] font-semibold whitespace-nowrap">
+                  <span className="font-['Playfair_Display',Georgia,serif] text-[9px] min-[360px]:text-[10.5px] sm:text-xs md:text-sm tracking-tight sm:tracking-wider text-[#1a241d] font-semibold truncate sm:whitespace-nowrap">
                     Clinical Dermatology &amp; Aesthetic Cosmetology
                   </span>
                   <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 bg-[#873f3b] shrink-0" />
@@ -151,9 +151,9 @@ export default function DoctorsSilkEditorial() {
                   </span>
                 </div>
 
-                {/* 4. Professional, Concise Patient Copy - Lead text on ONE SINGLE LINE */}
+                {/* 4. Professional, Concise Patient Copy */}
                 <div className="space-y-3 sm:space-y-3.5 text-sm sm:text-base md:text-[16px] leading-relaxed text-[#3a4034] mb-7 sm:mb-8">
-                  <p className="font-medium text-[#1a241d] whitespace-nowrap text-[12px] min-[400px]:text-[13px] sm:text-[14px] md:text-[14.5px] lg:text-[15px] xl:text-[15.5px]">
+                  <p className="font-medium text-[#1a241d] text-xs sm:text-[14px] md:text-[14.5px] lg:text-[15px] xl:text-[15.5px] leading-relaxed">
                     {doc.leadText}
                   </p>
                   <p className="text-[#4a5043]">
