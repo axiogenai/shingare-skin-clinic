@@ -153,15 +153,15 @@ const marqueeItems: MarqueeItem[] = [
 export default function SpecialtyMarquee() {
   return (
     <div className="w-full shrink-0 relative z-20 overflow-hidden bg-white/60 backdrop-blur-xl py-2.5 sm:py-3 border-y border-stone-200/70 select-none font-source shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-      <div className="flex w-max animate-marquee items-center">
+      <div className="flex w-max animate-marquee items-center will-change-transform">
         {[...Array(2)].map((_, loopIdx) => (
-          <div key={loopIdx} className="flex items-center">
+          <div key={loopIdx} className="flex items-center shrink-0">
             {marqueeItems.map((item, index) => {
               const Glyph = item.glyph;
               return (
                 <div
                   key={`${loopIdx}-${index}`}
-                  className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mx-2.5 rounded-full bg-white/95 hover:bg-white border border-stone-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all whitespace-nowrap"
+                  className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mx-2.5 rounded-full bg-white/95 hover:bg-white border border-stone-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all whitespace-nowrap shrink-0"
                 >
                   <Glyph />
                   <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-stone-600 bg-stone-100/90 px-2 py-0.5 rounded-md border border-stone-200/60">
