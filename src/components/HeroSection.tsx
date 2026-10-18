@@ -14,7 +14,6 @@ import {
   MapPin,
   ScanFace,
   ShieldCheck,
-  Sparkles,
   Stethoscope,
   SunMedium,
 } from "lucide-react";
@@ -68,11 +67,11 @@ export default function HeroSection() {
             </div>
 
             {/* Editorial Headline */}
-            <h1 className="font-['Playfair_Display',Georgia,serif] text-[24px] xs:text-[27px] sm:text-[32px] font-bold leading-[1.12] tracking-[-0.02em] text-[#1a221b]">
-              Healthy Skin,
+            <h1 className="font-['Playfair_Display',Georgia,serif] text-[24px] xs:text-[27px] sm:text-[32px] font-bold leading-[1.14] tracking-[-0.02em] text-[#1a221b]">
+              Your skin,
               <br />
               <span className="relative inline-block italic font-medium text-[#873f3b]">
-                Naturally
+                in expert
                 <svg
                   className="absolute -bottom-1 left-0 w-full h-1.5 text-[#873f3b]/50 pointer-events-none"
                   viewBox="0 0 100 10"
@@ -83,7 +82,7 @@ export default function HeroSection() {
                 </svg>
               </span>
               <br />
-              Beautiful You.
+              hands.
             </h1>
 
             {/* Category Subtitle */}
@@ -140,7 +139,7 @@ export default function HeroSection() {
             {/* 1. Skin Treatments */}
             <div className="flex flex-col items-center text-center px-1">
               <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
-                <Sparkles size={19} strokeWidth={1.8} />
+                <ScanFace size={19} strokeWidth={1.8} />
               </div>
               <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
                 Skin<br />Treatments
