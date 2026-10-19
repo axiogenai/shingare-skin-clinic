@@ -142,15 +142,6 @@ body {
   will-change: transform;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .animate-marquee:hover {
-    animation-play-state: paused;
-  }
-  .animate-marquee-slow:hover {
-    animation-play-state: paused;
-  }
-}
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -170,81 +161,51 @@ body {
   animation: pulse-subtle 3s ease-in-out infinite;
 }
 
-/* Clinic Map Pin Radar Pulse & Beacon Animations */
-@keyframes map-radar-pulse {
+/* Clinic Map Pin Smooth Translucent Pulse Halo (Works on 100% of Mobile & Desktop Browsers) */
+@keyframes map-pin-halo {
   0% {
-    transform: scale(0.35);
-    -webkit-transform: scale(0.35);
-    opacity: 0.95;
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    opacity: 0.85;
   }
-  60% {
-    opacity: 0.55;
+  50% {
+    opacity: 0.4;
   }
   100% {
-    transform: scale(2.3);
-    -webkit-transform: scale(2.3);
+    transform: scale(2.2);
+    -webkit-transform: scale(2.2);
     opacity: 0;
   }
 }
 
-@-webkit-keyframes map-radar-pulse {
+@-webkit-keyframes map-pin-halo {
   0% {
-    -webkit-transform: scale(0.35);
-    opacity: 0.95;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0.85;
   }
-  60% {
-    opacity: 0.55;
+  50% {
+    opacity: 0.4;
   }
   100% {
-    -webkit-transform: scale(2.3);
+    -webkit-transform: scale(2.2);
+    transform: scale(2.2);
     opacity: 0;
   }
 }
 
-@keyframes map-beacon-breathe {
-  0%, 100% {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(140, 35, 31, 0.7);
-  }
-  50% {
-    transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    box-shadow: 0 0 8px 3px rgba(140, 35, 31, 0.85);
-  }
-}
-
-@-webkit-keyframes map-beacon-breathe {
-  0%, 100% {
-    -webkit-transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(140, 35, 31, 0.7);
-  }
-  50% {
-    -webkit-transform: scale(1.2);
-    box-shadow: 0 0 8px 3px rgba(140, 35, 31, 0.85);
-  }
-}
-
-.map-radar-wave-1 {
-  animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) infinite !important;
-  -webkit-animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) infinite !important;
+.map-pin-halo-1 {
+  animation: map-pin-halo 2.2s cubic-bezier(0.2, 0.8, 0.3, 1) infinite !important;
+  -webkit-animation: map-pin-halo 2.2s cubic-bezier(0.2, 0.8, 0.3, 1) infinite !important;
   will-change: transform, opacity;
   transform-origin: center center;
   -webkit-transform-origin: center center;
 }
 
-.map-radar-wave-2 {
-  animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) 1.2s infinite !important;
-  -webkit-animation: map-radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) 1.2s infinite !important;
+.map-pin-halo-2 {
+  animation: map-pin-halo 2.2s cubic-bezier(0.2, 0.8, 0.3, 1) 1.1s infinite !important;
+  -webkit-animation: map-pin-halo 2.2s cubic-bezier(0.2, 0.8, 0.3, 1) 1.1s infinite !important;
   will-change: transform, opacity;
-  transform-origin: center center;
-  -webkit-transform-origin: center center;
-}
-
-.map-beacon-core {
-  animation: map-beacon-breathe 2s ease-in-out infinite !important;
-  -webkit-animation: map-beacon-breathe 2s ease-in-out infinite !important;
-  will-change: transform, box-shadow;
   transform-origin: center center;
   -webkit-transform-origin: center center;
 }

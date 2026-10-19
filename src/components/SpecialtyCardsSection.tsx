@@ -165,7 +165,7 @@ const stackDepth = (c: number, index: number, maxDepth: number) => {
 
 const calcOpacity = (c: number, index: number, maxDepth: number) => {
   const depthOpacity = clamp(maxDepth + 1 - (index - Math.max(c, 0)), 0, 1);
-  const exitOp = clamp(1 - exitProgress(c, index) * 1.5, 0, 1);
+  const exitOp = clamp(1 - exitProgress(c, index) * 1.6, 0, 1);
   return depthOpacity * exitOp;
 };
 
@@ -387,6 +387,7 @@ export default function SpecialtyCardsSection() {
   const [isSectionActive, setIsSectionActive] = useState(false);
   const isSectionActiveRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
@@ -439,35 +440,49 @@ export default function SpecialtyCardsSection() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isSectionActive) return;
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-        e.preventDefault();
-        scrollToCard(Math.min(total - 1, activeCardIndex + 1));
+        if (activeCardIndex < total - 1) {
+          e.preventDefault();
+          scrollToCard(activeCardIndex + 1);
+        }
       } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-        e.preventDefault();
-        scrollToCard(Math.max(0, activeCardIndex - 1));
+        if (activeCardIndex > 0) {
+          e.preventDefault();
+          scrollToCard(activeCardIndex - 1);
+        }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isSectionActive, activeCardIndex, scrollToCard, total]);
 
-  // Touch swipe support for mobile
+  // Touch swipe support for horizontal card gestures (vertical scroll is 100% native browser scroll)
   const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartY.current === null) return;
-    const touchEndY = e.changedTouches[0].clientY;
-    const diff = touchStartY.current - touchEndY;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        // Swiped up -> next card
-        scrollToCard(Math.min(total - 1, activeCardIndex + 1));
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const diffX = touchStartX.current - e.changedTouches[0].clientX;
+    const diffY = touchStartY.current - e.changedTouches[0].clientY;
+
+    const isHorizontal = Math.abs(diffX) > Math.abs(diffY);
+    const threshold = 40;
+
+    // Only swipe cards on clear horizontal swipes — never touch vertical scroll!
+    if (isHorizontal && Math.abs(diffX) > threshold) {
+      if (diffX > 0) {
+        if (activeCardIndex < total - 1) {
+          scrollToCard(activeCardIndex + 1);
+        }
       } else {
-        // Swiped down -> previous card
-        scrollToCard(Math.max(0, activeCardIndex - 1));
+        if (activeCardIndex > 0) {
+          scrollToCard(activeCardIndex - 1);
+        }
       }
     }
+
+    touchStartX.current = null;
     touchStartY.current = null;
   };
 
@@ -479,7 +494,7 @@ export default function SpecialtyCardsSection() {
       style={{ height: `${CLINIC_CARDS.length * 100}vh` }}
     >
       {/* Sticky Presentation Viewport Frame matching drmonalisclinic.com */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-start items-center overflow-hidden py-4 sm:py-6 select-none">
+      <div className="sticky top-[54px] sm:top-[60px] h-[calc(100dvh-54px)] sm:h-[calc(100dvh-60px)] w-full flex flex-col justify-start items-center overflow-hidden py-3 sm:py-5 select-none">
         {/* Soft atmospheric ambient glow matching luxury palette */}
         <div
           aria-hidden="true"
@@ -490,21 +505,21 @@ export default function SpecialtyCardsSection() {
         </div>
 
         {/* Editorial Section Header */}
-        <div className="mx-auto max-w-3xl text-center px-4 pt-2 sm:pt-4 pb-2 sm:pb-3 shrink-0 z-20 mb-4 sm:mb-6 md:mb-8">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#292d27]/15 bg-white/80 px-3.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[#626a59] shadow-[0_2px_10px_rgba(41,45,39,0.04)] backdrop-blur-xl">
+        <div className="mx-auto max-w-3xl text-center px-4 pt-1 sm:pt-3 pb-1 shrink-0 z-20 mb-2 sm:mb-4">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#292d27]/15 bg-white/90 px-3.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[#626a59] shadow-[0_2px_10px_rgba(41,45,39,0.04)] backdrop-blur-xl">
             Our services
           </span>
-          <h2 className="mt-2 font-['DM_Serif_Display',serif] text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-normal leading-tight tracking-tight text-[#292d27]">
+          <h2 className="mt-1.5 font-['DM_Serif_Display',serif] text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-normal leading-tight tracking-tight text-[#292d27]">
             Find the right place to <span className="italic font-normal text-[#7e423e]">start.</span>
           </h2>
-          <p className="mx-auto mt-1 max-w-xl text-xs sm:text-[13px] leading-relaxed text-[#66695f] hidden sm:block">
+          <p className="mx-auto mt-1 max-w-xl text-xs sm:text-[13px] leading-relaxed text-[#66695f]">
             Explore our care areas, learn what each involves, and book a consultation when you are ready.
           </p>
         </div>
 
         {/* Central Deck Stage matching drmonalisclinic.com (cards stacked with upcoming peeking at bottom) */}
         <div
-          className="relative w-full max-w-[820px] h-[460px] sm:h-[400px] flex items-center justify-center mt-4 sm:mt-8 md:mt-12 lg:mt-16 mb-auto"
+          className="relative w-full max-w-[820px] h-[460px] sm:h-[400px] flex items-center justify-center my-auto"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >

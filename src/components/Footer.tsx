@@ -315,19 +315,27 @@ export default function Footer() {
           </svg>
         </div>
 
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-10 lg:px-16 py-3.5 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-2.5 sm:gap-4 text-xs font-sans">
-          {/* Left: Corrected Official Clinic Copyright */}
+        <div className="max-w-[1320px] mx-auto px-5 sm:px-10 lg:px-16 py-4 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 text-xs font-sans">
+          {/* Left: Official Clinic Copyright */}
           <div className="text-white/70 text-[10.5px] sm:text-xs text-center md:text-left">
             © 2026 Shingare Skin &amp; Cosmetics Clinic. All rights reserved.
           </div>
 
-          {/* Center: Delicate Leaf Icon with Fine White Dividers */}
-          <div className="hidden md:flex items-center gap-3 opacity-60">
-            <div className="w-12 h-[1px] bg-white/40" />
-            <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C3 5 3 15 3 15s0-1 .35-1.5C4.65 11.5 8 11 17 8Z" />
-            </svg>
-            <div className="w-12 h-[1px] bg-white/40" />
+          {/* Center: Creator Attribution */}
+          <div className="flex items-center justify-center text-[11px] sm:text-xs text-white/75">
+            <a
+              href="https://team.axiogen.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-white transition-colors group"
+            >
+              <span>Made with</span>
+              <span className="text-[#C5A059] group-hover:scale-125 transition-transform duration-150 inline-block text-xs" aria-hidden="true">♥</span>
+              <span>by</span>
+              <span className="font-semibold text-white underline decoration-[#C5A059]/70 underline-offset-4 group-hover:decoration-[#C5A059] transition-all">
+                team.axiogen.in
+              </span>
+            </a>
           </div>
 
           {/* Right: Legal Links */}

@@ -153,7 +153,35 @@ const marqueeItems: MarqueeItem[] = [
 export default function SpecialtyMarquee() {
   return (
     <div className="w-full shrink-0 relative z-20 overflow-hidden bg-white/60 backdrop-blur-xl py-2.5 sm:py-3 border-y border-stone-200/70 select-none font-source shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-      <div className="flex w-max animate-marquee items-center will-change-transform">
+      <style>{`
+        @keyframes specialtyMarqueeScroll {
+          0% {
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-50%, 0, 0);
+            -webkit-transform: translate3d(-50%, 0, 0);
+          }
+        }
+        @-webkit-keyframes specialtyMarqueeScroll {
+          0% {
+            -webkit-transform: translate3d(0, 0, 0);
+          }
+          100% {
+            -webkit-transform: translate3d(-50%, 0, 0);
+          }
+        }
+        .specialty-marquee-track {
+          display: flex !important;
+          width: max-content !important;
+          animation: specialtyMarqueeScroll 26s linear infinite !important;
+          -webkit-animation: specialtyMarqueeScroll 26s linear infinite !important;
+          animation-play-state: running !important;
+          will-change: transform;
+        }
+      `}</style>
+      <div className="flex w-max specialty-marquee-track items-center will-change-transform">
         {[...Array(2)].map((_, loopIdx) => (
           <div key={loopIdx} className="flex items-center shrink-0">
             {marqueeItems.map((item, index) => {

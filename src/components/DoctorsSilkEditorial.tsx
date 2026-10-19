@@ -165,9 +165,9 @@ export default function DoctorsSilkEditorial() {
                 <div className="flex items-center">
                   <Link
                     href={`/book-now?doctor=${encodeURIComponent(doc.name)}`}
-                    className="inline-flex items-center justify-center gap-2.5 bg-[#1a241d] text-white px-7 py-3.5 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1a241d] hover:bg-[#28352b] text-white px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold tracking-wide shadow-[0_4px_16px_rgba(26,36,29,0.16)] active:scale-[0.98] transition-all duration-150 whitespace-nowrap"
                   >
-                    <CalendarCheck className="w-4 h-4 text-[#D4AF37]" />
+                    <CalendarCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C5A059] shrink-0" />
                     <span>{doc.consultCta}</span>
                   </Link>
                 </div>

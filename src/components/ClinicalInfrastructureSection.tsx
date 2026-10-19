@@ -7,7 +7,7 @@ import {
   Activity,
   Droplets,
   Flame,
-  Sparkles,
+  SunMedium,
   ShieldCheck,
 } from "lucide-react";
 
@@ -80,7 +80,7 @@ const platforms: Platform[] = [
     clinicalImpact:
       "Delivers therapeutic 311nm light waves to calm inflammatory immune cells and stimulate natural repigmentation.",
     safetyProfile: "Drug-free, non-thermal • Controlled dosimetry",
-    icon: Sparkles,
+    icon: SunMedium,
   },
 ];
 

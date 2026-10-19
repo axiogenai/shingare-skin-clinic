@@ -1,93 +1,80 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-
-function AnimatedCounter({ end, suffix = "", duration = 2 }: { end: number; suffix?: string; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let startTime: number | null = null;
-          const animate = (time: number) => {
-            if (!startTime) startTime = time;
-            const progress = Math.min((time - startTime) / (duration * 1000), 1);
-            setCount(Math.floor(progress * end));
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            } else {
-              setCount(end);
-            }
-          };
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.25 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [end, duration, hasAnimated]);
-
-  return (
-    <span ref={ref} className="font-playfair font-normal italic">
-      {count}
-      {suffix}
-    </span>
-  );
-}
+import React from "react";
 
 export default function ConfidenceSection() {
-  const stats = [
-    { label: "Years in Dermatology & Hair Care", value: 12, suffix: "+" },
-    { label: "Patients Treated Annually", value: 3, suffix: "k+" },
-    { label: "Doctor-Led Procedures", value: 100, suffix: "%" },
-    { label: "MMC / Medical Council Verified Doctors", value: 2, suffix: "" },
+  const clinicalStandards = [
+    {
+      code: "01",
+      title: "100% Doctor-Led Care",
+      subtitle: "MMC REGISTERED SPECIALISTS",
+      description:
+        "Every consultation, diagnosis, and laser procedure is personally performed by Dr. Pramod or Dr. Priyanka Shingare — never delegated to technicians.",
+    },
+    {
+      code: "02",
+      title: "US FDA-Cleared Lasers",
+      subtitle: "GOLD-STANDARD PLATFORMS",
+      description:
+        "Equipped with dual-wavelength Q-Switched Nd:YAG lasers, polarized digital dermoscopy, and autologous PRP/GFC systems under hospital-grade sterilization.",
+    },
+    {
+      code: "03",
+      title: "Root-Cause Diagnostics",
+      subtitle: "ZERO GUESSWORK • HONEST MEDICINE",
+      description:
+        "Science-backed treatment architecture tailored to your unique skin biology with transparent medical counsel and zero commercial upselling.",
+    },
   ];
 
   return (
-    <section className="bg-transparent py-20 md:py-28 relative font-source">
-      <div className="max-w-[1140px] mx-auto px-5 sm:px-6 md:px-8 flex flex-col items-center text-center">
-        {/* Pill Badge */}
-        <div className="inline-block bg-[#FAEDDA]/90 backdrop-blur-md text-gray-900 text-[10px] xs:text-xs md:text-sm font-semibold px-3.5 sm:px-5 py-1.5 rounded-full mb-5 uppercase tracking-wider border border-[#E8DCBE]/70 shadow-2xs max-w-full truncate">
-          CONFIDENCE ROOTED IN CLINICAL SCIENCE
+    <section className="relative isolate py-14 sm:py-18 md:py-22 bg-[#FAF8F5] border-y border-[#292d27]/8 select-none">
+      <div className="max-w-[1200px] mx-auto px-4 xs:px-6 sm:px-8">
+        {/* Editorial Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#292d27]/10 shadow-[0_2px_6px_rgba(0,0,0,0.03)] mb-3.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#873f3b]" />
+            <span className="text-[9.5px] xs:text-[10px] font-mono font-bold tracking-[0.16em] text-[#555a50] uppercase">
+              THE CLINICAL STANDARD
+            </span>
+          </div>
+
+          <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl xs:text-3xl sm:text-4xl lg:text-[40px] font-bold text-[#1a221b] leading-[1.22] tracking-tight">
+            Advanced Clinical Dermatology.
+            <br />
+            <span className="italic font-medium text-[#873f3b]">
+              Ethical Care, Zero Compromise.
+            </span>
+          </h2>
+
+          <p className="mt-3 text-xs xs:text-sm sm:text-base text-[#555a50] leading-relaxed max-w-2xl mx-auto">
+            Delivering evidence-based medical dermatology, laser aesthetics, and trichology with physician-led rigor and absolute clinical transparency.
+          </p>
         </div>
 
-        {/* Short, Clean Headline */}
-        <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-normal leading-[1.2] text-gray-950 max-w-3xl mb-4">
-          Skin, Hair &amp; Laser Health.{" "}
-          <span className="italic text-[#108283] font-medium">
-            Expertly cared for.
-          </span>
-        </h2>
-
-        {/* Concise Subtitle */}
-        <p className="font-source text-gray-700 text-base sm:text-lg font-normal max-w-2xl mb-12 md:mb-16 leading-relaxed">
-          Evidence-based dermatological therapies at <strong className="font-semibold text-gray-950">Shingare Skin &amp; Cosmetics Clinic</strong>, Peth Vadgaon, delivering scientific care with zero guesswork.
-        </p>
-
-        {/* 4 Stats Grid - Clean numbers and text without card wrappers */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 md:gap-12 w-full pt-4">
-          {stats.map((stat) => (
+        {/* 3 Impressive Clinical Standard Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          {clinicalStandards.map((item) => (
             <div
-              key={stat.label}
-              className="flex flex-col items-center justify-center text-center"
+              key={item.code}
+              className="group relative rounded-2xl bg-white p-5 xs:p-6 sm:p-7 border border-[#292d27]/10 shadow-[0_4px_20px_rgba(40,45,35,0.04),inset_0_1px_0_0_rgba(255,255,255,0.95)] hover:border-[#873f3b]/30 transition-all duration-200"
             >
-              {/* Number on top in teal italic serif */}
-              <div className="text-[#108283] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-normal leading-none mb-2 sm:mb-3 font-playfair">
-                <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+              <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-[#292d27]/8">
+                <span className="font-mono text-[11px] font-bold text-[#873f3b] tracking-wider">
+                  STANDARD {item.code}
+                </span>
+                <span className="w-2 h-2 rounded-full bg-[#873f3b]/20 group-hover:bg-[#873f3b] transition-colors" />
               </div>
 
-              {/* Label underneath in delicate italic serif */}
-              <p className="font-playfair text-xs xs:text-sm sm:text-base lg:text-[17px] text-gray-800 italic font-normal tracking-wide max-w-[200px]">
-                {stat.label}
+              <h3 className="font-['Playfair_Display',Georgia,serif] text-lg sm:text-xl font-bold text-[#1a221b] tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-[10px] xs:text-[10.5px] font-mono font-bold uppercase tracking-[0.14em] text-[#873f3b] mt-1">
+                {item.subtitle}
+              </p>
+
+              <p className="mt-2.5 text-xs sm:text-[13px] text-[#555a50] leading-relaxed">
+                {item.description}
               </p>
             </div>
           ))}

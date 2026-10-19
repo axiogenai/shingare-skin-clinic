@@ -41,12 +41,7 @@ export default function HeroSection() {
       {/* MOBILE HERO PRESENTATION (< lg)                                */}
       {/* Full-Bleed Luxury Editorial Screen - Reference Design Aligned  */}
       {/* ============================================================== */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="block lg:hidden w-full select-none"
-      >
+      <div className="block lg:hidden w-full select-none">
         {/* Upper Editorial Visual Zone */}
         <div className="relative w-full min-h-[310px] xs:min-h-[340px] sm:min-h-[380px] bg-gradient-to-b from-[#F7F2EB] via-[#F4ECE2] to-[#EFE7DD] overflow-hidden pt-5 xs:pt-6 pb-3">
           
@@ -58,52 +53,86 @@ export default function HeroSection() {
           {/* Soft ambient radial glow behind model */}
           <div className="pointer-events-none absolute right-0 top-0 w-80 h-80 rounded-full bg-white/40 blur-3xl" />
 
-          {/* Left Column: Location, Headline, Subtitle, Verified Badge */}
-          <div className="relative z-20 w-[58%] xs:w-[56%] sm:w-[52%] pl-4 xs:pl-5 sm:pl-8 pr-1 pt-1 flex flex-col items-start select-none">
-            {/* Kolhapur Location Pill */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-[#292d27]/10 text-[9.5px] xs:text-[10px] font-semibold text-[#5c6054] mb-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] backdrop-blur-xs">
-              <MapPin size={11} className="text-[#873f3b]" />
-              <span className="tracking-[0.16em] uppercase font-mono">KOLHAPUR</span>
-            </div>
+          {/* Left Column: Location, Headline, Subtitle */}
+          <div className="relative z-20 w-[58%] xs:w-[56%] sm:w-[52%] pl-4 xs:pl-5 sm:pl-8 pr-1 pt-6 xs:pt-7 sm:pt-8 flex flex-col items-start select-none">
+            {/* Top Micro-Badges: MMC Verified & Kolhapur Location (Guaranteed Same Line) */}
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center gap-1.5 mb-3.5 xs:mb-4 flex-nowrap whitespace-nowrap"
+            >
+              {/* MMC Verified Badge */}
+              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-[#873f3b]/35 shadow-[0_2px_6px_rgba(135,63,59,0.06)] shrink-0">
+                <ShieldCheck size={11} className="text-[#873f3b] shrink-0" />
+                <span className="text-[8px] xs:text-[8.5px] font-mono font-bold tracking-[0.1em] text-[#873f3b] uppercase whitespace-nowrap">
+                  MMC VERIFIED
+                </span>
+              </div>
+
+              {/* Kolhapur Location Pill */}
+              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-[#292d27]/10 text-[8px] xs:text-[8.5px] font-semibold text-[#555a50] shadow-[0_2px_6px_rgba(0,0,0,0.04)] shrink-0">
+                <MapPin size={10.5} className="text-[#873f3b] shrink-0" />
+                <span className="tracking-[0.12em] uppercase font-mono font-bold whitespace-nowrap">
+                  KOLHAPUR
+                </span>
+              </div>
+            </motion.div>
 
             {/* Editorial Headline */}
-            <h1 className="font-['Playfair_Display',Georgia,serif] text-[24px] xs:text-[27px] sm:text-[32px] font-bold leading-[1.14] tracking-[-0.02em] text-[#1a221b]">
+            <motion.h1
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="font-['Playfair_Display',Georgia,serif] text-[28px] xs:text-[31px] sm:text-[35px] font-bold leading-[1.22] xs:leading-[1.24] tracking-[-0.02em] text-[#1a221b]"
+            >
               Your skin,
               <br />
               <span className="relative inline-block italic font-medium text-[#873f3b]">
                 in expert
                 <svg
-                  className="absolute -bottom-1 left-0 w-full h-1.5 text-[#873f3b]/50 pointer-events-none"
+                  className="absolute -bottom-1 left-0 w-full h-1.5 text-[#873f3b]/60 pointer-events-none"
                   viewBox="0 0 100 10"
                   fill="none"
                   preserveAspectRatio="none"
                 >
-                  <path d="M 2,5 Q 50,10 98,3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                    d="M 2,5 Q 50,10 98,3"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </span>
               <br />
               hands.
-            </h1>
+            </motion.h1>
 
             {/* Category Subtitle */}
-            <div className="mt-2.5 xs:mt-3 flex flex-col items-start">
-              <span className="text-[9px] xs:text-[10px] font-mono font-bold tracking-[0.18em] text-[#555a50] uppercase">
+            <motion.div
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-3.5 xs:mt-4 flex flex-col items-start"
+            >
+              <span className="text-[8.5px] xs:text-[9px] font-mono font-bold tracking-[0.12em] text-[#555a50] uppercase whitespace-nowrap">
                 SKIN • HAIR • COSMETICS
               </span>
-              <div className="w-10 h-[2px] bg-[#873f3b] mt-1 rounded-full" />
-            </div>
-
-            {/* Medical Accreditation Badge (MMC Verified) */}
-            <div className="mt-3 xs:mt-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-[#873f3b]/25 shadow-[0_2px_10px_rgba(135,63,59,0.08)]">
-              <ShieldCheck size={13} className="text-[#873f3b]" />
-              <span className="text-[8.5px] xs:text-[9.5px] font-mono font-bold tracking-[0.14em] text-[#873f3b] uppercase">
-                MMC VERIFIED
-              </span>
-            </div>
+              <div className="w-10 h-[2px] bg-[#873f3b] mt-1.5 rounded-full" />
+            </motion.div>
           </div>
 
           {/* Right Column: Prominent Model Cutout Portrait */}
-          <div className="absolute right-[-14px] xs:right-[-6px] sm:right-4 bottom-0 w-[58%] xs:w-[56%] sm:w-[50%] h-[310px] xs:h-[340px] sm:h-[380px] pointer-events-none z-10">
+          <div
+            style={{
+              WebkitMaskImage: "linear-gradient(to bottom, black 84%, transparent 96%)",
+              maskImage: "linear-gradient(to bottom, black 84%, transparent 96%)",
+            }}
+            className="absolute right-[-14px] xs:right-[-6px] sm:right-4 bottom-0 w-[58%] xs:w-[56%] sm:w-[50%] h-[310px] xs:h-[340px] sm:h-[380px] pointer-events-none z-10"
+          >
             <Image
               src="/girl-latest.png"
               alt="Portrait representing skin and cosmetic care at Shingare Skin Clinic"
@@ -138,7 +167,7 @@ export default function HeroSection() {
           <div className="grid grid-cols-4 my-4 py-3 border-y border-[#292d27]/8 divide-x divide-[#292d27]/10">
             {/* 1. Skin Treatments */}
             <div className="flex flex-col items-center text-center px-1">
-              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform duration-150 active:scale-95">
                 <ScanFace size={19} strokeWidth={1.8} />
               </div>
               <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
@@ -148,7 +177,7 @@ export default function HeroSection() {
 
             {/* 2. Hair Restoration */}
             <div className="flex flex-col items-center text-center px-1">
-              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform duration-150 active:scale-95">
                 <Droplets size={19} strokeWidth={1.8} />
               </div>
               <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
@@ -158,7 +187,7 @@ export default function HeroSection() {
 
             {/* 3. Laser Aesthetics */}
             <div className="flex flex-col items-center text-center px-1">
-              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform duration-150 active:scale-95">
                 <SunMedium size={19} strokeWidth={1.8} />
               </div>
               <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
@@ -168,7 +197,7 @@ export default function HeroSection() {
 
             {/* 4. Personalized Care */}
             <div className="flex flex-col items-center text-center px-1">
-              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform active:scale-95">
+              <div className="w-11 h-11 xs:w-13 xs:h-13 rounded-full bg-[#f6ece4] text-[#873f3b] flex items-center justify-center shadow-xs border border-[#873f3b]/12 transition-transform duration-150 active:scale-95">
                 <HeartHandshake size={19} strokeWidth={1.8} />
               </div>
               <span className="text-[8px] xs:text-[9.5px] font-bold tracking-wider text-[#353a30] uppercase mt-1.5 leading-[1.2]">
@@ -213,7 +242,7 @@ export default function HeroSection() {
             </Link>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* ============================================================== */}
       {/* DESKTOP / LAPTOP HERO PRESENTATION (lg+)                       */}
@@ -221,12 +250,7 @@ export default function HeroSection() {
       {/* ============================================================== */}
       <div className="hidden lg:grid mx-auto max-w-[1440px] items-center gap-8 lg:gap-8 xl:grid-cols-[0.95fr_1.05fr] xl:gap-16 2xl:gap-20">
         {/* Left Column: Editorial Headline & Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, ease: "easeOut" }}
-          className="relative z-10 w-full max-w-2xl mx-auto lg:mx-0"
-        >
+        <div className="relative z-10 w-full max-w-2xl mx-auto lg:mx-0">
 
           {/* Clinic Brand Sub-title */}
           <div className="mb-4 sm:mb-5 flex items-center gap-2 sm:gap-3 select-none flex-wrap xs:flex-nowrap">
@@ -252,8 +276,11 @@ export default function HeroSection() {
           </div>
 
           {/* Hero Title */}
-          <h1
+          <motion.h1
             id="homepage-hero-title"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="font-['Playfair_Display',Georgia,serif] text-[2.3rem] xs:text-[2.7rem] sm:text-[3.3rem] md:text-[3.8rem] lg:text-[4.2rem] xl:text-[4.6rem] font-bold leading-[1.08] tracking-[-0.025em] text-[#1b261e]"
           >
             Your skin,
@@ -267,7 +294,10 @@ export default function HeroSection() {
                 fill="none"
                 preserveAspectRatio="none"
               >
-                <path
+                <motion.path
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.75, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                   d="M 4,7 Q 150,18 296,5"
                   stroke="currentColor"
                   strokeWidth="3.2"
@@ -276,12 +306,17 @@ export default function HeroSection() {
               </svg>
             </span>{" "}
             hands.
-          </h1>
+          </motion.h1>
 
           {/* Subtitle Description */}
-          <p className="mt-4 sm:mt-5 max-w-lg text-[14px] sm:text-[15px] leading-relaxed text-[#555a50]">
+          <motion.p
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-4 sm:mt-5 max-w-lg text-[14px] sm:text-[15px] leading-relaxed text-[#555a50]"
+          >
             Thoughtful dermatology, hair care and aesthetic treatments — with clear guidance, personalised plans and care centred around you.
-          </p>
+          </motion.p>
 
           {/* CTAs */}
           <div className="mt-6 sm:mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -311,15 +346,10 @@ export default function HeroSection() {
               </span>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Right Column: Hero Visual Arch with Floating Badges */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97, y: 16 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.12, ease: "easeOut" }}
-          className="relative mx-auto w-full max-w-[560px] lg:max-w-[520px] xl:max-w-[580px] lg:ml-auto"
-        >
+        <div className="relative mx-auto w-full max-w-[560px] lg:max-w-[520px] xl:max-w-[580px] lg:ml-auto">
           <div aria-hidden="true" className="absolute inset-x-[8%] bottom-[3%] top-[4%] rounded-[48%] border border-white/70 bg-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,.8)] backdrop-blur-[2px]" />
           
           {/* Arch Visual Container */}
@@ -355,13 +385,7 @@ export default function HeroSection() {
               <span className="mt-0.5 block text-xs sm:text-sm font-semibold text-[#2d312a]">Peth Vadgaon, Kolhapur</span>
             </span>
           </div>
-        </motion.div>
-      </div>
-
-      {/* Bottom Subtle Divider */}
-      <div className="mx-auto mt-10 sm:mt-12 flex max-w-[1440px] items-center justify-between border-t border-[#6c715f]/15 pt-4 text-[9px] font-semibold uppercase tracking-[.16em] text-[#77796f] sm:text-[10px]">
-        <span>Clinical knowledge. Human care.</span>
-        <span className="hidden items-center gap-2 sm:inline-flex"><span className="h-px w-8 bg-[#7e423e]/60" /> Scroll to explore</span>
+        </div>
       </div>
     </section>
   );

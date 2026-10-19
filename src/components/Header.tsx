@@ -18,11 +18,18 @@ export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobileTreatmentsOpen, setIsMobileTreatmentsOpen] = useState(false);
   const [isTreatmentsOpen, setIsTreatmentsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Lock body scroll when mobile navigation drawer is open
   useScrollLock(isMobileOpen);
+
+  useEffect(() => {
+    if (!isMobileOpen) {
+      setIsMobileTreatmentsOpen(false);
+    }
+  }, [isMobileOpen]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -75,8 +82,8 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 print:hidden ${
           isScrolled
-            ? "bg-[#E6DFD5]/95 backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] border-b border-[#D2C8BC]/70"
-            : "bg-[#E8E2D8]/90 backdrop-blur-xl border-b border-[#D5CCC0]/60 shadow-[0_2px_16px_rgba(0,0,0,0.03)]"
+            ? "bg-[#FAF7F2]/95 backdrop-blur-2xl shadow-[0_4px_24px_rgba(40,45,35,0.06)] border-b border-[#292d27]/10"
+            : "bg-[#FAF7F2]/90 backdrop-blur-xl border-b border-[#292d27]/8 shadow-[0_2px_16px_rgba(40,45,35,0.03)]"
         }`}
       >
         <div className="w-full max-w-[1440px] mx-auto px-2.5 sm:px-6 lg:px-6 xl:px-10 h-[54px] sm:h-[60px] flex items-center justify-between">
@@ -245,175 +252,233 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Mobile Hamburger Menu Button */}
+          {/* Mobile Bespoke Luxury Menu Button */}
           <div className="lg:hidden flex items-center">
             <button
               type="button"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-xl text-[#4A4238] hover:text-black hover:bg-black/5 active:scale-95 transition-all"
-              aria-label="Toggle menu"
+              className="w-10 h-10 rounded-full bg-white/90 hover:bg-white border border-[#292d27]/12 shadow-[0_2px_8px_rgba(40,45,35,0.05)] backdrop-blur-md flex items-center justify-center active:scale-[0.95] transition-all duration-150 cursor-pointer"
+              aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileOpen}
             >
-              {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {/* Bespoke Architectural Horology Bars */}
+              <div className="relative w-4 h-3 flex flex-col justify-between items-end pointer-events-none">
+                <span
+                  className={`h-[1.75px] rounded-full transition-all duration-200 ease-out origin-center ${
+                    isMobileOpen
+                      ? "w-4 bg-[#873f3b] translate-y-[5px] rotate-45"
+                      : "w-4 bg-[#1a221b]"
+                  }`}
+                />
+                <span
+                  className={`h-[1.75px] rounded-full transition-all duration-150 ease-out ${
+                    isMobileOpen
+                      ? "w-0 opacity-0"
+                      : "w-2.5 bg-[#873f3b]"
+                  }`}
+                />
+                <span
+                  className={`h-[1.75px] rounded-full transition-all duration-200 ease-out origin-center ${
+                    isMobileOpen
+                      ? "w-4 bg-[#873f3b] -translate-y-[5px] -rotate-45"
+                      : "w-3.5 bg-[#1a221b]"
+                  }`}
+                />
+              </div>
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
-      {isMobileOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
-            onClick={() => setIsMobileOpen(false)}
-          />
+      {/* Mobile Drawer Menu with Simple Smooth Slide Animation */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${
+          isMobileOpen ? "opacity-100 pointer-events-auto visible" : "opacity-0 pointer-events-none invisible"
+        }`}
+      >
+        {/* Backdrop Fade */}
+        <div
+          className={`fixed inset-0 bg-black/45 backdrop-blur-xs transition-opacity duration-300 ${
+            isMobileOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setIsMobileOpen(false)}
+        />
 
-          <div className="fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-[#FAF7F2] shadow-2xl z-50 p-6 flex flex-col justify-between overflow-y-auto">
-            <div>
-              <div className="flex items-center justify-between pb-5 border-b border-[#E0D8CE]">
-                <div className="flex items-center gap-2">
-                  <Image
-                    src="/logo-hd.png"
-                    alt="Shingare Skin & Cosmetics Clinic"
-                    width={32}
-                    height={32}
-                    className="w-7 h-7 object-contain shrink-0"
-                  />
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      style={{
-                        fontFamily: "'Amita', 'Karma', serif",
-                        fontSize: "19px",
-                        fontWeight: 700,
-                        color: "#93231f",
-                        lineHeight: 1,
-                      }}
-                    >
-                      शिनगारे
-                    </span>
+        {/* Curved Floating Card Drawer */}
+        <div
+          className={`fixed top-2.5 right-2.5 bottom-2.5 w-[76%] xs:w-[295px] max-w-[320px] bg-[#FCFBF8] rounded-[28px] xs:rounded-[32px] shadow-[0_16px_44px_rgba(40,45,35,0.15),0_2px_6px_rgba(0,0,0,0.04),inset_0_1px_0_0_rgba(255,255,255,0.95)] z-50 p-4 xs:p-5 flex flex-col justify-between overflow-y-auto border border-[#292d27]/9 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            isMobileOpen ? "translate-x-0" : "translate-x-[115%]"
+          }`}
+        >
+          <div>
+            <div className="flex items-center justify-between pb-4 border-b border-[#292d27]/8">
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/logo-hd.png"
+                  alt="Shingare Skin & Cosmetics Clinic"
+                  width={30}
+                  height={30}
+                  className="w-6 h-6 xs:w-7 xs:h-7 object-contain shrink-0"
+                />
+                <div className="flex items-center gap-1.5">
+                  <span
+                    style={{
+                      fontFamily: "'Amita', 'Karma', serif",
+                      fontSize: "18px",
+                      fontWeight: 700,
+                      color: "#93231f",
+                      lineHeight: 1,
+                    }}
+                  >
+                    शिनगारे
+                  </span>
 
-                    <span
-                      style={{
-                        fontFamily: "'Mukta', 'Poppins', sans-serif",
-                        fontSize: "8px",
-                        fontWeight: 600,
-                        color: "#4A4238",
-                        letterSpacing: "0.16em",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      SKIN &amp; COSMETICS
-                    </span>
-                  </div>
+                  <span
+                    style={{
+                      fontFamily: "'Mukta', 'Poppins', sans-serif",
+                      fontSize: "8px",
+                      fontWeight: 500,
+                      color: "#4A4238",
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    SKIN &amp; COSMETICS
+                  </span>
                 </div>
-                <button
-                  onClick={() => setIsMobileOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-black/5 text-gray-500"
-                >
-                  <X className="w-5 h-5" />
-                </button>
               </div>
+              <button
+                type="button"
+                onClick={() => setIsMobileOpen(false)}
+                className="w-7 h-7 xs:w-8 xs:h-8 rounded-full bg-white border border-[#292d27]/10 text-[#873f3b] shadow-xs hover:bg-[#FAF7F2] active:scale-95 transition-all flex items-center justify-center cursor-pointer"
+                aria-label="Close menu"
+              >
+                <X className="w-3.5 h-3.5 text-[#873f3b]" />
+              </button>
+            </div>
 
-              <div className="py-5 space-y-1.5">
-                <Link
-                  href="/"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block px-3 py-2 rounded-xl text-xs uppercase tracking-[0.2em] font-semibold text-gray-800 hover:bg-[#EFE9DF]"
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/about"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block px-3 py-2 rounded-xl text-xs uppercase tracking-[0.2em] font-semibold text-gray-800 hover:bg-[#EFE9DF]"
-                >
-                  About
-                </Link>
+            <div className="py-2 divide-y divide-[#292d27]/8">
+              <Link
+                href="/"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
+              >
+                <span>Home</span>
+              </Link>
+              <Link
+                href="/about"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
+              >
+                <span>About</span>
+              </Link>
 
-                <div className="py-2 px-3">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#991b1b] font-bold mb-2">
+              {/* Treatments Collapsible Accordion (Hidden Directly by Default) */}
+              <div className="py-1">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileTreatmentsOpen(!isMobileTreatmentsOpen)}
+                  className="w-full flex items-center justify-between py-1.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors cursor-pointer select-none"
+                  aria-expanded={isMobileTreatmentsOpen}
+                >
+                  <span className={isMobileTreatmentsOpen ? "text-[#873f3b]" : ""}>
                     Treatments
-                  </p>
-                  <div className="space-y-1 pl-2 border-l-2 border-[#991b1b]/30">
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      isMobileTreatmentsOpen ? "rotate-180 text-[#873f3b]" : "text-gray-400"
+                    }`}
+                  />
+                </button>
+
+                {isMobileTreatmentsOpen && (
+                  <div className="space-y-0.5 pl-3 pr-1 py-1.5 my-1 border-l-2 border-[#873f3b]/35 ml-2 divide-y divide-[#292d27]/6">
                     {treatmentItems.map((t) => (
                       <Link
                         key={t.name}
                         href={t.href}
-                        onClick={() => setIsMobileOpen(false)}
-                        className="block py-1 text-xs text-gray-700 hover:text-[#991b1b] font-medium"
+                        onClick={() => {
+                          setIsMobileOpen(false);
+                          setIsMobileTreatmentsOpen(false);
+                        }}
+                        className="flex items-center justify-between py-1.5 px-2 rounded-lg text-xs text-gray-700 hover:text-[#873f3b] hover:bg-black/[0.02] font-normal transition-colors"
                       >
-                        {t.name}
+                        <span>{t.name}</span>
+                        <span className="text-[8px] font-mono uppercase text-[#873f3b] bg-[#873f3b]/8 px-2 py-0.5 rounded-full font-medium">
+                          {t.tag}
+                        </span>
                       </Link>
                     ))}
                   </div>
-                </div>
-
-                <Link
-                  href="/packages"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block px-3 py-2 rounded-xl text-xs uppercase tracking-[0.2em] font-semibold text-gray-800 hover:bg-[#EFE9DF]"
-                >
-                  Packages
-                </Link>
-                <Link
-                  href="/technology"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block px-3 py-2 rounded-xl text-xs uppercase tracking-[0.2em] font-semibold text-gray-800 hover:bg-[#EFE9DF]"
-                >
-                  Technology
-                </Link>
-                <Link
-                  href="/blog"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block px-3 py-2 rounded-xl text-xs uppercase tracking-[0.2em] font-semibold text-gray-800 hover:bg-[#EFE9DF]"
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/contact"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block px-3 py-2 rounded-xl text-xs uppercase tracking-[0.2em] font-semibold text-gray-800 hover:bg-[#EFE9DF]"
-                >
-                  Contact
-                </Link>
+                )}
               </div>
 
-              {/* Digital ClinicOS Shortcuts */}
-              <div className="pt-4 border-t border-[#E0D8CE] space-y-2">
-                <p className="text-[10px] uppercase tracking-wider text-gray-400 font-bold px-3">
-                  ClinicOS Digital Portal
-                </p>
-                <Link
-                  href="/live-queue"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-emerald-800 bg-emerald-50/80 hover:bg-emerald-100"
-                >
-                  <Activity className="w-3.5 h-3.5" />
-                  <span>Live Queue Radar</span>
-                </Link>
-                <Link
-                  href="/my-rx"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-teal-800 bg-teal-50/80 hover:bg-teal-100"
-                >
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>Audio Rx Voice Portal</span>
-                </Link>
-              </div>
+              <Link
+                href="/packages"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
+              >
+                <span>Packages</span>
+              </Link>
+              <Link
+                href="/technology"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
+              >
+                <span>Technology</span>
+              </Link>
+              <Link
+                href="/blog"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
+              >
+                <span>Blog</span>
+              </Link>
+              <Link
+                href="/contact"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
+              >
+                <span>Contact</span>
+              </Link>
             </div>
 
-            <div className="pt-4 border-t border-[#E0D8CE]">
+            {/* Digital ClinicOS Shortcuts */}
+            <div className="pt-3 border-t border-[#292d27]/8 space-y-1.5">
+              <p className="text-[9.5px] uppercase tracking-[0.14em] text-[#873f3b] font-mono font-medium px-3">
+                ClinicOS Digital Portal
+              </p>
               <Link
-                href="/book-now"
+                href="/live-queue"
                 onClick={() => setIsMobileOpen(false)}
-                className="w-full bg-[#991b1b] hover:bg-[#801616] text-white py-3 rounded-full text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 shadow-sm"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[#873f3b] bg-[#873f3b]/6 border border-[#873f3b]/12 hover:bg-[#873f3b]/10 transition-colors"
               >
-                <CalendarCheck className="w-4 h-4" />
-                <span>Book Now</span>
+                <Activity className="w-3.5 h-3.5" />
+                <span>Live Queue Radar</span>
+              </Link>
+              <Link
+                href="/my-rx"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[#1a221b] bg-[#1a221b]/5 border border-[#1a221b]/8 hover:bg-[#1a221b]/8 transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Audio Rx Voice Portal</span>
               </Link>
             </div>
           </div>
+
+          <div className="pt-3 border-t border-[#292d27]/8">
+            <Link
+              href="/book-now"
+              onClick={() => setIsMobileOpen(false)}
+              className="w-full bg-[#873f3b] hover:bg-[#723430] active:scale-[0.985] text-white py-2.5 rounded-full text-xs uppercase tracking-[0.16em] font-medium flex items-center justify-center gap-2 shadow-sm transition-all"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              <span>Book Token</span>
+            </Link>
+          </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
