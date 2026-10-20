@@ -17,6 +17,8 @@ import {
   ChevronDown,
   QrCode,
   Printer,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 const TREATMENT_OPTIONS = [
@@ -202,7 +204,7 @@ export default function AppointmentSection() {
           <div className="lg:col-span-7 flex flex-col">
             <div
               style={{ transform: "none", transition: "none" }}
-              className="bg-white border border-stone-200/80 rounded-3xl p-4 sm:p-7 md:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.03)] flex flex-col !transform-none !transition-none"
+              className="bg-white border border-stone-200/80 rounded-3xl px-3.5 py-4 sm:p-7 md:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.03)] flex flex-col !transform-none !transition-none"
             >
               {submittedToken ? (
                 <div className="space-y-4 my-auto">
@@ -331,24 +333,26 @@ export default function AppointmentSection() {
                 <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
                   <div className="space-y-4">
                     {/* Authentication Status Strip */}
-                    <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-[#FAF4F2] text-[#873f3b] flex items-center justify-center shrink-0">
-                          <ShieldCheck className="w-3.5 h-3.5" />
-                        </div>
-                        <div>
-                          <span className="text-xs font-bold text-gray-900 block leading-tight">
+                    <div className="flex items-start gap-2 sm:gap-2.5 pb-3 border-b border-gray-100 min-w-0">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#FAF4F2] text-[#873f3b] border border-[#873f3b]/15 flex items-center justify-center shrink-0 mt-0.5">
+                        <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0 pr-1 sm:pr-0">
+                        {/* Top Line: ClinicOS Verified OPD Portal + Small Official Token Label */}
+                        <div className="flex items-center justify-between gap-1.5 sm:gap-2 min-w-0">
+                          <span className="text-[12px] min-[390px]:text-[13px] sm:text-[15px] font-bold text-gray-950 block leading-tight whitespace-nowrap tracking-tight">
                             ClinicOS Verified OPD Portal
                           </span>
-                          <span className="text-[10px] text-gray-500 font-mono">
-                            MMC Reg. I-87218-A • Peth Vadgaon
+                          <span className="inline-flex items-center gap-1 text-[7px] min-[390px]:text-[7.5px] sm:text-[8px] font-mono font-bold bg-[#7e423e]/8 text-[#7e423e] border border-[#7e423e]/20 px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow-2xs whitespace-nowrap shrink-0">
+                            <span className="w-1 h-1 rounded-full bg-[#7e423e] shrink-0" />
+                            Official Token
                           </span>
                         </div>
+                        {/* Bottom Line: Full MMC Reg and Location with Zero Truncation */}
+                        <span className="text-[9.5px] sm:text-[10px] text-gray-500 font-mono block leading-normal mt-0.5 whitespace-nowrap">
+                          MMC Reg. I-87218-A • Peth Vadgaon
+                        </span>
                       </div>
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-semibold bg-[#7e423e]/8 text-[#7e423e] border border-[#7e423e]/18 px-2.5 py-0.5 rounded-full uppercase tracking-[0.16em] shadow-2xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7e423e]" />
-                        Official Token
-                      </span>
                     </div>
 
                     {/* Patient Name & Mobile */}
@@ -652,10 +656,11 @@ export default function AppointmentSection() {
                         </label>
                         <div className="grid grid-cols-2 gap-2">
                           {[
-                            { name: "Morning (10:00 AM – 1:30 PM)", label: "Morning", time: "10:00 – 1:30" },
-                            { name: "Evening (5:00 PM – 9:00 PM)", label: "Evening", time: "5:00 – 9:00" },
+                            { name: "Morning (10:00 AM – 1:30 PM)", label: "Morning", time: "10:00 – 1:30", icon: Sun },
+                            { name: "Evening (5:00 PM – 9:00 PM)", label: "Evening", time: "5:00 – 9:00", icon: Moon },
                           ].map((slotItem) => {
                             const isSelected = formData.slot.startsWith(slotItem.label);
+                            const SlotIcon = slotItem.icon;
                             return (
                               <button
                                 key={slotItem.name}
@@ -672,7 +677,10 @@ export default function AppointmentSection() {
                                     : "border-gray-200 hover:border-gray-300"
                                 }`}
                               >
-                                <div className="font-bold">{slotItem.label}</div>
+                                <div className="flex items-center justify-center gap-1.5 font-bold">
+                                  <SlotIcon className="w-3.5 h-3.5 shrink-0" strokeWidth={2.2} />
+                                  <span>{slotItem.label}</span>
+                                </div>
                                 <div
                                   style={{ color: isSelected ? "#873f3b" : "#6B7280" }}
                                   className="text-[10px] font-normal mt-0.5"

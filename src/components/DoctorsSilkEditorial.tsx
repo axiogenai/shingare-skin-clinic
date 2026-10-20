@@ -123,15 +123,15 @@ export default function DoctorsSilkEditorial() {
                 }`}
               >
                 {/* 1. Refined Eyebrow */}
-                <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
-                  <span className="w-2 h-2 rotate-45 bg-[#873f3b] shrink-0" />
-                  <span className="font-['Playfair_Display',Georgia,serif] italic text-base sm:text-lg lg:text-xl font-medium tracking-wide text-[#873f3b]">
+                <div className="flex items-start gap-2 mb-2 sm:mb-2.5">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 bg-[#873f3b] shrink-0 mt-[5px] sm:mt-[7px]" />
+                  <span className="font-['Playfair_Display',Georgia,serif] italic text-[13px] min-[375px]:text-[14px] sm:text-base lg:text-xl font-medium tracking-wide text-[#873f3b] leading-snug">
                     {doc.eyebrow}
                   </span>
                 </div>
 
-                {/* 2. Doctor Name Headline in distinct, readable Playfair Display */}
-                <h2 className="font-['Playfair_Display',Georgia,serif] text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-bold text-[#1a241d] tracking-tight leading-[1.14] mb-3 sm:mb-4">
+                {/* 2. Doctor Name Headline in distinct, readable Playfair Display - Strictly on ONE SINGLE LINE across all sides */}
+                <h2 className="font-['Playfair_Display',Georgia,serif] text-[18px] min-[360px]:text-[20px] min-[390px]:text-[22px] sm:text-3xl md:text-4xl lg:text-[44px] font-bold text-[#1a241d] tracking-tight leading-tight mb-3 sm:mb-4 whitespace-nowrap">
                   {doc.name}
                 </h2>
 

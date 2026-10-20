@@ -50,6 +50,30 @@
 
 *, *::before, *::after {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Eliminate browser black focus outline / border on click across all text, links, and buttons */
+*:focus:not(input):not(textarea):not(select),
+*:focus-visible:not(input):not(textarea):not(select) {
+  outline: none !important;
+}
+
+a, button, [role="button"], span, div, h1, h2, h3, h4, h5, h6, p {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+a:focus,
+a:focus-visible,
+a:active,
+button:focus,
+button:focus-visible,
+button:active,
+[role="button"]:focus,
+[role="button"]:focus-visible,
+[role="button"]:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 html, body {

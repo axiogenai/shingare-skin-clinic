@@ -140,7 +140,7 @@ export default function ContactPage() {
               <div className="relative rounded-xl border border-[#EAE3D6] overflow-hidden bg-neutral-100 h-[215px] sm:h-[230px] w-full shadow-inner">
                 <iframe
                   title="Shingare Skin &amp; Cosmetics Clinic Map Location"
-                  src="https://maps.google.com/maps?q=Shingare+Skin+and+Cosmetics+Clinic+Peth+Vadgaon+Kolhapur&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  src="https://maps.google.com/maps?q=16.8378,74.3142&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   className="w-full h-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

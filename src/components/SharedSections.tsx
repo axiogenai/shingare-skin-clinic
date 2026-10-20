@@ -18,56 +18,71 @@ interface HeroBannerProps {
 
 export function HeroBanner({ title, subtitle, badge }: HeroBannerProps) {
   return (
-    <section
-      className="relative w-full pt-28 md:pt-32 pb-20 md:pb-28 overflow-hidden font-source"
-      style={{
-        background:
-          "linear-gradient(160deg, #FDF5EE 0%, #FAEAE0 35%, #F5E2D4 65%, #F0DAC8 100%)",
-      }}
-    >
-      {/* Decorative silk ribbon watermark */}
+    <section className="relative w-full z-10 font-source -mb-7 sm:-mb-9 md:-mb-11 pointer-events-none select-none">
+      {/* 1. Main Banner Body with luxury silk peach gradient */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="relative w-full pt-28 md:pt-32 pb-16 md:pb-20 overflow-hidden pointer-events-auto select-auto"
         style={{
-          backgroundImage:
-            "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(248,178,148,0.13) 0%, transparent 70%)",
+          background:
+            "linear-gradient(160deg, #FDF5EE 0%, #FAEAE0 35%, #F5E2D4 65%, #F0DAC8 100%)",
         }}
-      />
-
-      <motion.div
-        className="relative z-10 max-w-[860px] mx-auto text-center px-5 sm:px-6"
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
       >
-        {badge && (
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md text-[#873f3b] text-[10px] font-bold uppercase tracking-[0.2em] mb-5 border border-[#873f3b]/18 shadow-xs">
-            <Stethoscope className="w-3 h-3 text-[#873f3b]" />
-            <span>{badge}</span>
-          </div>
-        )}
+        {/* Decorative silk ribbon watermark */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(248,178,148,0.13) 0%, transparent 70%)",
+          }}
+        />
 
-        <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-normal leading-[1.12] text-gray-950 mb-5 tracking-tight">
-          {title}
-        </h1>
+        <motion.div
+          className="relative z-10 max-w-[860px] mx-auto text-center px-5 sm:px-6"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          {badge && (
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md text-[#873f3b] text-[10px] font-bold uppercase tracking-[0.2em] mb-5 border border-[#873f3b]/18 shadow-xs">
+              <Stethoscope className="w-3 h-3 text-[#873f3b]" />
+              <span>{badge}</span>
+            </div>
+          )}
 
-        {subtitle && (
-          <p className="font-playfair text-base sm:text-lg md:text-xl italic text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {subtitle}
-          </p>
-        )}
-      </motion.div>
+          <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-normal leading-[1.12] text-gray-950 mb-5 tracking-tight">
+            {title}
+          </h1>
 
-      {/* Smooth wave into content */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+          {subtitle && (
+            <p className="font-playfair text-base sm:text-lg md:text-xl italic text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              {subtitle}
+            </p>
+          )}
+        </motion.div>
+      </div>
+
+      {/* 2. Seamless Organic Wave Extension: Curves directly over the following section with zero white gap */}
+      <div className="relative w-full -mt-[1px] leading-none overflow-hidden">
         <svg
           viewBox="0 0 1440 60"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
-          className="w-full h-[32px] md:h-[48px]"
+          className="block w-full h-[28px] sm:h-[38px] md:h-[48px]"
         >
-          <path d="M0 20 Q360 0 720 28 Q1080 56 1440 12 L1440 60 L0 60 Z" fill="#F4F7F8" />
+          {/* Peach Banner curve flowing directly from the banner background */}
+          <path
+            d="M0 0 L1440 0 L1440 12 Q1080 56 720 28 Q360 0 0 20 Z"
+            fill="#F0DAC8"
+          />
+          {/* Subtle champagne silk contour line along the exact curve */}
+          <path
+            d="M0 20 Q360 0 720 28 Q1080 56 1440 12"
+            fill="none"
+            stroke="#C5A059"
+            strokeOpacity="0.4"
+            strokeWidth="1.2"
+          />
         </svg>
       </div>
     </section>

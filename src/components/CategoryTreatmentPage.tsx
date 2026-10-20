@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import { Clock, Check } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { HeroBanner, CTABanner } from "@/components/SharedSections";
 import { TreatmentItem } from "@/data/treatments";
 
@@ -29,20 +28,40 @@ export default function CategoryTreatmentPage({
       {/* 1. Hero Banner */}
       <HeroBanner badge={badge} title={title} subtitle={subtitle} />
 
-      {/* 2. Slow Marquee Anchor Bar (Zero scrollbars, smooth continuous motion, pause on hover) */}
-      <div className="w-full bg-[#FAF0DD]/40 border-b border-gray-200/60 overflow-hidden py-3 select-none">
-        <div className="flex w-max animate-marquee-slow items-center hover:[animation-play-state:paused]">
-          {[...Array(3)].map((_, loopIdx) => (
-            <div key={loopIdx} className="flex items-center">
+      {/* 2. Treatment Anchor Marquee Bar - Positioned with safe top padding to sit gracefully below the curve */}
+      <div className="w-full bg-[#FAF0DD]/60 border-b border-[#D4AF37]/25 overflow-hidden pt-8 pb-3 sm:pt-9 sm:pb-3.5 select-none relative z-0">
+        <style>{`
+          @keyframes treatmentMarqueeScroll {
+            0% {
+              transform: translate3d(0, 0, 0);
+              -webkit-transform: translate3d(0, 0, 0);
+            }
+            100% {
+              transform: translate3d(-50%, 0, 0);
+              -webkit-transform: translate3d(-50%, 0, 0);
+            }
+          }
+          .treatment-marquee-track {
+            display: flex !important;
+            width: max-content !important;
+            animation: treatmentMarqueeScroll 28s linear infinite !important;
+            -webkit-animation: treatmentMarqueeScroll 28s linear infinite !important;
+            animation-play-state: running !important;
+            will-change: transform;
+          }
+        `}</style>
+        <div className="flex w-max treatment-marquee-track items-center hover:[animation-play-state:paused]">
+          {[...Array(2)].map((_, loopIdx) => (
+            <div key={loopIdx} className="flex items-center shrink-0">
               {services.map((service) => (
-                <div key={`${loopIdx}-${service.id}`} className="flex items-center">
+                <div key={`${loopIdx}-${service.id}`} className="flex items-center shrink-0">
                   <a
                     href={`#${service.id}`}
-                    className="text-xs sm:text-sm text-gray-700 hover:text-[#108283] font-medium transition-colors px-3 py-1 hover:underline underline-offset-4 whitespace-nowrap"
+                    className="text-xs sm:text-sm text-[#2C3E50] hover:text-[#873f3b] font-medium transition-colors px-3.5 py-1 hover:underline underline-offset-4 whitespace-nowrap"
                   >
                     {service.title}
                   </a>
-                  <span className="text-[#108283]/40 font-bold px-2 select-none">•</span>
+                  <span className="text-[#873f3b]/35 font-bold px-2.5 select-none">•</span>
                 </div>
               ))}
             </div>
@@ -50,8 +69,8 @@ export default function CategoryTreatmentPage({
         </div>
       </div>
 
-      {/* 3. Primederm Treatment Cards Section with Parallax Scroll & Clip Reveal */}
-      <section className="py-16 md:py-24 px-5 md:px-10 max-w-[1240px] mx-auto space-y-20 md:space-y-28">
+      {/* 3. Treatment Cards Section */}
+      <section className="pt-8 sm:pt-12 md:pt-16 pb-16 md:pb-24 px-5 md:px-10 max-w-[1240px] mx-auto space-y-12 sm:space-y-16 md:space-y-24">
         {services.map((service, index) => (
           <TreatmentCardItem
             key={service.id}
@@ -74,36 +93,15 @@ function TreatmentCardItem({
   service: TreatmentItem;
   isEven: boolean;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "center start"],
-  });
-
-  const opacityContent = useTransform(scrollYProgress, [0, 0.7], [0, 1]);
-  const clipProgress = useTransform(
-    scrollYProgress,
-    [0, 0.7],
-    ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]
-  );
-  const translateContent = useTransform(scrollYProgress, [0, 1], [-50, 0]);
-
   return (
     <div
-      ref={cardRef}
       id={service.id}
       className={`flex flex-col ${
         isEven ? "lg:flex-row" : "lg:flex-row-reverse"
       } gap-10 lg:gap-16 items-center scroll-mt-36`}
     >
-      {/* Image Column with Parallax Reveal */}
-      <motion.div
-        style={{
-          opacity: opacityContent,
-          clipPath: clipProgress,
-        }}
-        className="w-full lg:w-1/2"
-      >
+      {/* Image Column */}
+      <div className="w-full lg:w-1/2">
         <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-black/5 aspect-[4/3] group bg-white">
           <img
             src={service.image}
@@ -117,13 +115,10 @@ function TreatmentCardItem({
             {service.categoryLabel}
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Content Column with Parallax Translate */}
-      <motion.div
-        style={{ y: translateContent }}
-        className="w-full lg:w-1/2 space-y-5"
-      >
+      {/* Content Column */}
+      <div className="w-full lg:w-1/2 space-y-5">
         <h2 className="text-2xl sm:text-3xl lg:text-[32px] xl:text-[36px] font-playfair text-[#2C3E50] leading-tight tracking-tight font-normal">
           {service.title}
         </h2>
@@ -175,7 +170,7 @@ function TreatmentCardItem({
             <span>{service.sessions}</span>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

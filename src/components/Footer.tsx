@@ -156,8 +156,8 @@ export default function Footer() {
             <div className="w-10 h-[1.5px] bg-[#183324]/30 mb-2 sm:mb-3" />
 
             {/* Description */}
-            <p className="text-[11.5px] sm:text-[13px] leading-snug sm:leading-relaxed text-[#556958] max-w-[310px] mb-4 sm:mb-6 font-sans">
-              Expert dermatology, personalised care and advanced aesthetic treatments for your natural beauty and healthy skin.
+            <p className="text-[11.5px] sm:text-[13px] leading-snug sm:leading-relaxed text-[#556958] max-w-[360px] sm:max-w-[400px] mb-4 sm:mb-6 font-sans">
+              Expert dermatology, personalised care and advanced aesthetic treatments for your natural beauty and healthy&nbsp;skin.
             </p>
 
             {/* Call Us Today Action Pill */}
@@ -234,7 +234,7 @@ export default function Footer() {
             </h4>
             <div className="w-8 h-[1.5px] bg-[#244231]/35 mt-1 sm:mt-1.5 mb-2.5 sm:mb-5" />
 
-            <p className="text-[11.5px] sm:text-[13px] text-[#556958] leading-snug sm:leading-relaxed mb-3 sm:mb-5 max-w-[300px]">
+            <p className="text-[10px] min-[375px]:text-[11px] sm:text-xs md:text-[12.5px] lg:text-[13px] text-[#556958] leading-normal mb-3 sm:mb-5 whitespace-nowrap">
               Get expert skincare tips, updates and offers straight to your inbox.
             </p>
 

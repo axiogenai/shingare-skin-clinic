@@ -150,8 +150,8 @@ const CLINIC_CARDS: ClinicCard[] = [
 const clamp = (val: number, min: number, max: number) =>
   Math.min(Math.max(val, min), max);
 
-const ew = { peek: 0.05, scaleStep: 0.028, exitShrink: 0.05, maxDepth: 2 };
-const ej = { peek: 0.038, scaleStep: 0.02, exitShrink: 0.05, maxDepth: 1 };
+const ew = { peek: 0.05, scaleStep: 0.028, exitShrink: 0.05, maxDepth: 2, exitY: 1.45 };
+const ej = { peek: 0.038, scaleStep: 0.02, exitShrink: 0.05, maxDepth: 1, exitY: 0.25 };
 
 const exitProgress = (c: number, index: number) =>
   clamp((c - index) / 0.5, 0, 1);
@@ -170,7 +170,7 @@ const calcOpacity = (c: number, index: number, maxDepth: number) => {
 };
 
 function generateKeyframes(index: number, total: number, config: typeof ew) {
-  const { peek, scaleStep, exitShrink, maxDepth } = config;
+  const { peek, scaleStep, exitShrink, maxDepth, exitY } = config;
   const points: { p: number; y: string; scale: number; opacity: number }[] = [];
   const steps = 30;
 
@@ -178,7 +178,7 @@ function generateKeyframes(index: number, total: number, config: typeof ew) {
     const p = i / steps;
     const c = p * Math.max(total - 1, 1);
 
-    const y = `${((stackDepth(c, index, maxDepth) * peek - 1.45 * exitProgress(c, index)) * 100).toFixed(3)}%`;
+    const y = `${((stackDepth(c, index, maxDepth) * peek - exitY * exitProgress(c, index)) * 100).toFixed(3)}%`;
     const scale = Number(
       (1 - stackDepth(c, index, maxDepth) * scaleStep - exitProgress(c, index) * exitShrink).toFixed(4)
     );
@@ -251,7 +251,7 @@ const SpecialtyCardItem = React.memo(function SpecialtyCardItem({
     >
       <motion.div
         onClick={onClick}
-        className="group relative w-full max-w-[360px] sm:max-w-[680px] md:max-w-[760px] rounded-3xl overflow-hidden cursor-pointer border border-white/20 select-none"
+        className="group relative w-full max-w-[360px] sm:max-w-[680px] md:max-w-[760px] rounded-3xl overflow-hidden cursor-pointer border border-white/20 select-none shadow-xl"
         style={{
           y,
           scale,
@@ -262,7 +262,7 @@ const SpecialtyCardItem = React.memo(function SpecialtyCardItem({
           transform: "translate3d(0, 0, 0)",
           WebkitBackfaceVisibility: "hidden",
           backfaceVisibility: "hidden",
-          height: isMobile ? "430px" : "360px",
+          height: isMobile ? "415px" : "360px",
         }}
       >
         <div className="relative w-full h-full flex flex-col sm:flex-row overflow-hidden">
@@ -519,7 +519,7 @@ export default function SpecialtyCardsSection() {
 
         {/* Central Deck Stage matching drmonalisclinic.com (cards stacked with upcoming peeking at bottom) */}
         <div
-          className="relative w-full max-w-[820px] h-[460px] sm:h-[400px] flex items-center justify-center my-auto"
+          className="relative w-full max-w-[820px] h-[450px] sm:h-[400px] flex items-center justify-center my-auto shrink-0"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >

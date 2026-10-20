@@ -428,13 +428,6 @@ export default function Header() {
                 <span>Technology</span>
               </Link>
               <Link
-                href="/blog"
-                onClick={() => setIsMobileOpen(false)}
-                className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
-              >
-                <span>Blog</span>
-              </Link>
-              <Link
                 href="/contact"
                 onClick={() => setIsMobileOpen(false)}
                 className="flex items-center justify-between py-2.5 px-1.5 text-xs uppercase tracking-[0.16em] font-medium text-gray-800 hover:text-[#873f3b] transition-colors"
